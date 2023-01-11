@@ -10,3 +10,22 @@ It is a FastAPI service backed by SQLAlchemy and Alembic, organised into clean
 layers (routers → services → repositories → models) so business rules live in
 one place and stay testable.
 
+## Features
+
+- **Inventory & catalog** — categories, individual assets with barcodes,
+  serial numbers, and rate cards, plus reusable kits (bundles).
+- **Reservations** — availability conflict detection over overlapping windows,
+  a full lifecycle state machine, rescheduling, and cancellation that releases
+  held inventory.
+- **Pricing engine** — daily/weekly/monthly tier decomposition, seasonal
+  multipliers, customer and bundle discounts, and refundable deposits.
+- **Orders & invoicing** — draft orders from confirmed reservations, invoice
+  generation, partial payments, void rules, and late-fee accrual.
+- **Checkout / check-in** — condition inspections, automatic damage reports,
+  and routing of damaged gear into maintenance.
+- **Maintenance work orders** — labour/parts costs and asset status handling.
+- **Platform concerns** — RBAC (admin/manager/agent/viewer), audit logging,
+  API keys, webhooks with retry/backoff, and idempotent order creation.
+- **Reporting** — inventory utilisation, revenue, overdue exposure, dashboards.
+- **Background sweeps** — overdue reservations and late-fee accrual.
+
