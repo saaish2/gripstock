@@ -29,3 +29,21 @@ one place and stay testable.
 - **Reporting** — inventory utilisation, revenue, overdue exposure, dashboards.
 - **Background sweeps** — overdue reservations and late-fee accrual.
 
+## Quick start
+
+```bash
+python -m venv .venv && source .venv/bin/activate
+pip install -e ".[dev]"
+
+# Create the schema and load demo data
+gripstock initdb
+gripstock seed
+
+# Run the API
+uvicorn app.main:app --reload
+```
+
+Open <http://localhost:8000/docs> for the interactive API documentation.
+
+Default seeded admin: `admin@gripstock.test` / `changeit-please`.
+
