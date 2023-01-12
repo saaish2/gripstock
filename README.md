@@ -47,3 +47,9 @@ Open <http://localhost:8000/docs> for the interactive API documentation.
 
 Default seeded admin: `admin@gripstock.test` / `changeit-please`.
 
+## Configuration
+
+All configuration is read from the environment with the `GRIPSTOCK_` prefix.
+Copy `.env.example` to `.env` and adjust. The defaults boot a local SQLite
+database with zero setup.
+
