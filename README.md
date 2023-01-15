@@ -53,3 +53,12 @@ All configuration is read from the environment with the `GRIPSTOCK_` prefix.
 Copy `.env.example` to `.env` and adjust. The defaults boot a local SQLite
 database with zero setup.
 
+## Database & migrations
+
+Development and tests build the schema directly from the ORM metadata
+(`gripstock initdb`). Production uses Alembic:
+
+```bash
+alembic upgrade head
+```
+
