@@ -62,3 +62,11 @@ Development and tests build the schema directly from the ORM metadata
 alembic upgrade head
 ```
 
+## Testing
+
+```bash
+make test       # run the pytest suite
+make lint       # ruff + mypy
+make cov        # coverage report
+```
+
