@@ -70,3 +70,9 @@ make lint       # ruff + mypy
 make cov        # coverage report
 ```
 
+## Architecture
+
+See [docs/architecture.md](docs/architecture.md) for the module map, request
+flow, and the core domain state machines. The HTTP surface is catalogued in
+[docs/api.md](docs/api.md).
+
