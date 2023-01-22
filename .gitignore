@@ -18,3 +18,9 @@ coverage.xml
 htmlcov/
 .mypy_cache/
 .ruff_cache/
+
+# Local databases & env
+*.db
+*.sqlite3
+.env
+.env.local
