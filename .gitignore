@@ -24,3 +24,8 @@ htmlcov/
 *.sqlite3
 .env
 .env.local
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
