@@ -15,3 +15,7 @@ from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 Environment = Literal["development", "test", "staging", "production"]
+
+
+class Settings(BaseSettings):
+    """Strongly-typed view over the process environment."""
