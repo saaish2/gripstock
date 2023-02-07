@@ -19,3 +19,10 @@ Environment = Literal["development", "test", "staging", "production"]
 
 class Settings(BaseSettings):
     """Strongly-typed view over the process environment."""
+
+    model_config = SettingsConfigDict(
+        env_prefix="GRIPSTOCK_",
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+    )
