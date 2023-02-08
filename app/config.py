@@ -28,3 +28,4 @@ class Settings(BaseSettings):
     )
 
     env: Environment = "development"
+    debug: bool = True
