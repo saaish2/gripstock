@@ -29,3 +29,4 @@ class Settings(BaseSettings):
 
     env: Environment = "development"
     debug: bool = True
+    secret_key: str = "dev-insecure-secret-key"
