@@ -32,3 +32,4 @@ class Settings(BaseSettings):
     secret_key: str = "dev-insecure-secret-key"
 
     database_url: str = "sqlite:///./gripstock.db"
+    database_echo: bool = False
