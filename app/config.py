@@ -33,3 +33,5 @@ class Settings(BaseSettings):
 
     database_url: str = "sqlite:///./gripstock.db"
     database_echo: bool = False
+
+    session_ttl_minutes: int = 720
