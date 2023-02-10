@@ -35,3 +35,4 @@ class Settings(BaseSettings):
     database_echo: bool = False
 
     session_ttl_minutes: int = 720
+    password_min_length: int = 10
