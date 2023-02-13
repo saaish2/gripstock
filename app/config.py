@@ -38,3 +38,4 @@ class Settings(BaseSettings):
     password_min_length: int = 10
 
     default_deposit_rate: Decimal = Decimal("0.20")
+    late_fee_daily_rate: Decimal = Decimal("0.05")
