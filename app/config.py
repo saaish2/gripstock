@@ -42,3 +42,5 @@ class Settings(BaseSettings):
     grace_period_hours: int = 4
     weekly_tier_days: int = 7
     monthly_tier_days: int = 28
+
+    webhook_max_attempts: int = 5
