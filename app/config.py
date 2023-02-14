@@ -39,3 +39,4 @@ class Settings(BaseSettings):
 
     default_deposit_rate: Decimal = Decimal("0.20")
     late_fee_daily_rate: Decimal = Decimal("0.05")
+    grace_period_hours: int = 4
