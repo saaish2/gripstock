@@ -47,3 +47,4 @@ class Settings(BaseSettings):
     webhook_backoff_seconds: int = 30
 
     log_level: str = "INFO"
+    log_json: bool = False
