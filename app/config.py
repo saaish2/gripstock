@@ -44,3 +44,4 @@ class Settings(BaseSettings):
     monthly_tier_days: int = 28
 
     webhook_max_attempts: int = 5
+    webhook_backoff_seconds: int = 30
