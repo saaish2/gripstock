@@ -48,3 +48,10 @@ class Settings(BaseSettings):
 
     log_level: str = "INFO"
     log_json: bool = False
+
+    @field_validator("default_deposit_rate", "late_fee_daily_rate")
+    @classmethod
+    def _non_negative_rate(cls, value: Decimal) -> Decimal:
+        if value < 0:
+            raise ValueError("rate must not be negative")
+        return value
