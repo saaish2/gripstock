@@ -55,3 +55,10 @@ class Settings(BaseSettings):
         if value < 0:
             raise ValueError("rate must not be negative")
         return value
+
+    @field_validator("password_min_length")
+    @classmethod
+    def _sane_password_length(cls, value: int) -> int:
+        if value < 6:
+            raise ValueError("password_min_length must be at least 6")
+        return value
