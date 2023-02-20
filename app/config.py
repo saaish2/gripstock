@@ -66,3 +66,7 @@ class Settings(BaseSettings):
     @property
     def is_production(self) -> bool:
         return self.env == "production"
+
+    @property
+    def is_testing(self) -> bool:
+        return self.env == "test"
