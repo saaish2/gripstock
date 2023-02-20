@@ -81,3 +81,9 @@ def get_settings() -> Settings:
     """Return the process-wide settings singleton."""
 
     return Settings()
+
+
+def reset_settings_cache() -> None:
+    """Drop the cached settings — used by tests that tweak the environment."""
+
+    get_settings.cache_clear()
