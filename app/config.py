@@ -70,3 +70,7 @@ class Settings(BaseSettings):
     @property
     def is_testing(self) -> bool:
         return self.env == "test"
+
+    @property
+    def is_sqlite(self) -> bool:
+        return self.database_url.startswith("sqlite")
