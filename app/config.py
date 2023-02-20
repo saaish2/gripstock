@@ -62,3 +62,7 @@ class Settings(BaseSettings):
         if value < 6:
             raise ValueError("password_min_length must be at least 6")
         return value
+
+    @property
+    def is_production(self) -> bool:
+        return self.env == "production"
