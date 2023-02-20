@@ -74,3 +74,10 @@ class Settings(BaseSettings):
     @property
     def is_sqlite(self) -> bool:
         return self.database_url.startswith("sqlite")
+
+
+@lru_cache
+def get_settings() -> Settings:
+    """Return the process-wide settings singleton."""
+
+    return Settings()
