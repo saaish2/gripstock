@@ -23,3 +23,7 @@ def set_request_id(value: str | None) -> None:
 
 def get_request_id() -> str | None:
     return _request_id.get()
+
+
+class JsonFormatter(logging.Formatter):
+    """Render log records as compact JSON objects."""
