@@ -46,3 +46,12 @@ class JsonFormatter(logging.Formatter):
 
 class TextFormatter(logging.Formatter):
     """Readable single-line formatter with optional request id."""
+
+    def format(self, record: logging.LogRecord) -> str:
+        base = f"{record.levelname:<7} {record.name}: {record.getMessage()}"
+        rid = get_request_id()
+        if rid:
+            base = f"[{rid}] {base}"
+        if record.exc_info:
+            base = f"{base}\n{self.formatException(record.exc_info)}"
+        return base
