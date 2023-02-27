@@ -42,3 +42,7 @@ class JsonFormatter(logging.Formatter):
         for key, value in getattr(record, "extra_fields", {}).items():
             payload[key] = value
         return json.dumps(payload, default=str, separators=(",", ":"))
+
+
+class TextFormatter(logging.Formatter):
+    """Readable single-line formatter with optional request id."""
