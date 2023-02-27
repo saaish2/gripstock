@@ -55,3 +55,14 @@ class TextFormatter(logging.Formatter):
         if record.exc_info:
             base = f"{base}\n{self.formatException(record.exc_info)}"
         return base
+
+
+def configure_logging(level: str = "INFO", as_json: bool = False) -> None:
+    """Install a single stdout handler with the chosen formatter."""
+
+    root = logging.getLogger()
+    root.handlers.clear()
+    handler = logging.StreamHandler(sys.stdout)
+    handler.setFormatter(JsonFormatter() if as_json else TextFormatter())
+    root.addHandler(handler)
+    root.setLevel(level.upper())
