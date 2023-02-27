@@ -27,3 +27,18 @@ def get_request_id() -> str | None:
 
 class JsonFormatter(logging.Formatter):
     """Render log records as compact JSON objects."""
+
+    def format(self, record: logging.LogRecord) -> str:
+        payload: dict[str, Any] = {
+            "level": record.levelname,
+            "logger": record.name,
+            "message": record.getMessage(),
+        }
+        rid = get_request_id()
+        if rid:
+            payload["request_id"] = rid
+        if record.exc_info:
+            payload["exc"] = self.formatException(record.exc_info)
+        for key, value in getattr(record, "extra_fields", {}).items():
+            payload[key] = value
+        return json.dumps(payload, default=str, separators=(",", ":"))
