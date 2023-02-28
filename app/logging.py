@@ -66,3 +66,7 @@ def configure_logging(level: str = "INFO", as_json: bool = False) -> None:
     handler.setFormatter(JsonFormatter() if as_json else TextFormatter())
     root.addHandler(handler)
     root.setLevel(level.upper())
+
+
+def get_logger(name: str) -> logging.Logger:
+    return logging.getLogger(f"gripstock.{name}")
