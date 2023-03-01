@@ -70,3 +70,9 @@ def configure_logging(level: str = "INFO", as_json: bool = False) -> None:
 
 def get_logger(name: str) -> logging.Logger:
     return logging.getLogger(f"gripstock.{name}")
+
+
+def log_event(logger: logging.Logger, message: str, **fields: Any) -> None:
+    """Emit an info log carrying structured ``extra_fields``."""
+
+    logger.info(message, extra={"extra_fields": fields})
