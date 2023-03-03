@@ -15,3 +15,5 @@ from fastapi.responses import JSONResponse
 
 class GripstockError(Exception):
     """Base class for every error the domain raises."""
+
+    status_code: int = 500
