@@ -23,3 +23,9 @@ class GripstockError(Exception):
         super().__init__(message)
         self.message = message
         self.details = details or {}
+
+    def to_payload(self) -> dict[str, Any]:
+        body: dict[str, Any] = {"error": {"code": self.code, "message": self.message}}
+        if self.details:
+            body["error"]["details"] = self.details
+        return body
