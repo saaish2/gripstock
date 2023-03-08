@@ -29,3 +29,6 @@ class GripstockError(Exception):
         if self.details:
             body["error"]["details"] = self.details
         return body
+
+
+class ValidationError(GripstockError):
