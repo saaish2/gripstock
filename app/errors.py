@@ -33,3 +33,4 @@ class GripstockError(Exception):
 
 class ValidationError(GripstockError):
     status_code = 422
+    code = "validation_error"
