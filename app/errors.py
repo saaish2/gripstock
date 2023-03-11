@@ -38,3 +38,4 @@ class ValidationError(GripstockError):
 
 class NotFoundError(GripstockError):
     status_code = 404
+    code = "not_found"
