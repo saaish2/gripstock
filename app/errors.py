@@ -43,3 +43,4 @@ class NotFoundError(GripstockError):
 
 class ConflictError(GripstockError):
     status_code = 409
+    code = "conflict"
