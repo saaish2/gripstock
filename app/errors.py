@@ -49,3 +49,6 @@ class ConflictError(GripstockError):
 class AuthenticationError(GripstockError):
     status_code = 401
     code = "unauthenticated"
+
+
+class PermissionDeniedError(GripstockError):
