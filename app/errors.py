@@ -54,3 +54,7 @@ class AuthenticationError(GripstockError):
 class PermissionDeniedError(GripstockError):
     status_code = 403
     code = "permission_denied"
+
+
+class InvalidStateError(GripstockError):
+    """Raised when an entity cannot transition to the requested state."""
