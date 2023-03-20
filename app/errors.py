@@ -61,3 +61,7 @@ class InvalidStateError(GripstockError):
 
     status_code = 409
     code = "invalid_state"
+
+
+class BusinessRuleError(GripstockError):
+    """Raised when a domain invariant would be violated."""
