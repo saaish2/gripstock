@@ -60,3 +60,4 @@ class InvalidStateError(GripstockError):
     """Raised when an entity cannot transition to the requested state."""
 
     status_code = 409
+    code = "invalid_state"
