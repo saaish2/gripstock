@@ -53,3 +53,4 @@ class AuthenticationError(GripstockError):
 
 class PermissionDeniedError(GripstockError):
     status_code = 403
+    code = "permission_denied"
