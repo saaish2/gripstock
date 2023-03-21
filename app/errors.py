@@ -65,3 +65,5 @@ class InvalidStateError(GripstockError):
 
 class BusinessRuleError(GripstockError):
     """Raised when a domain invariant would be violated."""
+
+    status_code = 422
