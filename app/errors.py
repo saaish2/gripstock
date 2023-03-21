@@ -68,3 +68,6 @@ class BusinessRuleError(GripstockError):
 
     status_code = 422
     code = "business_rule_violation"
+
+
+class RateLimitedError(GripstockError):
