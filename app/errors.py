@@ -73,3 +73,7 @@ class BusinessRuleError(GripstockError):
 class RateLimitedError(GripstockError):
     status_code = 429
     code = "rate_limited"
+
+
+def not_found(entity: str, identifier: Any) -> NotFoundError:
+    return NotFoundError(f"{entity} {identifier!r} was not found")
