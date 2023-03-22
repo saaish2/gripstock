@@ -71,3 +71,4 @@ class BusinessRuleError(GripstockError):
 
 
 class RateLimitedError(GripstockError):
+    status_code = 429
