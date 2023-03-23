@@ -81,3 +81,8 @@ def not_found(entity: str, identifier: Any) -> NotFoundError:
 
 async def gripstock_error_handler(request: Request, exc: GripstockError) -> JSONResponse:
     return JSONResponse(status_code=exc.status_code, content=exc.to_payload())
+
+
+async def unhandled_error_handler(request: Request, exc: Exception) -> JSONResponse:
+    payload = {"error": {"code": "internal_error", "message": "an unexpected error occurred"}}
+    return JSONResponse(status_code=500, content=payload)
