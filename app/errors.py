@@ -86,3 +86,10 @@ async def gripstock_error_handler(request: Request, exc: GripstockError) -> JSON
 async def unhandled_error_handler(request: Request, exc: Exception) -> JSONResponse:
     payload = {"error": {"code": "internal_error", "message": "an unexpected error occurred"}}
     return JSONResponse(status_code=500, content=payload)
+
+
+def register_error_handlers(app: Any) -> None:
+    """Wire every domain error class to the JSON handler."""
+
+    app.add_exception_handler(GripstockError, gripstock_error_handler)
+    app.add_exception_handler(Exception, unhandled_error_handler)
