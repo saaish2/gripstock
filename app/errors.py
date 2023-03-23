@@ -77,3 +77,7 @@ class RateLimitedError(GripstockError):
 
 def not_found(entity: str, identifier: Any) -> NotFoundError:
     return NotFoundError(f"{entity} {identifier!r} was not found")
+
+
+async def gripstock_error_handler(request: Request, exc: GripstockError) -> JSONResponse:
+    return JSONResponse(status_code=exc.status_code, content=exc.to_payload())
