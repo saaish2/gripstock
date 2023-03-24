@@ -36,3 +36,10 @@ def _enable_sqlite_foreign_keys(engine: Engine) -> None:
         cursor = dbapi_connection.cursor()
         cursor.execute("PRAGMA foreign_keys=ON")
         cursor.close()
+
+
+def get_engine() -> Engine:
+    global _engine
+    if _engine is None:
+        _engine = _build_engine(get_settings())
+    return _engine
