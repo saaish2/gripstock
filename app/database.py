@@ -28,3 +28,11 @@ def _build_engine(settings: Settings) -> Engine:
     if settings.is_sqlite:
         _enable_sqlite_foreign_keys(engine)
     return engine
+
+
+def _enable_sqlite_foreign_keys(engine: Engine) -> None:
+    @event.listens_for(engine, "connect")
+    def _set_pragma(dbapi_connection, _record):  # noqa: ANN001
+        cursor = dbapi_connection.cursor()
+        cursor.execute("PRAGMA foreign_keys=ON")
+        cursor.close()
