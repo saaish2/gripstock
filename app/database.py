@@ -12,3 +12,4 @@ from sqlalchemy.orm import Session, sessionmaker
 from app.config import Settings, get_settings
 
 _engine: Engine | None = None
+_SessionFactory: sessionmaker[Session] | None = None
