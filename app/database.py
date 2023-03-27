@@ -52,3 +52,13 @@ def get_session_factory() -> sessionmaker[Session]:
             bind=get_engine(), autoflush=False, expire_on_commit=False, future=True
         )
     return _SessionFactory
+
+
+def reset_engine() -> None:
+    """Dispose the engine and clear factories — used between test runs."""
+
+    global _engine, _SessionFactory
+    if _engine is not None:
+        _engine.dispose()
+    _engine = None
+    _SessionFactory = None
