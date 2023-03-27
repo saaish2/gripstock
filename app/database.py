@@ -62,3 +62,18 @@ def reset_engine() -> None:
         _engine.dispose()
     _engine = None
     _SessionFactory = None
+
+
+@contextmanager
+def session_scope() -> Iterator[Session]:
+    """Provide a transactional scope around a series of operations."""
+
+    session = get_session_factory()()
+    try:
+        yield session
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()
