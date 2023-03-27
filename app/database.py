@@ -77,3 +77,17 @@ def session_scope() -> Iterator[Session]:
         raise
     finally:
         session.close()
+
+
+def get_db() -> Iterator[Session]:
+    """FastAPI dependency yielding a request-scoped session."""
+
+    session = get_session_factory()()
+    try:
+        yield session
+        session.commit()
+    except Exception:
+        session.rollback()
+        raise
+    finally:
+        session.close()
