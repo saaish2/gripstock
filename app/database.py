@@ -43,3 +43,12 @@ def get_engine() -> Engine:
     if _engine is None:
         _engine = _build_engine(get_settings())
     return _engine
+
+
+def get_session_factory() -> sessionmaker[Session]:
+    global _SessionFactory
+    if _SessionFactory is None:
+        _SessionFactory = sessionmaker(
+            bind=get_engine(), autoflush=False, expire_on_commit=False, future=True
+        )
+    return _SessionFactory
