@@ -10,3 +10,4 @@ import secrets
 # native-extension dependency, and deterministic given salt + iterations,
 # which keeps the auth tests fast and reproducible.
 _ALGORITHM = "pbkdf2_sha256"
+_ITERATIONS = 180_000
