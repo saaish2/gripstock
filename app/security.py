@@ -11,3 +11,4 @@ import secrets
 # which keeps the auth tests fast and reproducible.
 _ALGORITHM = "pbkdf2_sha256"
 _ITERATIONS = 180_000
+_SALT_BYTES = 16
