@@ -36,3 +36,13 @@ def verify_password(password: str, hashed: str) -> bool:
         return hmac.compare_digest(expected, candidate)
     except (ValueError, AttributeError):
         return False
+
+
+def needs_rehash(hashed: str) -> bool:
+    """True when a stored hash uses fewer iterations than the current policy."""
+
+    try:
+        _, iterations, _, _ = hashed.split("$")
+        return int(iterations) < _ITERATIONS
+    except ValueError:
+        return True
