@@ -20,3 +20,19 @@ def hash_password(password: str) -> str:
     salt = secrets.token_bytes(_SALT_BYTES)
     digest = hashlib.pbkdf2_hmac("sha256", password.encode("utf-8"), salt, _ITERATIONS)
     return f"{_ALGORITHM}${_ITERATIONS}${salt.hex()}${digest.hex()}"
+
+
+def verify_password(password: str, hashed: str) -> bool:
+    """Check ``password`` against a previously stored hash."""
+
+    try:
+        algorithm, iterations, salt_hex, digest_hex = hashed.split("$")
+        if algorithm != _ALGORITHM:
+            return False
+        expected = bytes.fromhex(digest_hex)
+        candidate = hashlib.pbkdf2_hmac(
+            "sha256", password.encode("utf-8"), bytes.fromhex(salt_hex), int(iterations)
+        )
+        return hmac.compare_digest(expected, candidate)
+    except (ValueError, AttributeError):
+        return False
