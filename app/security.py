@@ -46,3 +46,9 @@ def needs_rehash(hashed: str) -> bool:
         return int(iterations) < _ITERATIONS
     except ValueError:
         return True
+
+
+def generate_token(num_bytes: int = 32) -> str:
+    """Return a URL-safe random token."""
+
+    return secrets.token_urlsafe(num_bytes)
