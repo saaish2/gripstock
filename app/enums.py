@@ -8,3 +8,6 @@ service layer can validate a move with a single membership test.
 from __future__ import annotations
 
 from enum import StrEnum
+
+
+class Role(StrEnum):
