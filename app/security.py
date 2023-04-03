@@ -63,3 +63,9 @@ def generate_api_key() -> tuple[str, str]:
 
     plaintext = f"gs_{secrets.token_urlsafe(24)}"
     return plaintext, fingerprint_token(plaintext)
+
+
+def fingerprint_token(token: str) -> str:
+    """Return a stable SHA-256 fingerprint of a secret token."""
+
+    return hashlib.sha256(token.encode("utf-8")).hexdigest()
