@@ -52,3 +52,14 @@ def generate_token(num_bytes: int = 32) -> str:
     """Return a URL-safe random token."""
 
     return secrets.token_urlsafe(num_bytes)
+
+
+def generate_api_key() -> tuple[str, str]:
+    """Return ``(plaintext, fingerprint)`` for a new API key.
+
+    Only the fingerprint is persisted; the plaintext is shown to the caller
+    exactly once at creation time.
+    """
+
+    plaintext = f"gs_{secrets.token_urlsafe(24)}"
+    return plaintext, fingerprint_token(plaintext)
