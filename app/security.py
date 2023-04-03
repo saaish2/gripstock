@@ -69,3 +69,7 @@ def fingerprint_token(token: str) -> str:
     """Return a stable SHA-256 fingerprint of a secret token."""
 
     return hashlib.sha256(token.encode("utf-8")).hexdigest()
+
+
+def constant_time_equals(a: str, b: str) -> bool:
+    return hmac.compare_digest(a.encode("utf-8"), b.encode("utf-8"))
