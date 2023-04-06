@@ -14,3 +14,4 @@ class Role(StrEnum):
     ADMIN = "admin"
     MANAGER = "manager"
     AGENT = "agent"
+    VIEWER = "viewer"
