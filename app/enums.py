@@ -15,3 +15,6 @@ class Role(StrEnum):
     MANAGER = "manager"
     AGENT = "agent"
     VIEWER = "viewer"
+
+
+class CustomerStatus(StrEnum):
