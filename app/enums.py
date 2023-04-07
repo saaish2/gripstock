@@ -18,3 +18,4 @@ class Role(StrEnum):
 
 
 class CustomerStatus(StrEnum):
+    ACTIVE = "active"
