@@ -25,3 +25,4 @@ class CustomerStatus(StrEnum):
 
 
 class AssetStatus(StrEnum):
+    AVAILABLE = "available"
