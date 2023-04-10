@@ -21,3 +21,4 @@ class CustomerStatus(StrEnum):
     ACTIVE = "active"
     ON_HOLD = "on_hold"
     BLOCKED = "blocked"
+    ARCHIVED = "archived"
