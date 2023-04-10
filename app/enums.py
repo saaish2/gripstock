@@ -22,3 +22,6 @@ class CustomerStatus(StrEnum):
     ON_HOLD = "on_hold"
     BLOCKED = "blocked"
     ARCHIVED = "archived"
+
+
+class AssetStatus(StrEnum):
