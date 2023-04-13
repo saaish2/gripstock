@@ -35,3 +35,4 @@ class AssetStatus(StrEnum):
 
 class AssetCondition(StrEnum):
     NEW = "new"
+    GOOD = "good"
