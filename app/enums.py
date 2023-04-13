@@ -31,3 +31,6 @@ class AssetStatus(StrEnum):
     IN_MAINTENANCE = "in_maintenance"
     RETIRED = "retired"
     LOST = "lost"
+
+
+class AssetCondition(StrEnum):
