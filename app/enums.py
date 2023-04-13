@@ -29,3 +29,4 @@ class AssetStatus(StrEnum):
     RESERVED = "reserved"
     CHECKED_OUT = "checked_out"
     IN_MAINTENANCE = "in_maintenance"
+    RETIRED = "retired"
