@@ -37,3 +37,4 @@ class AssetCondition(StrEnum):
     NEW = "new"
     GOOD = "good"
     FAIR = "fair"
+    POOR = "poor"
