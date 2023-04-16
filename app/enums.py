@@ -38,3 +38,4 @@ class AssetCondition(StrEnum):
     GOOD = "good"
     FAIR = "fair"
     POOR = "poor"
+    UNUSABLE = "unusable"
