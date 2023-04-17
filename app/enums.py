@@ -43,3 +43,4 @@ class AssetCondition(StrEnum):
 
 class ReservationStatus(StrEnum):
     PENDING = "pending"
+    CONFIRMED = "confirmed"
