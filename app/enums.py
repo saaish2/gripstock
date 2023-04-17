@@ -46,3 +46,4 @@ class ReservationStatus(StrEnum):
     CONFIRMED = "confirmed"
     PICKED_UP = "picked_up"
     RETURNED = "returned"
+    CANCELLED = "cancelled"
