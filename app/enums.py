@@ -47,3 +47,4 @@ class ReservationStatus(StrEnum):
     PICKED_UP = "picked_up"
     RETURNED = "returned"
     CANCELLED = "cancelled"
+    OVERDUE = "overdue"
