@@ -39,3 +39,6 @@ class AssetCondition(StrEnum):
     FAIR = "fair"
     POOR = "poor"
     UNUSABLE = "unusable"
+
+
+class ReservationStatus(StrEnum):
