@@ -48,3 +48,4 @@ class ReservationStatus(StrEnum):
     RETURNED = "returned"
     CANCELLED = "cancelled"
     OVERDUE = "overdue"
+    NO_SHOW = "no_show"
