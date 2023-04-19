@@ -53,3 +53,4 @@ class ReservationStatus(StrEnum):
 
 class OrderStatus(StrEnum):
     DRAFT = "draft"
+    OPEN = "open"
