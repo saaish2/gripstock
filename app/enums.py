@@ -56,3 +56,6 @@ class OrderStatus(StrEnum):
     OPEN = "open"
     CLOSED = "closed"
     CANCELLED = "cancelled"
+
+
+class InvoiceStatus(StrEnum):
