@@ -59,3 +59,4 @@ class OrderStatus(StrEnum):
 
 
 class InvoiceStatus(StrEnum):
+    DRAFT = "draft"
