@@ -61,3 +61,4 @@ class OrderStatus(StrEnum):
 class InvoiceStatus(StrEnum):
     DRAFT = "draft"
     ISSUED = "issued"
+    PARTIALLY_PAID = "partially_paid"
