@@ -55,3 +55,4 @@ class OrderStatus(StrEnum):
     DRAFT = "draft"
     OPEN = "open"
     CLOSED = "closed"
+    CANCELLED = "cancelled"
