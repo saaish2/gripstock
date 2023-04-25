@@ -63,3 +63,4 @@ class InvoiceStatus(StrEnum):
     ISSUED = "issued"
     PARTIALLY_PAID = "partially_paid"
     PAID = "paid"
+    OVERDUE = "overdue"
