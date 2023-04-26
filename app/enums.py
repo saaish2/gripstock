@@ -64,3 +64,4 @@ class InvoiceStatus(StrEnum):
     PARTIALLY_PAID = "partially_paid"
     PAID = "paid"
     OVERDUE = "overdue"
+    VOID = "void"
