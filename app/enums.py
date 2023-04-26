@@ -65,3 +65,6 @@ class InvoiceStatus(StrEnum):
     PAID = "paid"
     OVERDUE = "overdue"
     VOID = "void"
+
+
+class PaymentMethod(StrEnum):
