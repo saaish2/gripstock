@@ -70,3 +70,4 @@ class InvoiceStatus(StrEnum):
 class PaymentMethod(StrEnum):
     CARD = "card"
     ACH = "ach"
+    CASH = "cash"
