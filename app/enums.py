@@ -73,3 +73,6 @@ class PaymentMethod(StrEnum):
     CASH = "cash"
     CHECK = "check"
     CREDIT = "account_credit"
+
+
+class DamageSeverity(StrEnum):
