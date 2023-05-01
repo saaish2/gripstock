@@ -72,3 +72,4 @@ class PaymentMethod(StrEnum):
     ACH = "ach"
     CASH = "cash"
     CHECK = "check"
+    CREDIT = "account_credit"
