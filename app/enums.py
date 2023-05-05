@@ -76,3 +76,4 @@ class PaymentMethod(StrEnum):
 
 
 class DamageSeverity(StrEnum):
+    COSMETIC = "cosmetic"
