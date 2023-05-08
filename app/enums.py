@@ -79,3 +79,4 @@ class DamageSeverity(StrEnum):
     COSMETIC = "cosmetic"
     MINOR = "minor"
     MAJOR = "major"
+    TOTAL = "total"
