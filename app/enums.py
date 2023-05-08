@@ -80,3 +80,6 @@ class DamageSeverity(StrEnum):
     MINOR = "minor"
     MAJOR = "major"
     TOTAL = "total"
+
+
+class MaintenanceStatus(StrEnum):
