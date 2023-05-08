@@ -83,3 +83,4 @@ class DamageSeverity(StrEnum):
 
 
 class MaintenanceStatus(StrEnum):
+    OPEN = "open"
