@@ -87,3 +87,6 @@ class MaintenanceStatus(StrEnum):
     IN_PROGRESS = "in_progress"
     COMPLETED = "completed"
     CANCELLED = "cancelled"
+
+
+class WebhookStatus(StrEnum):
