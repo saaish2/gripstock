@@ -91,3 +91,4 @@ class MaintenanceStatus(StrEnum):
 
 class WebhookStatus(StrEnum):
     PENDING = "pending"
+    DELIVERED = "delivered"
