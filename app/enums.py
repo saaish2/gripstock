@@ -93,3 +93,4 @@ class WebhookStatus(StrEnum):
     PENDING = "pending"
     DELIVERED = "delivered"
     FAILED = "failed"
+    DISABLED = "disabled"
