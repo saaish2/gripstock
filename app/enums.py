@@ -94,3 +94,28 @@ class WebhookStatus(StrEnum):
     DELIVERED = "delivered"
     FAILED = "failed"
     DISABLED = "disabled"
+
+
+# Allowed transitions per state machine. A move is legal iff the target is in
+# the set keyed by the current state.
+RESERVATION_TRANSITIONS: dict[ReservationStatus, set[ReservationStatus]] = {
+    ReservationStatus.PENDING: {
+        ReservationStatus.CONFIRMED,
+        ReservationStatus.CANCELLED,
+    },
+    ReservationStatus.CONFIRMED: {
+        ReservationStatus.PICKED_UP,
+        ReservationStatus.CANCELLED,
+        ReservationStatus.NO_SHOW,
+    },
+    ReservationStatus.PICKED_UP: {
+        ReservationStatus.RETURNED,
+        ReservationStatus.OVERDUE,
+    },
+    ReservationStatus.OVERDUE: {
+        ReservationStatus.RETURNED,
+    },
+    ReservationStatus.RETURNED: set(),
+    ReservationStatus.CANCELLED: set(),
+    ReservationStatus.NO_SHOW: set(),
+}
