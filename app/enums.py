@@ -119,3 +119,29 @@ RESERVATION_TRANSITIONS: dict[ReservationStatus, set[ReservationStatus]] = {
     ReservationStatus.CANCELLED: set(),
     ReservationStatus.NO_SHOW: set(),
 }
+
+ASSET_TRANSITIONS: dict[AssetStatus, set[AssetStatus]] = {
+    AssetStatus.AVAILABLE: {
+        AssetStatus.RESERVED,
+        AssetStatus.CHECKED_OUT,
+        AssetStatus.IN_MAINTENANCE,
+        AssetStatus.RETIRED,
+        AssetStatus.LOST,
+    },
+    AssetStatus.RESERVED: {
+        AssetStatus.CHECKED_OUT,
+        AssetStatus.AVAILABLE,
+        AssetStatus.LOST,
+    },
+    AssetStatus.CHECKED_OUT: {
+        AssetStatus.AVAILABLE,
+        AssetStatus.IN_MAINTENANCE,
+        AssetStatus.LOST,
+    },
+    AssetStatus.IN_MAINTENANCE: {
+        AssetStatus.AVAILABLE,
+        AssetStatus.RETIRED,
+    },
+    AssetStatus.RETIRED: set(),
+    AssetStatus.LOST: {AssetStatus.AVAILABLE},
+}
