@@ -145,3 +145,25 @@ ASSET_TRANSITIONS: dict[AssetStatus, set[AssetStatus]] = {
     AssetStatus.RETIRED: set(),
     AssetStatus.LOST: {AssetStatus.AVAILABLE},
 }
+
+INVOICE_TRANSITIONS: dict[InvoiceStatus, set[InvoiceStatus]] = {
+    InvoiceStatus.DRAFT: {InvoiceStatus.ISSUED, InvoiceStatus.VOID},
+    InvoiceStatus.ISSUED: {
+        InvoiceStatus.PARTIALLY_PAID,
+        InvoiceStatus.PAID,
+        InvoiceStatus.OVERDUE,
+        InvoiceStatus.VOID,
+    },
+    InvoiceStatus.PARTIALLY_PAID: {
+        InvoiceStatus.PAID,
+        InvoiceStatus.OVERDUE,
+        InvoiceStatus.VOID,
+    },
+    InvoiceStatus.OVERDUE: {
+        InvoiceStatus.PARTIALLY_PAID,
+        InvoiceStatus.PAID,
+        InvoiceStatus.VOID,
+    },
+    InvoiceStatus.PAID: set(),
+    InvoiceStatus.VOID: set(),
+}
