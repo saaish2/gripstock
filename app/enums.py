@@ -167,3 +167,9 @@ INVOICE_TRANSITIONS: dict[InvoiceStatus, set[InvoiceStatus]] = {
     InvoiceStatus.PAID: set(),
     InvoiceStatus.VOID: set(),
 }
+
+
+def can_transition(table: dict, current, target) -> bool:  # noqa: ANN001
+    """Return True if ``current -> target`` is permitted by ``table``."""
+
+    return target in table.get(current, set())
