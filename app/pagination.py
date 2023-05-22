@@ -7,3 +7,5 @@ from typing import Generic, TypeVar
 
 from sqlalchemy import Select, func, select
 from sqlalchemy.orm import Session
+
+T = TypeVar("T")
