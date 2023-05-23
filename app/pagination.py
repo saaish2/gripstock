@@ -9,3 +9,5 @@ from sqlalchemy import Select, func, select
 from sqlalchemy.orm import Session
 
 T = TypeVar("T")
+
+MAX_PAGE_SIZE = 100
