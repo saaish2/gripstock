@@ -11,3 +11,4 @@ from sqlalchemy.orm import Session
 T = TypeVar("T")
 
 MAX_PAGE_SIZE = 100
+DEFAULT_PAGE_SIZE = 25
