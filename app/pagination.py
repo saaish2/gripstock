@@ -17,3 +17,5 @@ DEFAULT_PAGE_SIZE = 25
 @dataclass(slots=True)
 class PageParams:
     """Validated pagination inputs."""
+
+    page: int = 1
