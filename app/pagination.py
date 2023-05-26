@@ -19,3 +19,4 @@ class PageParams:
     """Validated pagination inputs."""
 
     page: int = 1
+    size: int = DEFAULT_PAGE_SIZE
