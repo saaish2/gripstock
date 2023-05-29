@@ -20,3 +20,11 @@ class PageParams:
 
     page: int = 1
     size: int = DEFAULT_PAGE_SIZE
+
+    def __post_init__(self) -> None:
+        if self.page < 1:
+            self.page = 1
+        if self.size < 1:
+            self.size = DEFAULT_PAGE_SIZE
+        if self.size > MAX_PAGE_SIZE:
+            self.size = MAX_PAGE_SIZE
