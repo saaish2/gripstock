@@ -32,3 +32,8 @@ class PageParams:
     @property
     def offset(self) -> int:
         return (self.page - 1) * self.size
+
+
+@dataclass(slots=True)
+class Page(Generic[T]):
+    """A single page of results plus enough metadata to render controls."""
