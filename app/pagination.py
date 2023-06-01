@@ -39,3 +39,4 @@ class Page(Generic[T]):
     """A single page of results plus enough metadata to render controls."""
 
     items: list[T]
+    total: int
