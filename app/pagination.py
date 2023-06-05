@@ -41,3 +41,4 @@ class Page(Generic[T]):
     items: list[T]
     total: int
     page: int
+    size: int
