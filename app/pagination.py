@@ -42,3 +42,9 @@ class Page(Generic[T]):
     total: int
     page: int
     size: int
+
+    @property
+    def pages(self) -> int:
+        if self.size == 0:
+            return 0
+        return (self.total + self.size - 1) // self.size
