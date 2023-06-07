@@ -48,3 +48,7 @@ class Page(Generic[T]):
         if self.size == 0:
             return 0
         return (self.total + self.size - 1) // self.size
+
+    @property
+    def has_next(self) -> bool:
+        return self.page < self.pages
