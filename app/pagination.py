@@ -56,3 +56,16 @@ class Page(Generic[T]):
     @property
     def has_prev(self) -> bool:
         return self.page > 1
+
+    def to_dict(self, serializer) -> dict:  # noqa: ANN001
+        return {
+            "items": [serializer(item) for item in self.items],
+            "pagination": {
+                "page": self.page,
+                "size": self.size,
+                "total": self.total,
+                "pages": self.pages,
+                "has_next": self.has_next,
+                "has_prev": self.has_prev,
+            },
+        }
