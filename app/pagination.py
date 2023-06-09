@@ -69,3 +69,12 @@ class Page(Generic[T]):
                 "has_prev": self.has_prev,
             },
         }
+
+
+def paginate(session: Session, stmt: Select, params: PageParams) -> Page:
+    """Execute ``stmt`` with limit/offset and a matching count query."""
+
+    count_stmt = select(func.count()).select_from(stmt.order_by(None).subquery())
+    total = session.execute(count_stmt).scalar_one()
+    rows = session.execute(stmt.limit(params.size).offset(params.offset)).scalars().all()
+    return Page(items=list(rows), total=total, page=params.page, size=params.size)
