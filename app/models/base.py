@@ -6,3 +6,15 @@ from datetime import UTC, datetime
 
 from sqlalchemy import DateTime, Integer, func
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+
+
+def utcnow() -> datetime:
+    """Return a naive UTC timestamp.
+
+    We deliberately drop the tzinfo: SQLite does not preserve timezone on
+    round-trip, so storing aware values would make persisted timestamps
+    uncomparable with freshly-minted ones. Treating every stored timestamp as
+    UTC-naive keeps comparisons consistent across SQLite and PostgreSQL.
+    """
+
+    return datetime.now(UTC).replace(tzinfo=None)
