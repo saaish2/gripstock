@@ -18,3 +18,7 @@ def utcnow() -> datetime:
     """
 
     return datetime.now(UTC).replace(tzinfo=None)
+
+
+class Base(DeclarativeBase):
+    """Project-wide declarative base."""
