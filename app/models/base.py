@@ -24,3 +24,7 @@ class Base(DeclarativeBase):
     """Project-wide declarative base."""
 
     pass
+
+
+class IntPrimaryKey:
+    """Mixin adding an autoincrement integer primary key."""
