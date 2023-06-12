@@ -22,3 +22,5 @@ def utcnow() -> datetime:
 
 class Base(DeclarativeBase):
     """Project-wide declarative base."""
+
+    pass
