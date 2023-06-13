@@ -30,3 +30,7 @@ class IntPrimaryKey:
     """Mixin adding an autoincrement integer primary key."""
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
+
+
+class TimestampMixin:
+    """Mixin adding ``created_at`` / ``updated_at`` columns."""
