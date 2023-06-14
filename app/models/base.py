@@ -44,3 +44,7 @@ class TimestampMixin:
         onupdate=func.now(),
         nullable=False,
     )
+
+
+class SoftDeleteMixin:
+    """Mixin adding a nullable ``deleted_at`` for soft deletion."""
