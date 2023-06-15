@@ -48,3 +48,5 @@ class TimestampMixin:
 
 class SoftDeleteMixin:
     """Mixin adding a nullable ``deleted_at`` for soft deletion."""
+
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
