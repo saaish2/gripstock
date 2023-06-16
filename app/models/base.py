@@ -50,3 +50,7 @@ class SoftDeleteMixin:
     """Mixin adding a nullable ``deleted_at`` for soft deletion."""
 
     deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    @property
+    def is_deleted(self) -> bool:
+        return self.deleted_at is not None
