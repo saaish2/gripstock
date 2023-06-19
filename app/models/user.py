@@ -9,3 +9,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.enums import Role
 from app.models.base import Base, IntPrimaryKey, TimestampMixin
+
+
+class User(Base, IntPrimaryKey, TimestampMixin):
