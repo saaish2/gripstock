@@ -12,3 +12,4 @@ from app.models.base import Base, IntPrimaryKey, TimestampMixin
 
 
 class User(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "users"
