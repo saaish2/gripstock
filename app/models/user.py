@@ -27,3 +27,6 @@ class User(Base, IntPrimaryKey, TimestampMixin):
 
     def __repr__(self) -> str:  # pragma: no cover - debug helper
         return f"<User {self.id} {self.email} role={self.role}>"
+
+
+class Session(Base, IntPrimaryKey, TimestampMixin):
