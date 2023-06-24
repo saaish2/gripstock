@@ -20,3 +20,7 @@ class User(Base, IntPrimaryKey, TimestampMixin):
     role: Mapped[Role] = mapped_column(String(20), default=Role.AGENT, nullable=False)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     last_login_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    sessions: Mapped[list[Session]] = relationship(
+        back_populates="user", cascade="all, delete-orphan"
+    )
