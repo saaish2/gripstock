@@ -24,3 +24,6 @@ class User(Base, IntPrimaryKey, TimestampMixin):
     sessions: Mapped[list[Session]] = relationship(
         back_populates="user", cascade="all, delete-orphan"
     )
+
+    def __repr__(self) -> str:  # pragma: no cover - debug helper
+        return f"<User {self.id} {self.email} role={self.role}>"
