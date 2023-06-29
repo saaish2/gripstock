@@ -30,3 +30,4 @@ class User(Base, IntPrimaryKey, TimestampMixin):
 
 
 class Session(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "sessions"
