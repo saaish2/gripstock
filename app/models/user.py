@@ -31,3 +31,7 @@ class User(Base, IntPrimaryKey, TimestampMixin):
 
 class Session(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "sessions"
+
+    user_id: Mapped[int] = mapped_column(
+        ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=False
+    )
