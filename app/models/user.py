@@ -35,3 +35,6 @@ class Session(Base, IntPrimaryKey, TimestampMixin):
     user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id", ondelete="CASCADE"), index=True, nullable=False
     )
+    token_fingerprint: Mapped[str] = mapped_column(
+        String(64), unique=True, index=True, nullable=False
+    )
