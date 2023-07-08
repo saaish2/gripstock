@@ -12,3 +12,4 @@ from app.models.base import Base, IntPrimaryKey, SoftDeleteMixin, TimestampMixin
 
 
 class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
+    __tablename__ = "customers"
