@@ -15,3 +15,4 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     __tablename__ = "customers"
 
     name: Mapped[str] = mapped_column(String(255), index=True, nullable=False)
+    contact_email: Mapped[str] = mapped_column(String(255), nullable=False)
