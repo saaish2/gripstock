@@ -17,3 +17,4 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     name: Mapped[str] = mapped_column(String(255), index=True, nullable=False)
     contact_email: Mapped[str] = mapped_column(String(255), nullable=False)
     contact_phone: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    billing_address: Mapped[str | None] = mapped_column(Text, nullable=True)
