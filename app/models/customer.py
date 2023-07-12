@@ -19,3 +19,6 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     contact_phone: Mapped[str | None] = mapped_column(String(40), nullable=True)
     billing_address: Mapped[str | None] = mapped_column(Text, nullable=True)
     tax_id: Mapped[str | None] = mapped_column(String(40), nullable=True)
+    status: Mapped[CustomerStatus] = mapped_column(
+        String(20), default=CustomerStatus.ACTIVE, nullable=False
+    )
