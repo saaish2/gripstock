@@ -22,3 +22,6 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     status: Mapped[CustomerStatus] = mapped_column(
         String(20), default=CustomerStatus.ACTIVE, nullable=False
     )
+    credit_limit: Mapped[Decimal] = mapped_column(
+        Numeric(12, 2), default=Decimal("0.00"), nullable=False
+    )
