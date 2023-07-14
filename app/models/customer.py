@@ -25,3 +25,6 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     credit_limit: Mapped[Decimal] = mapped_column(
         Numeric(12, 2), default=Decimal("0.00"), nullable=False
     )
+    outstanding_balance: Mapped[Decimal] = mapped_column(
+        Numeric(12, 2), default=Decimal("0.00"), nullable=False
+    )
