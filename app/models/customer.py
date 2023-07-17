@@ -28,3 +28,6 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     outstanding_balance: Mapped[Decimal] = mapped_column(
         Numeric(12, 2), default=Decimal("0.00"), nullable=False
     )
+    discount_rate: Mapped[Decimal] = mapped_column(
+        Numeric(5, 4), default=Decimal("0.0000"), nullable=False
+    )
