@@ -31,3 +31,4 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     discount_rate: Mapped[Decimal] = mapped_column(
         Numeric(5, 4), default=Decimal("0.0000"), nullable=False
     )
+    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
