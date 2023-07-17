@@ -32,3 +32,5 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
         Numeric(5, 4), default=Decimal("0.0000"), nullable=False
     )
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    reservations: Mapped[list[Reservation]] = relationship(back_populates="customer")  # noqa: F821
