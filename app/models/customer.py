@@ -34,3 +34,4 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     reservations: Mapped[list[Reservation]] = relationship(back_populates="customer")  # noqa: F821
+    orders: Mapped[list[RentalOrder]] = relationship(back_populates="customer")  # noqa: F821
