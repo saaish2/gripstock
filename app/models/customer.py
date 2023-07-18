@@ -39,3 +39,8 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     @property
     def available_credit(self) -> Decimal:
         return self.credit_limit - self.outstanding_balance
+
+    def can_charge(self, amount: Decimal) -> bool:
+        if self.status != CustomerStatus.ACTIVE:
+            return False
+        return self.available_credit >= amount
