@@ -35,3 +35,7 @@ class Customer(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
 
     reservations: Mapped[list[Reservation]] = relationship(back_populates="customer")  # noqa: F821
     orders: Mapped[list[RentalOrder]] = relationship(back_populates="customer")  # noqa: F821
+
+    @property
+    def available_credit(self) -> Decimal:
+        return self.credit_limit - self.outstanding_balance
