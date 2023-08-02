@@ -12,3 +12,5 @@ T = TypeVar("T")
 
 class ORMModel(BaseModel):
     """Base for schemas that read from ORM objects."""
+
+    model_config = ConfigDict(from_attributes=True)
