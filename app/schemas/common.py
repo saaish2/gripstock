@@ -18,3 +18,4 @@ class ORMModel(BaseModel):
 
 class PaginationMeta(BaseModel):
     page: int
+    size: int
