@@ -22,3 +22,4 @@ class PaginationMeta(BaseModel):
     total: int
     pages: int
     has_next: bool
+    has_prev: bool
