@@ -21,3 +21,4 @@ class PaginationMeta(BaseModel):
     size: int
     total: int
     pages: int
+    has_next: bool
