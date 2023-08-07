@@ -20,3 +20,4 @@ class PaginationMeta(BaseModel):
     page: int
     size: int
     total: int
+    pages: int
