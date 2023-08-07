@@ -23,3 +23,6 @@ class PaginationMeta(BaseModel):
     pages: int
     has_next: bool
     has_prev: bool
+
+
+class PagedResponse(BaseModel, Generic[T]):
