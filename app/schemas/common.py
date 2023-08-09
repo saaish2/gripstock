@@ -31,3 +31,4 @@ class PagedResponse(BaseModel, Generic[T]):
 
 
 class Timestamped(ORMModel):
+    created_at: datetime
