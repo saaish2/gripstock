@@ -36,3 +36,4 @@ class Timestamped(ORMModel):
 
 
 class MessageResponse(BaseModel):
+    message: str
