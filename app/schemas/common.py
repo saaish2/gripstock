@@ -42,3 +42,4 @@ class MessageResponse(BaseModel):
 class HealthResponse(BaseModel):
     status: str = "ok"
     version: str
+    environment: str
