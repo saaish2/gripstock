@@ -43,3 +43,7 @@ class HealthResponse(BaseModel):
     status: str = "ok"
     version: str
     environment: str
+
+
+def page_params(page: int = Field(1, ge=1), size: int = Field(25, ge=1, le=100)) -> dict:
+    return {"page": page, "size": size}
