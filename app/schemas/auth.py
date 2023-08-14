@@ -11,3 +11,4 @@ from app.schemas.common import ORMModel
 
 
 class LoginRequest(BaseModel):
+    email: EmailStr
