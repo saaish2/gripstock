@@ -8,3 +8,6 @@ from pydantic import BaseModel, EmailStr, Field
 
 from app.enums import Role
 from app.schemas.common import ORMModel
+
+
+class LoginRequest(BaseModel):
