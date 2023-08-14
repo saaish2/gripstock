@@ -12,3 +12,4 @@ from app.schemas.common import ORMModel
 
 class LoginRequest(BaseModel):
     email: EmailStr
+    password: str = Field(min_length=1)
