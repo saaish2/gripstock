@@ -16,3 +16,4 @@ class LoginRequest(BaseModel):
 
 
 class LoginResponse(BaseModel):
+    token: str
