@@ -17,3 +17,4 @@ class LoginRequest(BaseModel):
 
 class LoginResponse(BaseModel):
     token: str
+    expires_at: datetime
