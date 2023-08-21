@@ -19,3 +19,6 @@ class LoginResponse(BaseModel):
     token: str
     expires_at: datetime
     user: UserOut
+
+
+class UserCreate(BaseModel):
