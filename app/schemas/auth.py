@@ -22,3 +22,4 @@ class LoginResponse(BaseModel):
 
 
 class UserCreate(BaseModel):
+    email: EmailStr
