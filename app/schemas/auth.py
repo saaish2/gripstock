@@ -31,3 +31,4 @@ class UserCreate(BaseModel):
 class UserUpdate(BaseModel):
     full_name: str | None = Field(default=None, max_length=255)
     role: Role | None = None
+    is_active: bool | None = None
