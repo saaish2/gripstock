@@ -35,3 +35,4 @@ class UserUpdate(BaseModel):
 
 
 class PasswordChange(BaseModel):
+    current_password: str
