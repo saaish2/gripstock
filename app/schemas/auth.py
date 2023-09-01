@@ -41,3 +41,4 @@ class PasswordChange(BaseModel):
 
 class UserOut(ORMModel):
     id: int
+    email: str
