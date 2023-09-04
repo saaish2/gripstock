@@ -45,3 +45,4 @@ class UserOut(ORMModel):
     full_name: str
     role: Role
     is_active: bool
+    last_login_at: datetime | None = None
