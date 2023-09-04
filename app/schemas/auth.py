@@ -44,3 +44,4 @@ class UserOut(ORMModel):
     email: str
     full_name: str
     role: Role
+    is_active: bool
