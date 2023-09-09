@@ -13,3 +13,5 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.base import Base
+
+ModelT = TypeVar("ModelT", bound=Base)
