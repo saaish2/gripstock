@@ -19,3 +19,6 @@ ModelT = TypeVar("ModelT", bound=Base)
 
 class BaseRepository(Generic[ModelT]):
     model: type[ModelT]
+
+    def __init__(self, session: Session) -> None:
+        self.session = session
