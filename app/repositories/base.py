@@ -22,3 +22,8 @@ class BaseRepository(Generic[ModelT]):
 
     def __init__(self, session: Session) -> None:
         self.session = session
+
+    def add(self, entity: ModelT) -> ModelT:
+        self.session.add(entity)
+        self.session.flush()
+        return entity
