@@ -18,3 +18,4 @@ ModelT = TypeVar("ModelT", bound=Base)
 
 
 class BaseRepository(Generic[ModelT]):
+    model: type[ModelT]
