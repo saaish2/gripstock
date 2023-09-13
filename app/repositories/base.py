@@ -27,3 +27,6 @@ class BaseRepository(Generic[ModelT]):
         self.session.add(entity)
         self.session.flush()
         return entity
+
+    def get(self, entity_id: int) -> ModelT | None:
+        return self.session.get(self.model, entity_id)
