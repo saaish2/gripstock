@@ -30,3 +30,6 @@ class BaseRepository(Generic[ModelT]):
 
     def get(self, entity_id: int) -> ModelT | None:
         return self.session.get(self.model, entity_id)
+
+    def list(self) -> list[ModelT]:
+        return list(self.session.execute(select(self.model)).scalars().all())
