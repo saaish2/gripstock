@@ -33,3 +33,7 @@ class BaseRepository(Generic[ModelT]):
 
     def list(self) -> list[ModelT]:
         return list(self.session.execute(select(self.model)).scalars().all())
+
+    def delete(self, entity: ModelT) -> None:
+        self.session.delete(entity)
+        self.session.flush()
