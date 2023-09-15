@@ -37,3 +37,9 @@ class BaseRepository(Generic[ModelT]):
     def delete(self, entity: ModelT) -> None:
         self.session.delete(entity)
         self.session.flush()
+
+    def count(self) -> int:
+        from sqlalchemy import func
+
+        stmt = select(func.count()).select_from(self.model)
+        return self.session.execute(stmt).scalar_one()
