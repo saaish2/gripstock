@@ -43,3 +43,6 @@ class BaseRepository(Generic[ModelT]):
 
         stmt = select(func.count()).select_from(self.model)
         return self.session.execute(stmt).scalar_one()
+
+    def exists(self, entity_id: int) -> bool:
+        return self.get(entity_id) is not None
