@@ -24,3 +24,6 @@ class UserRepository(BaseRepository[User]):
 
     def email_taken(self, email: str) -> bool:
         return self.get_by_email(email) is not None
+
+
+class SessionRepository(BaseRepository[SessionModel]):
