@@ -27,3 +27,4 @@ class UserRepository(BaseRepository[User]):
 
 
 class SessionRepository(BaseRepository[SessionModel]):
+    model = SessionModel
