@@ -17,3 +17,7 @@ class UserRepository(BaseRepository[User]):
     def get_by_email(self, email: str) -> User | None:
         stmt = select(User).where(User.email == email.lower())
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def list_active(self) -> list[User]:
+        stmt = select(User).where(User.is_active.is_(True)).order_by(User.full_name)
+        return list(self.session.execute(stmt).scalars().all())
