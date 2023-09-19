@@ -21,3 +21,6 @@ class UserRepository(BaseRepository[User]):
     def list_active(self) -> list[User]:
         stmt = select(User).where(User.is_active.is_(True)).order_by(User.full_name)
         return list(self.session.execute(stmt).scalars().all())
+
+    def email_taken(self, email: str) -> bool:
+        return self.get_by_email(email) is not None
