@@ -32,3 +32,11 @@ class SessionRepository(BaseRepository[SessionModel]):
     def get_by_fingerprint(self, fingerprint: str) -> SessionModel | None:
         stmt = select(SessionModel).where(SessionModel.token_fingerprint == fingerprint)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def active_for_user(self, user_id: int, now: datetime) -> list[SessionModel]:
+        stmt = select(SessionModel).where(
+            SessionModel.user_id == user_id,
+            SessionModel.revoked_at.is_(None),
+            SessionModel.expires_at > now,
+        )
+        return list(self.session.execute(stmt).scalars().all())
