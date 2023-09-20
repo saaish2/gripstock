@@ -28,3 +28,7 @@ class UserRepository(BaseRepository[User]):
 
 class SessionRepository(BaseRepository[SessionModel]):
     model = SessionModel
+
+    def get_by_fingerprint(self, fingerprint: str) -> SessionModel | None:
+        stmt = select(SessionModel).where(SessionModel.token_fingerprint == fingerprint)
+        return self.session.execute(stmt).scalar_one_or_none()
