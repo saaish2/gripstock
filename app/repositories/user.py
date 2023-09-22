@@ -40,3 +40,10 @@ class SessionRepository(BaseRepository[SessionModel]):
             SessionModel.expires_at > now,
         )
         return list(self.session.execute(stmt).scalars().all())
+
+    def revoke_all_for_user(self, user_id: int, now: datetime) -> int:
+        sessions = self.active_for_user(user_id, now)
+        for session in sessions:
+            session.revoked_at = now
+        self.session.flush()
+        return len(sessions)
