@@ -13,3 +13,5 @@ from sqlalchemy.orm import Session
 from app.models.billing import Invoice
 from app.models.order import RentalOrder
 from app.models.reservation import Reservation
+
+RESERVATION_PREFIX = "RSV"
