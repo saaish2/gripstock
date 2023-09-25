@@ -15,3 +15,4 @@ from app.models.order import RentalOrder
 from app.models.reservation import Reservation
 
 RESERVATION_PREFIX = "RSV"
+ORDER_PREFIX = "ORD"
