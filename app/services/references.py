@@ -16,3 +16,4 @@ from app.models.reservation import Reservation
 
 RESERVATION_PREFIX = "RSV"
 ORDER_PREFIX = "ORD"
+INVOICE_PREFIX = "INV"
