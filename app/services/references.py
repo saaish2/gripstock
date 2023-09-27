@@ -19,3 +19,8 @@ ORDER_PREFIX = "ORD"
 INVOICE_PREFIX = "INV"
 
 _BASE_OFFSET = 1000
+
+
+def _next_sequence(session: Session, model) -> int:  # noqa: ANN001
+    current = session.execute(select(func.count()).select_from(model)).scalar_one()
+    return _BASE_OFFSET + current + 1
