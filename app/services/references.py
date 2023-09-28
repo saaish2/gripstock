@@ -24,3 +24,8 @@ _BASE_OFFSET = 1000
 def _next_sequence(session: Session, model) -> int:  # noqa: ANN001
     current = session.execute(select(func.count()).select_from(model)).scalar_one()
     return _BASE_OFFSET + current + 1
+
+
+def next_reservation_reference(session: Session) -> str:
+    seq = _next_sequence(session, Reservation)
+    return f"{RESERVATION_PREFIX}-{seq:06d}"
