@@ -29,3 +29,8 @@ def _next_sequence(session: Session, model) -> int:  # noqa: ANN001
 def next_reservation_reference(session: Session) -> str:
     seq = _next_sequence(session, Reservation)
     return f"{RESERVATION_PREFIX}-{seq:06d}"
+
+
+def next_order_reference(session: Session) -> str:
+    seq = _next_sequence(session, RentalOrder)
+    return f"{ORDER_PREFIX}-{seq:06d}"
