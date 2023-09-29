@@ -34,3 +34,8 @@ def next_reservation_reference(session: Session) -> str:
 def next_order_reference(session: Session) -> str:
     seq = _next_sequence(session, RentalOrder)
     return f"{ORDER_PREFIX}-{seq:06d}"
+
+
+def next_invoice_number(session: Session) -> str:
+    seq = _next_sequence(session, Invoice)
+    return f"{INVOICE_PREFIX}-{seq:06d}"
