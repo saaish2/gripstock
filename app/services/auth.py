@@ -25,3 +25,6 @@ from app.security import (
     verify_password,
 )
 from app.services.audit import record_audit
+
+
+class AuthService:
