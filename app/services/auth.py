@@ -28,3 +28,8 @@ from app.services.audit import record_audit
 
 
 class AuthService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.users = UserRepository(session)
+        self.sessions = SessionRepository(session)
+        self.settings = get_settings()
