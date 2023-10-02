@@ -33,3 +33,33 @@ class AuthService:
         self.users = UserRepository(session)
         self.sessions = SessionRepository(session)
         self.settings = get_settings()
+
+    def create_user(
+        self,
+        *,
+        email: str,
+        full_name: str,
+        password: str,
+        role: Role = Role.AGENT,
+        actor_id: int | None = None,
+    ) -> User:
+        email = email.lower().strip()
+        if self.users.email_taken(email):
+            raise ConflictError(f"a user with email {email!r} already exists")
+        self._validate_password(password)
+        user = User(
+            email=email,
+            full_name=full_name.strip(),
+            password_hash=hash_password(password),
+            role=role,
+        )
+        self.users.add(user)
+        record_audit(
+            self.session,
+            actor_id=actor_id,
+            action="user.created",
+            entity_type="user",
+            entity_id=user.id,
+            payload={"email": email, "role": role},
+        )
+        return user
