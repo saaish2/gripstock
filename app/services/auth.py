@@ -84,3 +84,14 @@ class AuthService:
         )
         self.sessions.add(session)
         return user, session, token
+
+    def resolve_session(self, token: str) -> User:
+        fingerprint = fingerprint_token(token)
+        session = self.sessions.get_by_fingerprint(fingerprint)
+        now = utcnow()
+        if session is None or session.revoked_at is not None or session.expires_at <= now:
+            raise AuthenticationError("session is invalid or has expired")
+        user = self.users.get(session.user_id)
+        if user is None or not user.is_active:
+            raise AuthenticationError("user is no longer active")
+        return user
