@@ -63,3 +63,24 @@ class AuthService:
             payload={"email": email, "role": role},
         )
         return user
+
+    def authenticate(
+        self, email: str, password: str, user_agent: str | None = None
+    ) -> tuple[User, SessionModel, str]:
+        user = self.users.get_by_email(email.lower().strip())
+        if user is None or not verify_password(password, user.password_hash):
+            raise AuthenticationError("invalid email or password")
+        if not user.is_active:
+            raise AuthenticationError("this account is disabled")
+
+        now = utcnow()
+        user.last_login_at = now
+        token = generate_token()
+        session = SessionModel(
+            user_id=user.id,
+            token_fingerprint=fingerprint_token(token),
+            expires_at=now + timedelta(minutes=self.settings.session_ttl_minutes),
+            user_agent=user_agent,
+        )
+        self.sessions.add(session)
+        return user, session, token
