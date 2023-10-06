@@ -95,3 +95,9 @@ class AuthService:
         if user is None or not user.is_active:
             raise AuthenticationError("user is no longer active")
         return user
+
+    def logout(self, token: str) -> None:
+        session = self.sessions.get_by_fingerprint(fingerprint_token(token))
+        if session is not None and session.revoked_at is None:
+            session.revoked_at = utcnow()
+            self.session.flush()
