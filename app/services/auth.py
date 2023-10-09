@@ -128,3 +128,9 @@ class AuthService:
             user.is_active = is_active
         self.session.flush()
         return user
+
+    def _validate_password(self, password: str) -> None:
+        if len(password) < self.settings.password_min_length:
+            raise ValidationError(
+                f"password must be at least {self.settings.password_min_length} characters"
+            )
