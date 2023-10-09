@@ -108,3 +108,23 @@ class AuthService:
         self._validate_password(new_password)
         user.password_hash = hash_password(new_password)
         self.sessions.revoke_all_for_user(user.id, utcnow())
+
+    def update_user(
+        self,
+        user_id: int,
+        *,
+        full_name: str | None = None,
+        role: Role | None = None,
+        is_active: bool | None = None,
+    ) -> User:
+        user = self.users.get(user_id)
+        if user is None:
+            raise NotFoundError(f"user {user_id} not found")
+        if full_name is not None:
+            user.full_name = full_name.strip()
+        if role is not None:
+            user.role = role
+        if is_active is not None:
+            user.is_active = is_active
+        self.session.flush()
+        return user
