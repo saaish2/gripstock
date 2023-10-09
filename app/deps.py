@@ -13,3 +13,11 @@ from app.errors import AuthenticationError, PermissionDeniedError
 from app.models.user import User
 from app.pagination import PageParams
 from app.services.auth import AuthService
+
+# Role hierarchy — higher numbers strictly include the powers of lower ones.
+_ROLE_RANK: dict[Role, int] = {
+    Role.VIEWER: 0,
+    Role.AGENT: 1,
+    Role.MANAGER: 2,
+    Role.ADMIN: 3,
+}
