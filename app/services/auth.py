@@ -101,3 +101,10 @@ class AuthService:
         if session is not None and session.revoked_at is None:
             session.revoked_at = utcnow()
             self.session.flush()
+
+    def change_password(self, user: User, current: str, new_password: str) -> None:
+        if not verify_password(current, user.password_hash):
+            raise AuthenticationError("current password is incorrect")
+        self._validate_password(new_password)
+        user.password_hash = hash_password(new_password)
+        self.sessions.revoke_all_for_user(user.id, utcnow())
