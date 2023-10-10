@@ -21,3 +21,7 @@ _ROLE_RANK: dict[Role, int] = {
     Role.MANAGER: 2,
     Role.ADMIN: 3,
 }
+
+
+def db_session() -> Iterator[Session]:
+    yield from get_db()
