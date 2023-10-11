@@ -25,3 +25,9 @@ _ROLE_RANK: dict[Role, int] = {
 
 def db_session() -> Iterator[Session]:
     yield from get_db()
+
+
+def _extract_bearer(authorization: str | None) -> str:
+    if not authorization or not authorization.lower().startswith("bearer "):
+        raise AuthenticationError("missing or malformed Authorization header")
+    return authorization.split(" ", 1)[1].strip()
