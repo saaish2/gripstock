@@ -31,3 +31,11 @@ def _extract_bearer(authorization: str | None) -> str:
     if not authorization or not authorization.lower().startswith("bearer "):
         raise AuthenticationError("missing or malformed Authorization header")
     return authorization.split(" ", 1)[1].strip()
+
+
+def current_user(
+    authorization: str | None = Header(default=None),
+    session: Session = Depends(db_session),
+) -> User:
+    token = _extract_bearer(authorization)
+    return AuthService(session).resolve_session(token)
