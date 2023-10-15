@@ -39,3 +39,16 @@ def current_user(
 ) -> User:
     token = _extract_bearer(authorization)
     return AuthService(session).resolve_session(token)
+
+
+def require_role(minimum: Role) -> Callable[..., User]:
+    """Build a dependency that enforces a minimum role rank."""
+
+    def guard(user: User = Depends(current_user)) -> User:
+        if _ROLE_RANK[user.role] < _ROLE_RANK[minimum]:
+            raise PermissionDeniedError(
+                f"this action requires the {minimum} role or higher"
+            )
+        return user
+
+    return guard
