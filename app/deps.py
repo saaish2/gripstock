@@ -52,3 +52,6 @@ def require_role(minimum: Role) -> Callable[..., User]:
         return user
 
     return guard
+
+
+require_viewer = require_role(Role.VIEWER)
