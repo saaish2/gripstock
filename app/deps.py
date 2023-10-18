@@ -58,3 +58,10 @@ require_viewer = require_role(Role.VIEWER)
 require_agent = require_role(Role.AGENT)
 require_manager = require_role(Role.MANAGER)
 require_admin = require_role(Role.ADMIN)
+
+
+def pagination(
+    page: int = Query(default=1, ge=1),
+    size: int = Query(default=25, ge=1, le=100),
+) -> PageParams:
+    return PageParams(page=page, size=size)
