@@ -56,3 +56,4 @@ def require_role(minimum: Role) -> Callable[..., User]:
 
 require_viewer = require_role(Role.VIEWER)
 require_agent = require_role(Role.AGENT)
+require_manager = require_role(Role.MANAGER)
