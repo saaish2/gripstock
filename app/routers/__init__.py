@@ -22,3 +22,5 @@ from app.routers import (
     users,
     webhooks,
 )
+
+api_router = APIRouter()
