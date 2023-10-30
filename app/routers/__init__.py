@@ -39,3 +39,4 @@ api_router.include_router(operations.router)
 # Maintenance endpoints are defined alongside operations but mounted separately.
 api_router.include_router(operations.maintenance_router)
 api_router.include_router(webhooks.router)
+api_router.include_router(apikeys.router)
