@@ -10,3 +10,5 @@ from app import __version__
 from app.config import get_settings
 from app.deps import db_session
 from app.schemas.common import HealthResponse
+
+router = APIRouter(tags=["health"])
