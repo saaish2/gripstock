@@ -18,3 +18,10 @@ router = APIRouter(tags=["health"])
 def health() -> HealthResponse:
     settings = get_settings()
     return HealthResponse(status="ok", version=__version__, environment=settings.env)
+
+
+@router.get("/health/ready", response_model=HealthResponse)
+def ready(session: Session = Depends(db_session)) -> HealthResponse:
+    session.execute(text("SELECT 1"))
+    settings = get_settings()
+    return HealthResponse(status="ready", version=__version__, environment=settings.env)
