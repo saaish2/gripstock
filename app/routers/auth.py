@@ -15,3 +15,5 @@ from app.schemas.auth import (
 )
 from app.schemas.common import MessageResponse
 from app.services.auth import AuthService
+
+router = APIRouter(prefix="/auth", tags=["auth"])
