@@ -17,3 +17,14 @@ from app.schemas.common import MessageResponse
 from app.services.auth import AuthService
 
 router = APIRouter(prefix="/auth", tags=["auth"])
+
+
+@router.post("/login", response_model=LoginResponse)
+def login(
+    payload: LoginRequest,
+    user_agent: str | None = Header(default=None),
+    session: Session = Depends(db_session),
+) -> LoginResponse:
+    service = AuthService(session)
+    user, sess, token = service.authenticate(payload.email, payload.password, user_agent)
+    return LoginResponse(token=token, expires_at=sess.expires_at, user=UserOut.model_validate(user))
