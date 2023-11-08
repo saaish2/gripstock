@@ -38,3 +38,8 @@ def logout(
     token = authorization.split(" ", 1)[-1]
     AuthService(session).logout(token)
     return MessageResponse(message="logged out")
+
+
+@router.get("/me", response_model=UserOut)
+def me(user: User = Depends(current_user)) -> UserOut:
+    return UserOut.model_validate(user)
