@@ -43,3 +43,13 @@ def logout(
 @router.get("/me", response_model=UserOut)
 def me(user: User = Depends(current_user)) -> UserOut:
     return UserOut.model_validate(user)
+
+
+@router.post("/change-password", response_model=MessageResponse)
+def change_password(
+    payload: PasswordChange,
+    user: User = Depends(current_user),
+    session: Session = Depends(db_session),
+) -> MessageResponse:
+    AuthService(session).change_password(user, payload.current_password, payload.new_password)
+    return MessageResponse(message="password changed; please log in again")
