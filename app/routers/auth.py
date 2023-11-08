@@ -28,3 +28,13 @@ def login(
     service = AuthService(session)
     user, sess, token = service.authenticate(payload.email, payload.password, user_agent)
     return LoginResponse(token=token, expires_at=sess.expires_at, user=UserOut.model_validate(user))
+
+
+@router.post("/logout", response_model=MessageResponse)
+def logout(
+    authorization: str = Header(),
+    session: Session = Depends(db_session),
+) -> MessageResponse:
+    token = authorization.split(" ", 1)[-1]
+    AuthService(session).logout(token)
+    return MessageResponse(message="logged out")
