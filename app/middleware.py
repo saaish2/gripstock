@@ -10,3 +10,5 @@ from starlette.requests import Request
 from starlette.responses import Response
 
 from app.logging import get_logger, log_event, set_request_id
+
+logger = get_logger("http")
