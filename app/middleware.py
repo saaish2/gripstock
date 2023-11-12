@@ -12,3 +12,7 @@ from starlette.responses import Response
 from app.logging import get_logger, log_event, set_request_id
 
 logger = get_logger("http")
+
+
+class RequestContextMiddleware(BaseHTTPMiddleware):
+    """Attach a request id to each request and emit a timed access log."""
