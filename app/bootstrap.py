@@ -14,3 +14,7 @@ from app.models import Base
 
 def create_all(engine: Engine | None = None) -> None:
     Base.metadata.create_all(bind=engine or get_engine())
+
+
+def drop_all(engine: Engine | None = None) -> None:
+    Base.metadata.drop_all(bind=engine or get_engine())
