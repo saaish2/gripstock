@@ -10,3 +10,5 @@ from app.models.user import User
 from app.repositories.user import UserRepository
 from app.schemas.auth import UserCreate, UserOut, UserUpdate
 from app.services.auth import AuthService
+
+router = APIRouter(prefix="/users", tags=["users"])
