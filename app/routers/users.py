@@ -28,3 +28,12 @@ def create_user(
         actor_id=actor.id,
     )
     return UserOut.model_validate(user)
+
+
+@router.get("", response_model=list[UserOut])
+def list_users(
+    _: User = Depends(require_admin),
+    session: Session = Depends(db_session),
+) -> list[UserOut]:
+    users = UserRepository(session).list_active()
+    return [UserOut.model_validate(u) for u in users]
