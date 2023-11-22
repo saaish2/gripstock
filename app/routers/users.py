@@ -37,3 +37,19 @@ def list_users(
 ) -> list[UserOut]:
     users = UserRepository(session).list_active()
     return [UserOut.model_validate(u) for u in users]
+
+
+@router.patch("/{user_id}", response_model=UserOut)
+def update_user(
+    user_id: int,
+    payload: UserUpdate,
+    _: User = Depends(require_admin),
+    session: Session = Depends(db_session),
+) -> UserOut:
+    user = AuthService(session).update_user(
+        user_id,
+        full_name=payload.full_name,
+        role=payload.role,
+        is_active=payload.is_active,
+    )
+    return UserOut.model_validate(user)
