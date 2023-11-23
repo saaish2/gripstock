@@ -14,3 +14,5 @@ from decimal import Decimal
 import pytest
 from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
+
+os.environ.setdefault("GRIPSTOCK_ENV", "test")
