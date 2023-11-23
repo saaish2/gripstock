@@ -16,3 +16,4 @@ from fastapi.testclient import TestClient
 from sqlalchemy.orm import Session
 
 os.environ.setdefault("GRIPSTOCK_ENV", "test")
+os.environ.setdefault("GRIPSTOCK_SECRET_KEY", "test-secret")
