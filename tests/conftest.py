@@ -20,3 +20,4 @@ os.environ.setdefault("GRIPSTOCK_SECRET_KEY", "test-secret")
 
 from app.config import reset_settings_cache  # noqa: E402
 from app.database import get_session_factory, reset_engine  # noqa: E402
+from app.enums import Role  # noqa: E402
