@@ -22,3 +22,14 @@ from app.config import reset_settings_cache  # noqa: E402
 from app.database import get_session_factory, reset_engine  # noqa: E402
 from app.enums import Role  # noqa: E402
 from app.factory import create_app  # noqa: E402
+
+
+@pytest.fixture()
+def db_path() -> Iterator[str]:
+    fd, path = tempfile.mkstemp(suffix=".db")
+    os.close(fd)
+    yield path
+    try:
+        os.remove(path)
+    except OSError:
+        pass
