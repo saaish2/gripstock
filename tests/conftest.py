@@ -33,3 +33,15 @@ def db_path() -> Iterator[str]:
         os.remove(path)
     except OSError:
         pass
+
+
+@pytest.fixture()
+def configured_env(db_path: str) -> Iterator[None]:
+    os.environ["GRIPSTOCK_DATABASE_URL"] = f"sqlite:///{db_path}"
+    reset_settings_cache()
+    reset_engine()
+    from app.bootstrap import create_all
+
+    create_all()
+    yield
+    reset_engine()
