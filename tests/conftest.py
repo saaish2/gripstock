@@ -63,3 +63,23 @@ def client(configured_env: None) -> Iterator[TestClient]:
     app = create_app()
     with TestClient(app) as test_client:
         yield test_client
+
+
+@pytest.fixture()
+def admin_token(client: TestClient) -> str:
+    from app.database import session_scope
+    from app.services.auth import AuthService
+
+    with session_scope() as sess:
+        AuthService(sess).create_user(
+            email="admin@test.com",
+            full_name="Admin",
+            password="supersecret1",
+            role=Role.ADMIN,
+        )
+    resp = client.post(
+        "/auth/login",
+        json={"email": "admin@test.com", "password": "supersecret1"},
+    )
+    assert resp.status_code == 200, resp.text
+    return resp.json()["token"]
