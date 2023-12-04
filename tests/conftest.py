@@ -83,3 +83,8 @@ def admin_token(client: TestClient) -> str:
     )
     assert resp.status_code == 200, resp.text
     return resp.json()["token"]
+
+
+@pytest.fixture()
+def auth_headers(admin_token: str) -> dict[str, str]:
+    return {"Authorization": f"Bearer {admin_token}"}
