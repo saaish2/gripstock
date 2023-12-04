@@ -45,3 +45,14 @@ def configured_env(db_path: str) -> Iterator[None]:
     create_all()
     yield
     reset_engine()
+
+
+@pytest.fixture()
+def session(configured_env: None) -> Iterator[Session]:
+    factory = get_session_factory()
+    sess = factory()
+    try:
+        yield sess
+        sess.commit()
+    finally:
+        sess.close()
