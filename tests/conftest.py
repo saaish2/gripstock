@@ -56,3 +56,10 @@ def session(configured_env: None) -> Iterator[Session]:
         sess.commit()
     finally:
         sess.close()
+
+
+@pytest.fixture()
+def client(configured_env: None) -> Iterator[TestClient]:
+    app = create_app()
+    with TestClient(app) as test_client:
+        yield test_client
