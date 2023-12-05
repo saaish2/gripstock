@@ -88,3 +88,38 @@ def admin_token(client: TestClient) -> str:
 @pytest.fixture()
 def auth_headers(admin_token: str) -> dict[str, str]:
     return {"Authorization": f"Bearer {admin_token}"}
+
+
+@pytest.fixture()
+def sample_catalog(client: TestClient, auth_headers: dict) -> dict:
+    """Create a category and two assets; return their ids."""
+
+    cat = client.post(
+        "/categories",
+        json={"name": "Cameras", "description": "bodies"},
+        headers=auth_headers,
+    ).json()
+    asset_a = client.post(
+        "/assets",
+        json={
+            "category_id": cat["id"],
+            "name": "Alexa Mini",
+            "barcode": "CAM-001",
+            "daily_rate": "650.00",
+            "weekly_rate": "3250.00",
+            "replacement_value": "48000.00",
+        },
+        headers=auth_headers,
+    ).json()
+    asset_b = client.post(
+        "/assets",
+        json={
+            "category_id": cat["id"],
+            "name": "Komodo",
+            "barcode": "CAM-002",
+            "daily_rate": "450.00",
+            "replacement_value": "32000.00",
+        },
+        headers=auth_headers,
+    ).json()
+    return {"category": cat, "asset_a": asset_a, "asset_b": asset_b}
