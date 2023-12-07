@@ -137,3 +137,8 @@ def sample_customer(client: TestClient, auth_headers: dict) -> dict:
         },
         headers=auth_headers,
     ).json()
+
+
+@pytest.fixture()
+def default_deposit_rate() -> Decimal:
+    return Decimal("0.20")
