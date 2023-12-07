@@ -123,3 +123,17 @@ def sample_catalog(client: TestClient, auth_headers: dict) -> dict:
         headers=auth_headers,
     ).json()
     return {"category": cat, "asset_a": asset_a, "asset_b": asset_b}
+
+
+@pytest.fixture()
+def sample_customer(client: TestClient, auth_headers: dict) -> dict:
+    return client.post(
+        "/customers",
+        json={
+            "name": "Lantern House",
+            "contact_email": "ops@lantern.com",
+            "credit_limit": "25000.00",
+            "discount_rate": "0.05",
+        },
+        headers=auth_headers,
+    ).json()
