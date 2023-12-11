@@ -10,3 +10,10 @@ from app.security import (
     hash_password,
     verify_password,
 )
+
+
+def test_password_hash_roundtrip():
+    hashed = hash_password("hunter2-ok")
+    assert hashed != "hunter2-ok"
+    assert verify_password("hunter2-ok", hashed)
+    assert not verify_password("wrong", hashed)
