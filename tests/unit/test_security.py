@@ -17,3 +17,7 @@ def test_password_hash_roundtrip():
     assert hashed != "hunter2-ok"
     assert verify_password("hunter2-ok", hashed)
     assert not verify_password("wrong", hashed)
+
+
+def test_verify_rejects_garbage_hash():
+    assert not verify_password("anything", "not-a-real-hash")
