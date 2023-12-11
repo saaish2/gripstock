@@ -30,3 +30,9 @@ def test_generate_token_is_unique():
 def test_fingerprint_is_stable():
     assert fingerprint_token("abc") == fingerprint_token("abc")
     assert fingerprint_token("abc") != fingerprint_token("abd")
+
+
+def test_api_key_prefix_and_fingerprint():
+    plaintext, fingerprint = generate_api_key()
+    assert plaintext.startswith("gs_")
+    assert fingerprint == fingerprint_token(plaintext)
