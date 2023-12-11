@@ -11,3 +11,9 @@ from app.enums import (
     ReservationStatus,
     can_transition,
 )
+
+
+def test_reservation_happy_path():
+    assert can_transition(RESERVATION_TRANSITIONS, ReservationStatus.PENDING, ReservationStatus.CONFIRMED)
+    assert can_transition(RESERVATION_TRANSITIONS, ReservationStatus.CONFIRMED, ReservationStatus.PICKED_UP)
+    assert can_transition(RESERVATION_TRANSITIONS, ReservationStatus.PICKED_UP, ReservationStatus.RETURNED)
