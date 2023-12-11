@@ -25,3 +25,8 @@ def test_verify_rejects_garbage_hash():
 
 def test_generate_token_is_unique():
     assert generate_token() != generate_token()
+
+
+def test_fingerprint_is_stable():
+    assert fingerprint_token("abc") == fingerprint_token("abc")
+    assert fingerprint_token("abc") != fingerprint_token("abd")
