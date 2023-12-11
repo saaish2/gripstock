@@ -36,3 +36,8 @@ def test_api_key_prefix_and_fingerprint():
     plaintext, fingerprint = generate_api_key()
     assert plaintext.startswith("gs_")
     assert fingerprint == fingerprint_token(plaintext)
+
+
+def test_constant_time_equals():
+    assert constant_time_equals("same", "same")
+    assert not constant_time_equals("a", "b")
