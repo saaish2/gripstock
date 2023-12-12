@@ -27,3 +27,9 @@ def test_reservation_terminal_states_are_dead_ends():
 def test_reservation_illegal_moves():
     assert not can_transition(RESERVATION_TRANSITIONS, ReservationStatus.PENDING, ReservationStatus.RETURNED)
     assert not can_transition(RESERVATION_TRANSITIONS, ReservationStatus.RETURNED, ReservationStatus.PENDING)
+
+
+def test_asset_transitions():
+    assert can_transition(ASSET_TRANSITIONS, AssetStatus.AVAILABLE, AssetStatus.RESERVED)
+    assert can_transition(ASSET_TRANSITIONS, AssetStatus.CHECKED_OUT, AssetStatus.IN_MAINTENANCE)
+    assert not can_transition(ASSET_TRANSITIONS, AssetStatus.RETIRED, AssetStatus.AVAILABLE)
