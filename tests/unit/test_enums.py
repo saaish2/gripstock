@@ -33,3 +33,10 @@ def test_asset_transitions():
     assert can_transition(ASSET_TRANSITIONS, AssetStatus.AVAILABLE, AssetStatus.RESERVED)
     assert can_transition(ASSET_TRANSITIONS, AssetStatus.CHECKED_OUT, AssetStatus.IN_MAINTENANCE)
     assert not can_transition(ASSET_TRANSITIONS, AssetStatus.RETIRED, AssetStatus.AVAILABLE)
+
+
+def test_invoice_transitions():
+    assert can_transition(INVOICE_TRANSITIONS, InvoiceStatus.DRAFT, InvoiceStatus.ISSUED)
+    assert can_transition(INVOICE_TRANSITIONS, InvoiceStatus.ISSUED, InvoiceStatus.PAID)
+    assert not can_transition(INVOICE_TRANSITIONS, InvoiceStatus.PAID, InvoiceStatus.ISSUED)
+    assert not can_transition(INVOICE_TRANSITIONS, InvoiceStatus.VOID, InvoiceStatus.PAID)
