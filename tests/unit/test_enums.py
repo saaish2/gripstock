@@ -22,3 +22,8 @@ def test_reservation_happy_path():
 def test_reservation_terminal_states_are_dead_ends():
     for terminal in (ReservationStatus.RETURNED, ReservationStatus.CANCELLED, ReservationStatus.NO_SHOW):
         assert RESERVATION_TRANSITIONS[terminal] == set()
+
+
+def test_reservation_illegal_moves():
+    assert not can_transition(RESERVATION_TRANSITIONS, ReservationStatus.PENDING, ReservationStatus.RETURNED)
+    assert not can_transition(RESERVATION_TRANSITIONS, ReservationStatus.RETURNED, ReservationStatus.PENDING)
