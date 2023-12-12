@@ -17,3 +17,8 @@ def test_reservation_happy_path():
     assert can_transition(RESERVATION_TRANSITIONS, ReservationStatus.PENDING, ReservationStatus.CONFIRMED)
     assert can_transition(RESERVATION_TRANSITIONS, ReservationStatus.CONFIRMED, ReservationStatus.PICKED_UP)
     assert can_transition(RESERVATION_TRANSITIONS, ReservationStatus.PICKED_UP, ReservationStatus.RETURNED)
+
+
+def test_reservation_terminal_states_are_dead_ends():
+    for terminal in (ReservationStatus.RETURNED, ReservationStatus.CANCELLED, ReservationStatus.NO_SHOW):
+        assert RESERVATION_TRANSITIONS[terminal] == set()
