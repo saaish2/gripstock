@@ -14,3 +14,10 @@ def test_page_params_clamps():
 def test_page_params_offset():
     assert PageParams(page=1, size=25).offset == 0
     assert PageParams(page=3, size=10).offset == 20
+
+
+def test_page_metadata():
+    page = Page(items=[1, 2, 3], total=23, page=2, size=10)
+    assert page.pages == 3
+    assert page.has_next is True
+    assert page.has_prev is True
