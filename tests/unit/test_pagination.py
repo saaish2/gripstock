@@ -21,3 +21,10 @@ def test_page_metadata():
     assert page.pages == 3
     assert page.has_next is True
     assert page.has_prev is True
+
+
+def test_page_first_and_last():
+    first = Page(items=[], total=5, page=1, size=10)
+    assert first.has_prev is False
+    assert first.has_next is False
+    assert first.pages == 1
