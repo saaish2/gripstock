@@ -28,3 +28,10 @@ def test_page_first_and_last():
     assert first.has_prev is False
     assert first.has_next is False
     assert first.pages == 1
+
+
+def test_page_to_dict():
+    page = Page(items=[{"id": 1}], total=1, page=1, size=10)
+    out = page.to_dict(lambda x: x)
+    assert out["items"] == [{"id": 1}]
+    assert out["pagination"]["total"] == 1
