@@ -27,3 +27,8 @@ def test_login_rejects_bad_password(client, admin_token):
         json={"email": "admin@test.com", "password": "wrong"},
     )
     assert resp.status_code == 401
+
+
+def test_protected_route_requires_token(client):
+    resp = client.get("/auth/me")
+    assert resp.status_code == 401
