@@ -32,3 +32,9 @@ def test_login_rejects_bad_password(client, admin_token):
 def test_protected_route_requires_token(client):
     resp = client.get("/auth/me")
     assert resp.status_code == 401
+
+
+def test_logout_revokes_session(client, admin_token):
+    headers = {"Authorization": f"Bearer {admin_token}"}
+    assert client.post("/auth/logout", headers=headers).status_code == 200
+    assert client.get("/auth/me", headers=headers).status_code == 401
