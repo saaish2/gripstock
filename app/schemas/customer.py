@@ -9,3 +9,6 @@ from pydantic import BaseModel, EmailStr, Field
 
 from app.enums import CustomerStatus
 from app.schemas.common import ORMModel
+
+
+class CustomerCreate(BaseModel):
