@@ -13,3 +13,4 @@ from app.schemas.common import ORMModel
 
 class CustomerCreate(BaseModel):
     name: str = Field(min_length=1, max_length=255)
+    contact_email: EmailStr
