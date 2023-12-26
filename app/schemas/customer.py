@@ -16,3 +16,4 @@ class CustomerCreate(BaseModel):
     contact_email: EmailStr
     contact_phone: str | None = Field(default=None, max_length=40)
     billing_address: str | None = None
+    tax_id: str | None = Field(default=None, max_length=40)
