@@ -17,3 +17,4 @@ class CustomerCreate(BaseModel):
     contact_phone: str | None = Field(default=None, max_length=40)
     billing_address: str | None = None
     tax_id: str | None = Field(default=None, max_length=40)
+    credit_limit: Decimal = Field(default=Decimal("0.00"), ge=0)
