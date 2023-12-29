@@ -20,3 +20,6 @@ class CustomerCreate(BaseModel):
     credit_limit: Decimal = Field(default=Decimal("0.00"), ge=0)
     discount_rate: Decimal = Field(default=Decimal("0.0000"), ge=0, le=1)
     notes: str | None = None
+
+
+class CustomerUpdate(BaseModel):
