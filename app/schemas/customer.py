@@ -23,3 +23,4 @@ class CustomerCreate(BaseModel):
 
 
 class CustomerUpdate(BaseModel):
+    name: str | None = Field(default=None, max_length=255)
