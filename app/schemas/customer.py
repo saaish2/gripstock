@@ -26,3 +26,4 @@ class CustomerUpdate(BaseModel):
     name: str | None = Field(default=None, max_length=255)
     contact_email: EmailStr | None = None
     contact_phone: str | None = Field(default=None, max_length=40)
+    billing_address: str | None = None
