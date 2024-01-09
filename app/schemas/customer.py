@@ -30,3 +30,6 @@ class CustomerUpdate(BaseModel):
     credit_limit: Decimal | None = Field(default=None, ge=0)
     discount_rate: Decimal | None = Field(default=None, ge=0, le=1)
     notes: str | None = None
+
+
+class CustomerStatusUpdate(BaseModel):
