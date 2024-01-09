@@ -29,3 +29,4 @@ class CustomerUpdate(BaseModel):
     billing_address: str | None = None
     credit_limit: Decimal | None = Field(default=None, ge=0)
     discount_rate: Decimal | None = Field(default=None, ge=0, le=1)
+    notes: str | None = None
