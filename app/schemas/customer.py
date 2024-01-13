@@ -34,3 +34,6 @@ class CustomerUpdate(BaseModel):
 
 class CustomerStatusUpdate(BaseModel):
     status: CustomerStatus
+
+
+class CustomerOut(ORMModel):
