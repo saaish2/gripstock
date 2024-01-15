@@ -42,3 +42,4 @@ class CustomerOut(ORMModel):
     contact_email: str
     contact_phone: str | None = None
     status: CustomerStatus
+    credit_limit: Decimal
