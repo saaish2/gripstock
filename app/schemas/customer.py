@@ -41,3 +41,4 @@ class CustomerOut(ORMModel):
     name: str
     contact_email: str
     contact_phone: str | None = None
+    status: CustomerStatus
