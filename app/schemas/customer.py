@@ -40,3 +40,4 @@ class CustomerOut(ORMModel):
     id: int
     name: str
     contact_email: str
+    contact_phone: str | None = None
