@@ -38,3 +38,4 @@ class CustomerStatusUpdate(BaseModel):
 
 class CustomerOut(ORMModel):
     id: int
+    name: str
