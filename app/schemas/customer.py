@@ -43,3 +43,4 @@ class CustomerOut(ORMModel):
     contact_phone: str | None = None
     status: CustomerStatus
     credit_limit: Decimal
+    outstanding_balance: Decimal
