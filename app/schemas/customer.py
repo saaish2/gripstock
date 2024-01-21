@@ -46,3 +46,4 @@ class CustomerOut(ORMModel):
     outstanding_balance: Decimal
     available_credit: Decimal
     discount_rate: Decimal
+    created_at: datetime
