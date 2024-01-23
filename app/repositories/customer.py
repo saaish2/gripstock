@@ -11,3 +11,6 @@ from app.repositories.base import BaseRepository
 
 class CustomerRepository(BaseRepository[Customer]):
     model = Customer
+
+    def active_query(self) -> Select:
+        return select(Customer).where(Customer.deleted_at.is_(None))
