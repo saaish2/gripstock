@@ -14,3 +14,17 @@ class CustomerRepository(BaseRepository[Customer]):
 
     def active_query(self) -> Select:
         return select(Customer).where(Customer.deleted_at.is_(None))
+
+    def search_query(self, term: str | None, status: CustomerStatus | None) -> Select:
+        stmt = self.active_query()
+        if term:
+            like = f"%{term.lower()}%"
+            stmt = stmt.where(
+                or_(
+                    Customer.name.ilike(like),
+                    Customer.contact_email.ilike(like),
+                )
+            )
+        if status is not None:
+            stmt = stmt.where(Customer.status == status)
+        return stmt.order_by(Customer.name)
