@@ -28,3 +28,7 @@ class CustomerRepository(BaseRepository[Customer]):
         if status is not None:
             stmt = stmt.where(Customer.status == status)
         return stmt.order_by(Customer.name)
+
+    def get_active(self, customer_id: int) -> Customer | None:
+        stmt = self.active_query().where(Customer.id == customer_id)
+        return self.session.execute(stmt).scalar_one_or_none()
