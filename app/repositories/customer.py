@@ -32,3 +32,7 @@ class CustomerRepository(BaseRepository[Customer]):
     def get_active(self, customer_id: int) -> Customer | None:
         stmt = self.active_query().where(Customer.id == customer_id)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def with_outstanding_balance(self) -> list[Customer]:
+        stmt = self.active_query().where(Customer.outstanding_balance > 0)
+        return list(self.session.execute(stmt).scalars().all())
