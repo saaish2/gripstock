@@ -39,3 +39,9 @@ class CustomerService:
             entity_id=customer.id,
         )
         return customer
+
+    def get(self, customer_id: int) -> Customer:
+        customer = self.repo.get_active(customer_id)
+        if customer is None:
+            raise NotFoundError(f"customer {customer_id} not found")
+        return customer
