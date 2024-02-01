@@ -21,3 +21,6 @@ _ALLOWED_STATUS_MOVES: dict[CustomerStatus, set[CustomerStatus]] = {
     CustomerStatus.BLOCKED: {CustomerStatus.ACTIVE, CustomerStatus.ARCHIVED},
     CustomerStatus.ARCHIVED: set(),
 }
+
+
+class CustomerService:
