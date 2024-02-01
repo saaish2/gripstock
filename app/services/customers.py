@@ -24,3 +24,6 @@ _ALLOWED_STATUS_MOVES: dict[CustomerStatus, set[CustomerStatus]] = {
 
 
 class CustomerService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.repo = CustomerRepository(session)
