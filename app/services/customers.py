@@ -27,3 +27,15 @@ class CustomerService:
     def __init__(self, session: Session) -> None:
         self.session = session
         self.repo = CustomerRepository(session)
+
+    def create(self, data: dict, actor_id: int | None = None) -> Customer:
+        customer = Customer(**data)
+        self.repo.add(customer)
+        record_audit(
+            self.session,
+            actor_id=actor_id,
+            action="customer.created",
+            entity_type="customer",
+            entity_id=customer.id,
+        )
+        return customer
