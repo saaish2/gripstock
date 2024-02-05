@@ -66,3 +66,11 @@ class CustomerService:
         customer.status = target
         self.session.flush()
         return customer
+
+    def soft_delete(self, customer_id: int) -> None:
+        customer = self.get(customer_id)
+        if customer.outstanding_balance > 0:
+            raise BusinessRuleError("cannot archive a customer with an outstanding balance")
+        customer.deleted_at = utcnow()
+        customer.status = CustomerStatus.ARCHIVED
+        self.session.flush()
