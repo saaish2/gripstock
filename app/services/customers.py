@@ -45,3 +45,11 @@ class CustomerService:
         if customer is None:
             raise NotFoundError(f"customer {customer_id} not found")
         return customer
+
+    def update(self, customer_id: int, changes: dict) -> Customer:
+        customer = self.get(customer_id)
+        for field, value in changes.items():
+            if value is not None:
+                setattr(customer, field, value)
+        self.session.flush()
+        return customer
