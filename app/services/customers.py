@@ -53,3 +53,16 @@ class CustomerService:
                 setattr(customer, field, value)
         self.session.flush()
         return customer
+
+    def change_status(self, customer_id: int, target: CustomerStatus) -> Customer:
+        customer = self.get(customer_id)
+        if target == customer.status:
+            return customer
+        allowed = _ALLOWED_STATUS_MOVES.get(customer.status, set())
+        if target not in allowed:
+            raise InvalidStateError(
+                f"cannot move customer from {customer.status} to {target}"
+            )
+        customer.status = target
+        self.session.flush()
+        return customer
