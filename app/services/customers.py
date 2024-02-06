@@ -83,3 +83,11 @@ class CustomerService:
         customer.outstanding_balance = new_balance
         self.session.flush()
         return customer
+
+    def ensure_can_charge(self, customer: Customer, amount: Decimal) -> None:
+        if customer.status != CustomerStatus.ACTIVE:
+            raise BusinessRuleError(f"customer is {customer.status} and cannot be charged")
+        if not customer.can_charge(amount):
+            raise BusinessRuleError(
+                "charge would exceed the customer's available credit",
+            )
