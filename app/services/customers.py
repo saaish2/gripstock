@@ -91,3 +91,12 @@ class CustomerService:
             raise BusinessRuleError(
                 "charge would exceed the customer's available credit",
             )
+
+    def search(
+        self,
+        params: PageParams,
+        term: str | None = None,
+        status: CustomerStatus | None = None,
+    ) -> Page:
+        stmt = self.repo.search_query(term, status)
+        return paginate(self.session, stmt, params)
