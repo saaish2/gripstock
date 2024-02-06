@@ -74,3 +74,12 @@ class CustomerService:
         customer.deleted_at = utcnow()
         customer.status = CustomerStatus.ARCHIVED
         self.session.flush()
+
+    def adjust_balance(self, customer_id: int, delta: Decimal) -> Customer:
+        customer = self.get(customer_id)
+        new_balance = customer.outstanding_balance + delta
+        if new_balance < 0:
+            new_balance = Decimal("0.00")
+        customer.outstanding_balance = new_balance
+        self.session.flush()
+        return customer
