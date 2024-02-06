@@ -17,3 +17,5 @@ from app.schemas.customer import (
     CustomerUpdate,
 )
 from app.services.customers import CustomerService
+
+router = APIRouter(prefix="/customers", tags=["customers"])
