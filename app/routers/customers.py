@@ -19,3 +19,13 @@ from app.schemas.customer import (
 from app.services.customers import CustomerService
 
 router = APIRouter(prefix="/customers", tags=["customers"])
+
+
+@router.post("", response_model=CustomerOut, status_code=201)
+def create_customer(
+    payload: CustomerCreate,
+    actor: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> CustomerOut:
+    customer = CustomerService(session).create(payload.model_dump(), actor_id=actor.id)
+    return CustomerOut.model_validate(customer)
