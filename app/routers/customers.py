@@ -29,3 +29,15 @@ def create_customer(
 ) -> CustomerOut:
     customer = CustomerService(session).create(payload.model_dump(), actor_id=actor.id)
     return CustomerOut.model_validate(customer)
+
+
+@router.get("", response_model=PagedResponse[CustomerOut])
+def list_customers(
+    term: str | None = Query(default=None),
+    status: CustomerStatus | None = Query(default=None),
+    params: PageParams = Depends(pagination),
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> dict:
+    page = CustomerService(session).search(params, term=term, status=status)
+    return page.to_dict(lambda c: CustomerOut.model_validate(c).model_dump())
