@@ -41,3 +41,12 @@ def list_customers(
 ) -> dict:
     page = CustomerService(session).search(params, term=term, status=status)
     return page.to_dict(lambda c: CustomerOut.model_validate(c).model_dump())
+
+
+@router.get("/{customer_id}", response_model=CustomerOut)
+def get_customer(
+    customer_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> CustomerOut:
+    return CustomerOut.model_validate(CustomerService(session).get(customer_id))
