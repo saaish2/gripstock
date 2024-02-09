@@ -50,3 +50,14 @@ def get_customer(
     session: Session = Depends(db_session),
 ) -> CustomerOut:
     return CustomerOut.model_validate(CustomerService(session).get(customer_id))
+
+
+@router.patch("/{customer_id}", response_model=CustomerOut)
+def update_customer(
+    customer_id: int,
+    payload: CustomerUpdate,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> CustomerOut:
+    customer = CustomerService(session).update(customer_id, payload.model_dump(exclude_unset=True))
+    return CustomerOut.model_validate(customer)
