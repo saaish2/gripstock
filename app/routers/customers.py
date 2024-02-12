@@ -61,3 +61,14 @@ def update_customer(
 ) -> CustomerOut:
     customer = CustomerService(session).update(customer_id, payload.model_dump(exclude_unset=True))
     return CustomerOut.model_validate(customer)
+
+
+@router.post("/{customer_id}/status", response_model=CustomerOut)
+def change_status(
+    customer_id: int,
+    payload: CustomerStatusUpdate,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> CustomerOut:
+    customer = CustomerService(session).change_status(customer_id, payload.status)
+    return CustomerOut.model_validate(customer)
