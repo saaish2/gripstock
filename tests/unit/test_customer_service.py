@@ -20,3 +20,11 @@ def _make(session, **overrides) -> int:
     }
     data.update(overrides)
     return svc.create(data).id
+
+
+def test_status_transition_allowed(session):
+    svc = CustomerService(session)
+    cid = _make(session)
+    svc.change_status(cid, CustomerStatus.ON_HOLD)
+    customer = svc.get(cid)
+    assert customer.status == CustomerStatus.ON_HOLD
