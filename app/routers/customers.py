@@ -72,3 +72,13 @@ def change_status(
 ) -> CustomerOut:
     customer = CustomerService(session).change_status(customer_id, payload.status)
     return CustomerOut.model_validate(customer)
+
+
+@router.delete("/{customer_id}", response_model=MessageResponse)
+def archive_customer(
+    customer_id: int,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> MessageResponse:
+    CustomerService(session).soft_delete(customer_id)
+    return MessageResponse(message="customer archived")
