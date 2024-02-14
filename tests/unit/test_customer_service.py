@@ -36,3 +36,10 @@ def test_status_transition_blocked(session):
     svc.change_status(cid, CustomerStatus.ARCHIVED)
     with pytest.raises(InvalidStateError):
         svc.change_status(cid, CustomerStatus.ACTIVE)
+
+
+def test_can_charge_within_credit(session):
+    svc = CustomerService(session)
+    cid = _make(session, credit_limit=Decimal("500.00"))
+    customer = svc.get(cid)
+    svc.ensure_can_charge(customer, Decimal("400.00"))
