@@ -28,3 +28,11 @@ def test_status_transition_allowed(session):
     svc.change_status(cid, CustomerStatus.ON_HOLD)
     customer = svc.get(cid)
     assert customer.status == CustomerStatus.ON_HOLD
+
+
+def test_status_transition_blocked(session):
+    svc = CustomerService(session)
+    cid = _make(session)
+    svc.change_status(cid, CustomerStatus.ARCHIVED)
+    with pytest.raises(InvalidStateError):
+        svc.change_status(cid, CustomerStatus.ACTIVE)
