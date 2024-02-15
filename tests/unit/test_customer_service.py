@@ -43,3 +43,11 @@ def test_can_charge_within_credit(session):
     cid = _make(session, credit_limit=Decimal("500.00"))
     customer = svc.get(cid)
     svc.ensure_can_charge(customer, Decimal("400.00"))
+
+
+def test_charge_exceeding_credit_rejected(session):
+    svc = CustomerService(session)
+    cid = _make(session, credit_limit=Decimal("100.00"))
+    customer = svc.get(cid)
+    with pytest.raises(BusinessRuleError):
+        svc.ensure_can_charge(customer, Decimal("200.00"))
