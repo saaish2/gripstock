@@ -51,3 +51,11 @@ def test_charge_exceeding_credit_rejected(session):
     customer = svc.get(cid)
     with pytest.raises(BusinessRuleError):
         svc.ensure_can_charge(customer, Decimal("200.00"))
+
+
+def test_adjust_balance_never_negative(session):
+    svc = CustomerService(session)
+    cid = _make(session)
+    svc.adjust_balance(cid, Decimal("50.00"))
+    svc.adjust_balance(cid, Decimal("-200.00"))
+    assert svc.get(cid).outstanding_balance == Decimal("0.00")
