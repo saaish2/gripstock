@@ -59,3 +59,11 @@ def test_adjust_balance_never_negative(session):
     svc.adjust_balance(cid, Decimal("50.00"))
     svc.adjust_balance(cid, Decimal("-200.00"))
     assert svc.get(cid).outstanding_balance == Decimal("0.00")
+
+
+def test_archive_blocked_with_balance(session):
+    svc = CustomerService(session)
+    cid = _make(session)
+    svc.adjust_balance(cid, Decimal("100.00"))
+    with pytest.raises(BusinessRuleError):
+        svc.soft_delete(cid)
