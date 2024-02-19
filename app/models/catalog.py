@@ -23,3 +23,5 @@ from app.models.base import Base, IntPrimaryKey, SoftDeleteMixin, TimestampMixin
 
 class Category(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "categories"
+
+    name: Mapped[str] = mapped_column(String(120), unique=True, index=True, nullable=False)
