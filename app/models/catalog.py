@@ -19,3 +19,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.enums import AssetCondition, AssetStatus
 from app.models.base import Base, IntPrimaryKey, SoftDeleteMixin, TimestampMixin
+
+
+class Category(Base, IntPrimaryKey, TimestampMixin):
