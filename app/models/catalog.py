@@ -22,3 +22,4 @@ from app.models.base import Base, IntPrimaryKey, SoftDeleteMixin, TimestampMixin
 
 
 class Category(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "categories"
