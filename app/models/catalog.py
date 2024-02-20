@@ -26,3 +26,4 @@ class Category(Base, IntPrimaryKey, TimestampMixin):
 
     name: Mapped[str] = mapped_column(String(120), unique=True, index=True, nullable=False)
     slug: Mapped[str] = mapped_column(String(140), unique=True, index=True, nullable=False)
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
