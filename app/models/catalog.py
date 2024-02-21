@@ -30,3 +30,5 @@ class Category(Base, IntPrimaryKey, TimestampMixin):
     parent_id: Mapped[int | None] = mapped_column(
         ForeignKey("categories.id", ondelete="SET NULL"), nullable=True
     )
+
+    assets: Mapped[list[Asset]] = relationship(back_populates="category")
