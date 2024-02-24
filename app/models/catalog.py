@@ -32,3 +32,4 @@ class Category(Base, IntPrimaryKey, TimestampMixin):
     )
 
     assets: Mapped[list[Asset]] = relationship(back_populates="category")
+    children: Mapped[list[Category]] = relationship()
