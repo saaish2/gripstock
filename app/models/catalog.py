@@ -36,3 +36,4 @@ class Category(Base, IntPrimaryKey, TimestampMixin):
 
 
 class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
+    __tablename__ = "assets"
