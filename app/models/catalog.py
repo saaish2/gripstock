@@ -37,3 +37,4 @@ class Category(Base, IntPrimaryKey, TimestampMixin):
 
 class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     __tablename__ = "assets"
+    __table_args__ = (UniqueConstraint("barcode", name="uq_asset_barcode"),)
