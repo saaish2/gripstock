@@ -38,3 +38,7 @@ class Category(Base, IntPrimaryKey, TimestampMixin):
 class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     __tablename__ = "assets"
     __table_args__ = (UniqueConstraint("barcode", name="uq_asset_barcode"),)
+
+    category_id: Mapped[int] = mapped_column(
+        ForeignKey("categories.id", ondelete="RESTRICT"), index=True, nullable=False
+    )
