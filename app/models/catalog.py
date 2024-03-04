@@ -45,3 +45,4 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     name: Mapped[str] = mapped_column(String(200), index=True, nullable=False)
     manufacturer: Mapped[str | None] = mapped_column(String(120), nullable=True)
     model_number: Mapped[str | None] = mapped_column(String(120), nullable=True)
+    serial_number: Mapped[str | None] = mapped_column(String(120), index=True, nullable=True)
