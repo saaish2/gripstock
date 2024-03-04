@@ -42,3 +42,4 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     category_id: Mapped[int] = mapped_column(
         ForeignKey("categories.id", ondelete="RESTRICT"), index=True, nullable=False
     )
+    name: Mapped[str] = mapped_column(String(200), index=True, nullable=False)
