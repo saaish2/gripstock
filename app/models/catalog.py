@@ -54,3 +54,5 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     condition: Mapped[AssetCondition] = mapped_column(
         String(20), default=AssetCondition.GOOD, nullable=False
     )
+
+    daily_rate: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
