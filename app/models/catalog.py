@@ -51,3 +51,6 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     status: Mapped[AssetStatus] = mapped_column(
         String(20), default=AssetStatus.AVAILABLE, index=True, nullable=False
     )
+    condition: Mapped[AssetCondition] = mapped_column(
+        String(20), default=AssetCondition.GOOD, nullable=False
+    )
