@@ -47,3 +47,7 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     model_number: Mapped[str | None] = mapped_column(String(120), nullable=True)
     serial_number: Mapped[str | None] = mapped_column(String(120), index=True, nullable=True)
     barcode: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
+
+    status: Mapped[AssetStatus] = mapped_column(
+        String(20), default=AssetStatus.AVAILABLE, index=True, nullable=False
+    )
