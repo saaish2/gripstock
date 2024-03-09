@@ -59,3 +59,5 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     weekly_rate: Mapped[Decimal | None] = mapped_column(Numeric(10, 2), nullable=True)
     monthly_rate: Mapped[Decimal | None] = mapped_column(Numeric(10, 2), nullable=True)
     replacement_value: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
+
+    acquired_on: Mapped[date | None] = mapped_column(Date, nullable=True)
