@@ -61,3 +61,4 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     replacement_value: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
 
     acquired_on: Mapped[date | None] = mapped_column(Date, nullable=True)
+    home_location: Mapped[str | None] = mapped_column(String(120), nullable=True)
