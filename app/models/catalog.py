@@ -65,3 +65,10 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     category: Mapped[Category] = relationship(back_populates="assets")
+
+    @property
+    def is_rentable(self) -> bool:
+        return self.status == AssetStatus.AVAILABLE and self.condition not in (
+            AssetCondition.UNUSABLE,
+            AssetCondition.POOR,
+        )
