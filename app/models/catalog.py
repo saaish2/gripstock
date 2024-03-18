@@ -75,3 +75,4 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
 
 
 class Kit(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
+    __tablename__ = "kits"
