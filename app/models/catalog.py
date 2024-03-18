@@ -72,3 +72,6 @@ class Asset(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
             AssetCondition.UNUSABLE,
             AssetCondition.POOR,
         )
+
+
+class Kit(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
