@@ -79,3 +79,4 @@ class Kit(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
 
     name: Mapped[str] = mapped_column(String(200), unique=True, index=True, nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
