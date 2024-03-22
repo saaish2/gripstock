@@ -80,3 +80,6 @@ class Kit(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     name: Mapped[str] = mapped_column(String(200), unique=True, index=True, nullable=False)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    bundle_discount_rate: Mapped[Decimal] = mapped_column(
+        Numeric(5, 4), default=Decimal("0.0000"), nullable=False
+    )
