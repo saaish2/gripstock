@@ -91,3 +91,4 @@ class Kit(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
 
 class KitItem(Base, IntPrimaryKey):
     __tablename__ = "kit_items"
+    __table_args__ = (UniqueConstraint("kit_id", "asset_id", name="uq_kit_asset"),)
