@@ -83,3 +83,7 @@ class Kit(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     bundle_discount_rate: Mapped[Decimal] = mapped_column(
         Numeric(5, 4), default=Decimal("0.0000"), nullable=False
     )
+
+    items: Mapped[list[KitItem]] = relationship(
+        back_populates="kit", cascade="all, delete-orphan"
+    )
