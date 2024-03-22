@@ -87,3 +87,6 @@ class Kit(Base, IntPrimaryKey, TimestampMixin, SoftDeleteMixin):
     items: Mapped[list[KitItem]] = relationship(
         back_populates="kit", cascade="all, delete-orphan"
     )
+
+
+class KitItem(Base, IntPrimaryKey):
