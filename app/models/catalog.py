@@ -96,3 +96,6 @@ class KitItem(Base, IntPrimaryKey):
     kit_id: Mapped[int] = mapped_column(
         ForeignKey("kits.id", ondelete="CASCADE"), index=True, nullable=False
     )
+    asset_id: Mapped[int] = mapped_column(
+        ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
+    )
