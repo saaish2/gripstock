@@ -99,3 +99,4 @@ class KitItem(Base, IntPrimaryKey):
     asset_id: Mapped[int] = mapped_column(
         ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
     )
+    quantity: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
