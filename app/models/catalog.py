@@ -102,3 +102,4 @@ class KitItem(Base, IntPrimaryKey):
     quantity: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
 
     kit: Mapped[Kit] = relationship(back_populates="items")
+    asset: Mapped[Asset] = relationship()
