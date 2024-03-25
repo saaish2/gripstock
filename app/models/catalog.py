@@ -100,3 +100,5 @@ class KitItem(Base, IntPrimaryKey):
         ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
     )
     quantity: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
+
+    kit: Mapped[Kit] = relationship(back_populates="items")
