@@ -9,3 +9,6 @@ from pydantic import BaseModel, Field
 
 from app.enums import AssetCondition, AssetStatus
 from app.schemas.common import ORMModel
+
+
+class CategoryCreate(BaseModel):
