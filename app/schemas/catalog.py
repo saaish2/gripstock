@@ -18,3 +18,4 @@ class CategoryCreate(BaseModel):
 
 
 class CategoryOut(ORMModel):
+    id: int
