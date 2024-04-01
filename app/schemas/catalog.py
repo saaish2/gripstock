@@ -21,3 +21,4 @@ class CategoryOut(ORMModel):
     id: int
     name: str
     slug: str
+    description: str | None = None
