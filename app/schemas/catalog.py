@@ -22,3 +22,4 @@ class CategoryOut(ORMModel):
     name: str
     slug: str
     description: str | None = None
+    parent_id: int | None = None
