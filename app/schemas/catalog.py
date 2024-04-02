@@ -23,3 +23,6 @@ class CategoryOut(ORMModel):
     slug: str
     description: str | None = None
     parent_id: int | None = None
+
+
+class AssetCreate(BaseModel):
