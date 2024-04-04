@@ -26,3 +26,4 @@ class CategoryOut(ORMModel):
 
 
 class AssetCreate(BaseModel):
+    category_id: int
