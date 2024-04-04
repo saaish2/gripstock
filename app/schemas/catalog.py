@@ -27,3 +27,4 @@ class CategoryOut(ORMModel):
 
 class AssetCreate(BaseModel):
     category_id: int
+    name: str = Field(min_length=1, max_length=200)
