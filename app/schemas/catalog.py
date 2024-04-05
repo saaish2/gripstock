@@ -29,3 +29,4 @@ class AssetCreate(BaseModel):
     category_id: int
     name: str = Field(min_length=1, max_length=200)
     manufacturer: str | None = Field(default=None, max_length=120)
+    model_number: str | None = Field(default=None, max_length=120)
