@@ -31,3 +31,4 @@ class AssetCreate(BaseModel):
     manufacturer: str | None = Field(default=None, max_length=120)
     model_number: str | None = Field(default=None, max_length=120)
     serial_number: str | None = Field(default=None, max_length=120)
+    barcode: str = Field(min_length=1, max_length=64)
