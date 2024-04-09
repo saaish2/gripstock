@@ -35,3 +35,4 @@ class AssetCreate(BaseModel):
     condition: AssetCondition = AssetCondition.GOOD
     daily_rate: Decimal = Field(ge=0)
     weekly_rate: Decimal | None = Field(default=None, ge=0)
+    monthly_rate: Decimal | None = Field(default=None, ge=0)
