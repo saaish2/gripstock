@@ -37,3 +37,4 @@ class AssetCreate(BaseModel):
     weekly_rate: Decimal | None = Field(default=None, ge=0)
     monthly_rate: Decimal | None = Field(default=None, ge=0)
     replacement_value: Decimal = Field(ge=0)
+    acquired_on: date | None = None
