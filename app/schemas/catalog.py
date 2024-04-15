@@ -40,3 +40,6 @@ class AssetCreate(BaseModel):
     acquired_on: date | None = None
     home_location: str | None = Field(default=None, max_length=120)
     notes: str | None = None
+
+
+class AssetUpdate(BaseModel):
