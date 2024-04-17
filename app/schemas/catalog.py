@@ -46,3 +46,4 @@ class AssetUpdate(BaseModel):
     name: str | None = Field(default=None, max_length=200)
     condition: AssetCondition | None = None
     daily_rate: Decimal | None = Field(default=None, ge=0)
+    weekly_rate: Decimal | None = Field(default=None, ge=0)
