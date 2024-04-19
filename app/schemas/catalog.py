@@ -49,3 +49,4 @@ class AssetUpdate(BaseModel):
     weekly_rate: Decimal | None = Field(default=None, ge=0)
     monthly_rate: Decimal | None = Field(default=None, ge=0)
     replacement_value: Decimal | None = Field(default=None, ge=0)
+    home_location: str | None = Field(default=None, max_length=120)
