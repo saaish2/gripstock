@@ -54,3 +54,4 @@ class AssetUpdate(BaseModel):
 
 
 class AssetStatusUpdate(BaseModel):
+    status: AssetStatus
