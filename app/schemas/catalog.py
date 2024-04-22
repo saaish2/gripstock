@@ -58,3 +58,4 @@ class AssetStatusUpdate(BaseModel):
 
 
 class AssetOut(ORMModel):
+    id: int
