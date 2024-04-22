@@ -51,3 +51,6 @@ class AssetUpdate(BaseModel):
     replacement_value: Decimal | None = Field(default=None, ge=0)
     home_location: str | None = Field(default=None, max_length=120)
     notes: str | None = None
+
+
+class AssetStatusUpdate(BaseModel):
