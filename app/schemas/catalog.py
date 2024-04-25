@@ -60,3 +60,4 @@ class AssetStatusUpdate(BaseModel):
 class AssetOut(ORMModel):
     id: int
     category_id: int
+    name: str
