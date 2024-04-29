@@ -62,3 +62,4 @@ class AssetOut(ORMModel):
     category_id: int
     name: str
     manufacturer: str | None = None
+    model_number: str | None = None
