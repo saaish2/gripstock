@@ -65,3 +65,4 @@ class AssetOut(ORMModel):
     model_number: str | None = None
     serial_number: str | None = None
     barcode: str
+    status: AssetStatus
