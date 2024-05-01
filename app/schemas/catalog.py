@@ -64,3 +64,4 @@ class AssetOut(ORMModel):
     manufacturer: str | None = None
     model_number: str | None = None
     serial_number: str | None = None
+    barcode: str
