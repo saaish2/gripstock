@@ -67,3 +67,4 @@ class AssetOut(ORMModel):
     barcode: str
     status: AssetStatus
     condition: AssetCondition
+    daily_rate: Decimal
