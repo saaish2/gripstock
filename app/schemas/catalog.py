@@ -69,3 +69,4 @@ class AssetOut(ORMModel):
     condition: AssetCondition
     daily_rate: Decimal
     weekly_rate: Decimal | None = None
+    monthly_rate: Decimal | None = None
