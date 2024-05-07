@@ -70,3 +70,4 @@ class AssetOut(ORMModel):
     daily_rate: Decimal
     weekly_rate: Decimal | None = None
     monthly_rate: Decimal | None = None
+    replacement_value: Decimal
