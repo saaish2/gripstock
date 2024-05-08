@@ -72,3 +72,4 @@ class AssetOut(ORMModel):
     monthly_rate: Decimal | None = None
     replacement_value: Decimal
     home_location: str | None = None
+    created_at: datetime
