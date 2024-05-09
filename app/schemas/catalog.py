@@ -76,3 +76,4 @@ class AssetOut(ORMModel):
 
 
 class KitItemIn(BaseModel):
+    asset_id: int
