@@ -73,3 +73,6 @@ class AssetOut(ORMModel):
     replacement_value: Decimal
     home_location: str | None = None
     created_at: datetime
+
+
+class KitItemIn(BaseModel):
