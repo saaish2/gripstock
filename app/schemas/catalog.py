@@ -77,3 +77,4 @@ class AssetOut(ORMModel):
 
 class KitItemIn(BaseModel):
     asset_id: int
+    quantity: int = Field(default=1, ge=1)
