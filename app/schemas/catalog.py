@@ -85,3 +85,6 @@ class KitCreate(BaseModel):
     description: str | None = None
     bundle_discount_rate: Decimal = Field(default=Decimal("0.0000"), ge=0, le=1)
     items: list[KitItemIn] = Field(default_factory=list)
+
+
+class KitItemOut(ORMModel):
