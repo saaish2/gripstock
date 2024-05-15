@@ -89,3 +89,4 @@ class KitCreate(BaseModel):
 
 class KitItemOut(ORMModel):
     asset_id: int
+    quantity: int
