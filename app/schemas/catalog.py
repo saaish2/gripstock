@@ -94,3 +94,4 @@ class KitItemOut(ORMModel):
 
 class KitOut(ORMModel):
     id: int
+    name: str
