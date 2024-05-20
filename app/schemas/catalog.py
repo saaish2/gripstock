@@ -96,3 +96,4 @@ class KitOut(ORMModel):
     id: int
     name: str
     description: str | None = None
+    is_active: bool
