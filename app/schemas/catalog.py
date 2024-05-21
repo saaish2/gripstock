@@ -97,3 +97,4 @@ class KitOut(ORMModel):
     name: str
     description: str | None = None
     is_active: bool
+    bundle_discount_rate: Decimal
