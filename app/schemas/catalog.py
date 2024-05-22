@@ -98,3 +98,4 @@ class KitOut(ORMModel):
     description: str | None = None
     is_active: bool
     bundle_discount_rate: Decimal
+    items: list[KitItemOut] = Field(default_factory=list)
