@@ -18,3 +18,6 @@ class CategoryRepository(BaseRepository[Category]):
 
     def list_ordered(self) -> list[Category]:
         return list(self.session.execute(select(Category).order_by(Category.name)).scalars().all())
+
+    def slug_taken(self, slug: str) -> bool:
+        return self.get_by_slug(slug) is not None
