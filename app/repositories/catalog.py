@@ -15,3 +15,6 @@ class CategoryRepository(BaseRepository[Category]):
     def get_by_slug(self, slug: str) -> Category | None:
         stmt = select(Category).where(Category.slug == slug)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def list_ordered(self) -> list[Category]:
+        return list(self.session.execute(select(Category).order_by(Category.name)).scalars().all())
