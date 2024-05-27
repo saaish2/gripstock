@@ -11,3 +11,7 @@ from app.repositories.base import BaseRepository
 
 class CategoryRepository(BaseRepository[Category]):
     model = Category
+
+    def get_by_slug(self, slug: str) -> Category | None:
+        stmt = select(Category).where(Category.slug == slug)
+        return self.session.execute(stmt).scalar_one_or_none()
