@@ -21,3 +21,6 @@ class CategoryRepository(BaseRepository[Category]):
 
     def slug_taken(self, slug: str) -> bool:
         return self.get_by_slug(slug) is not None
+
+
+class AssetRepository(BaseRepository[Asset]):
