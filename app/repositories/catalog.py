@@ -24,3 +24,4 @@ class CategoryRepository(BaseRepository[Category]):
 
 
 class AssetRepository(BaseRepository[Asset]):
+    model = Asset
