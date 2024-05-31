@@ -25,3 +25,6 @@ class CategoryRepository(BaseRepository[Category]):
 
 class AssetRepository(BaseRepository[Asset]):
     model = Asset
+
+    def active_query(self) -> Select:
+        return select(Asset).where(Asset.deleted_at.is_(None))
