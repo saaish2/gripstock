@@ -28,3 +28,7 @@ class AssetRepository(BaseRepository[Asset]):
 
     def active_query(self) -> Select:
         return select(Asset).where(Asset.deleted_at.is_(None))
+
+    def get_by_barcode(self, barcode: str) -> Asset | None:
+        stmt = self.active_query().where(Asset.barcode == barcode)
+        return self.session.execute(stmt).scalar_one_or_none()
