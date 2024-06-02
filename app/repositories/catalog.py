@@ -32,3 +32,25 @@ class AssetRepository(BaseRepository[Asset]):
     def get_by_barcode(self, barcode: str) -> Asset | None:
         stmt = self.active_query().where(Asset.barcode == barcode)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def search_query(
+        self,
+        term: str | None = None,
+        category_id: int | None = None,
+        status: AssetStatus | None = None,
+    ) -> Select:
+        stmt = self.active_query()
+        if term:
+            like = f"%{term.lower()}%"
+            stmt = stmt.where(
+                or_(
+                    Asset.name.ilike(like),
+                    Asset.manufacturer.ilike(like),
+                    Asset.serial_number.ilike(like),
+                )
+            )
+        if category_id is not None:
+            stmt = stmt.where(Asset.category_id == category_id)
+        if status is not None:
+            stmt = stmt.where(Asset.status == status)
+        return stmt.order_by(Asset.name)
