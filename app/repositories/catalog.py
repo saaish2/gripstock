@@ -60,3 +60,6 @@ class AssetRepository(BaseRepository[Asset]):
             return []
         stmt = self.active_query().where(Asset.id.in_(asset_ids))
         return list(self.session.execute(stmt).scalars().all())
+
+    def barcode_taken(self, barcode: str) -> bool:
+        return self.get_by_barcode(barcode) is not None
