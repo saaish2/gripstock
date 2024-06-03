@@ -54,3 +54,9 @@ class AssetRepository(BaseRepository[Asset]):
         if status is not None:
             stmt = stmt.where(Asset.status == status)
         return stmt.order_by(Asset.name)
+
+    def list_by_ids(self, asset_ids: list[int]) -> list[Asset]:
+        if not asset_ids:
+            return []
+        stmt = self.active_query().where(Asset.id.in_(asset_ids))
+        return list(self.session.execute(stmt).scalars().all())
