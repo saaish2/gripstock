@@ -63,3 +63,6 @@ class AssetRepository(BaseRepository[Asset]):
 
     def barcode_taken(self, barcode: str) -> bool:
         return self.get_by_barcode(barcode) is not None
+
+
+class KitRepository(BaseRepository[Kit]):
