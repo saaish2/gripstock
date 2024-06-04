@@ -66,3 +66,4 @@ class AssetRepository(BaseRepository[Asset]):
 
 
 class KitRepository(BaseRepository[Kit]):
+    model = Kit
