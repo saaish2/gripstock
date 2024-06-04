@@ -67,3 +67,7 @@ class AssetRepository(BaseRepository[Asset]):
 
 class KitRepository(BaseRepository[Kit]):
     model = Kit
+
+    def get_by_name(self, name: str) -> Kit | None:
+        stmt = select(Kit).where(Kit.name == name)
+        return self.session.execute(stmt).scalar_one_or_none()
