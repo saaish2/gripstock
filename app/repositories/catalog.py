@@ -71,3 +71,7 @@ class KitRepository(BaseRepository[Kit]):
     def get_by_name(self, name: str) -> Kit | None:
         stmt = select(Kit).where(Kit.name == name)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def list_active(self) -> list[Kit]:
+        stmt = select(Kit).where(Kit.is_active.is_(True), Kit.deleted_at.is_(None))
+        return list(self.session.execute(stmt).scalars().all())
