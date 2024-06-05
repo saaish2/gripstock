@@ -75,3 +75,7 @@ class KitRepository(BaseRepository[Kit]):
     def list_active(self) -> list[Kit]:
         stmt = select(Kit).where(Kit.is_active.is_(True), Kit.deleted_at.is_(None))
         return list(self.session.execute(stmt).scalars().all())
+
+    def items_for(self, kit_id: int) -> list[KitItem]:
+        stmt = select(KitItem).where(KitItem.kit_id == kit_id)
+        return list(self.session.execute(stmt).scalars().all())
