@@ -13,3 +13,5 @@ from app.models.catalog import Asset, Category, Kit, KitItem
 from app.pagination import Page, PageParams, paginate
 from app.repositories.catalog import AssetRepository, CategoryRepository, KitRepository
 from app.services.audit import record_audit
+
+_SLUG_RE = re.compile(r"[^a-z0-9]+")
