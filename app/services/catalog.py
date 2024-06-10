@@ -22,3 +22,6 @@ def slugify(value: str) -> str:
     if not slug:
         raise ValidationError("cannot derive a slug from an empty name")
     return slug
+
+
+class CategoryService:
