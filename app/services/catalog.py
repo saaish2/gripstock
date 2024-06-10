@@ -15,3 +15,10 @@ from app.repositories.catalog import AssetRepository, CategoryRepository, KitRep
 from app.services.audit import record_audit
 
 _SLUG_RE = re.compile(r"[^a-z0-9]+")
+
+
+def slugify(value: str) -> str:
+    slug = _SLUG_RE.sub("-", value.lower()).strip("-")
+    if not slug:
+        raise ValidationError("cannot derive a slug from an empty name")
+    return slug
