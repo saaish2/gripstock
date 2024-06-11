@@ -25,3 +25,6 @@ def slugify(value: str) -> str:
 
 
 class CategoryService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.repo = CategoryRepository(session)
