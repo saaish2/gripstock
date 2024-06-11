@@ -28,3 +28,13 @@ class CategoryService:
     def __init__(self, session: Session) -> None:
         self.session = session
         self.repo = CategoryRepository(session)
+
+    def create(self, name: str, description: str | None = None, parent_id: int | None = None) -> Category:
+        slug = slugify(name)
+        if self.repo.slug_taken(slug):
+            raise ConflictError(f"a category with slug {slug!r} already exists")
+        if parent_id is not None and self.repo.get(parent_id) is None:
+            raise NotFoundError(f"parent category {parent_id} not found")
+        category = Category(name=name.strip(), slug=slug, description=description, parent_id=parent_id)
+        self.repo.add(category)
+        return category
