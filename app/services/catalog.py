@@ -44,3 +44,6 @@ class CategoryService:
         if category is None:
             raise NotFoundError(f"category {category_id} not found")
         return category
+
+    def list(self) -> list[Category]:
+        return self.repo.list_ordered()
