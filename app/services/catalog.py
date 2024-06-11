@@ -38,3 +38,9 @@ class CategoryService:
         category = Category(name=name.strip(), slug=slug, description=description, parent_id=parent_id)
         self.repo.add(category)
         return category
+
+    def get(self, category_id: int) -> Category:
+        category = self.repo.get(category_id)
+        if category is None:
+            raise NotFoundError(f"category {category_id} not found")
+        return category
