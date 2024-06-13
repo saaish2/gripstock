@@ -47,3 +47,6 @@ class CategoryService:
 
     def list(self) -> list[Category]:
         return self.repo.list_ordered()
+
+
+class AssetService:
