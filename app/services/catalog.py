@@ -50,3 +50,7 @@ class CategoryService:
 
 
 class AssetService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.repo = AssetRepository(session)
+        self.categories = CategoryRepository(session)
