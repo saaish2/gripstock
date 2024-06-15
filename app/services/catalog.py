@@ -54,3 +54,19 @@ class AssetService:
         self.session = session
         self.repo = AssetRepository(session)
         self.categories = CategoryRepository(session)
+
+    def create(self, data: dict, actor_id: int | None = None) -> Asset:
+        if self.categories.get(data["category_id"]) is None:
+            raise NotFoundError(f"category {data['category_id']} not found")
+        if self.repo.barcode_taken(data["barcode"]):
+            raise ConflictError(f"barcode {data['barcode']!r} is already in use")
+        asset = Asset(**data)
+        self.repo.add(asset)
+        record_audit(
+            self.session,
+            actor_id=actor_id,
+            action="asset.created",
+            entity_type="asset",
+            entity_id=asset.id,
+        )
+        return asset
