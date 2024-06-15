@@ -70,3 +70,9 @@ class AssetService:
             entity_id=asset.id,
         )
         return asset
+
+    def get(self, asset_id: int) -> Asset:
+        asset = self.repo.get(asset_id)
+        if asset is None or asset.deleted_at is not None:
+            raise NotFoundError(f"asset {asset_id} not found")
+        return asset
