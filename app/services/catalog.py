@@ -76,3 +76,11 @@ class AssetService:
         if asset is None or asset.deleted_at is not None:
             raise NotFoundError(f"asset {asset_id} not found")
         return asset
+
+    def update(self, asset_id: int, changes: dict) -> Asset:
+        asset = self.get(asset_id)
+        for field, value in changes.items():
+            if value is not None:
+                setattr(asset, field, value)
+        self.session.flush()
+        return asset
