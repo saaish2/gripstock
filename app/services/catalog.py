@@ -84,3 +84,22 @@ class AssetService:
                 setattr(asset, field, value)
         self.session.flush()
         return asset
+
+    def change_status(self, asset_id: int, target: AssetStatus, actor_id: int | None = None) -> Asset:
+        asset = self.get(asset_id)
+        if target == asset.status:
+            return asset
+        if not can_transition(ASSET_TRANSITIONS, asset.status, target):
+            raise InvalidStateError(f"cannot move asset from {asset.status} to {target}")
+        previous = asset.status
+        asset.status = target
+        self.session.flush()
+        record_audit(
+            self.session,
+            actor_id=actor_id,
+            action="asset.status_changed",
+            entity_type="asset",
+            entity_id=asset.id,
+            payload={"from": previous, "to": target},
+        )
+        return asset
