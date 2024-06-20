@@ -123,3 +123,6 @@ class AssetService:
     ) -> Page:
         stmt = self.repo.search_query(term, category_id, status)
         return paginate(self.session, stmt, params)
+
+
+class KitService:
