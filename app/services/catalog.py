@@ -106,3 +106,10 @@ class AssetService:
 
     def retire(self, asset_id: int) -> Asset:
         return self.change_status(asset_id, AssetStatus.RETIRED)
+
+    def soft_delete(self, asset_id: int) -> None:
+        asset = self.get(asset_id)
+        if asset.status in (AssetStatus.RESERVED, AssetStatus.CHECKED_OUT):
+            raise InvalidStateError("cannot delete an asset that is reserved or checked out")
+        asset.deleted_at = utcnow()
+        self.session.flush()
