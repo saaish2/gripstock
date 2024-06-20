@@ -126,3 +126,7 @@ class AssetService:
 
 
 class KitService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.repo = KitRepository(session)
+        self.assets = AssetRepository(session)
