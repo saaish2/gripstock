@@ -130,3 +130,25 @@ class KitService:
         self.session = session
         self.repo = KitRepository(session)
         self.assets = AssetRepository(session)
+
+    def create(
+        self,
+        name: str,
+        items: list[dict],
+        description: str | None = None,
+        bundle_discount_rate=None,
+    ) -> Kit:
+        if self.repo.get_by_name(name) is not None:
+            raise ConflictError(f"a kit named {name!r} already exists")
+        asset_ids = [item["asset_id"] for item in items]
+        found = {a.id for a in self.assets.list_by_ids(asset_ids)}
+        missing = set(asset_ids) - found
+        if missing:
+            raise NotFoundError(f"assets not found: {sorted(missing)}")
+        kit = Kit(name=name.strip(), description=description)
+        if bundle_discount_rate is not None:
+            kit.bundle_discount_rate = bundle_discount_rate
+        for item in items:
+            kit.items.append(KitItem(asset_id=item["asset_id"], quantity=item.get("quantity", 1)))
+        self.repo.add(kit)
+        return kit
