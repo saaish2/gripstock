@@ -103,3 +103,6 @@ class AssetService:
             payload={"from": previous, "to": target},
         )
         return asset
+
+    def retire(self, asset_id: int) -> Asset:
+        return self.change_status(asset_id, AssetStatus.RETIRED)
