@@ -113,3 +113,13 @@ class AssetService:
             raise InvalidStateError("cannot delete an asset that is reserved or checked out")
         asset.deleted_at = utcnow()
         self.session.flush()
+
+    def search(
+        self,
+        params: PageParams,
+        term: str | None = None,
+        category_id: int | None = None,
+        status: AssetStatus | None = None,
+    ) -> Page:
+        stmt = self.repo.search_query(term, category_id, status)
+        return paginate(self.session, stmt, params)
