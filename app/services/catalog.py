@@ -152,3 +152,9 @@ class KitService:
             kit.items.append(KitItem(asset_id=item["asset_id"], quantity=item.get("quantity", 1)))
         self.repo.add(kit)
         return kit
+
+    def get(self, kit_id: int) -> Kit:
+        kit = self.repo.get(kit_id)
+        if kit is None or kit.deleted_at is not None:
+            raise NotFoundError(f"kit {kit_id} not found")
+        return kit
