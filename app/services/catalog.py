@@ -161,3 +161,9 @@ class KitService:
 
     def list_active(self) -> list[Kit]:
         return self.repo.list_active()
+
+    def deactivate(self, kit_id: int) -> Kit:
+        kit = self.get(kit_id)
+        kit.is_active = False
+        self.session.flush()
+        return kit
