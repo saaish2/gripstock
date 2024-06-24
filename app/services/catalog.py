@@ -158,3 +158,6 @@ class KitService:
         if kit is None or kit.deleted_at is not None:
             raise NotFoundError(f"kit {kit_id} not found")
         return kit
+
+    def list_active(self) -> list[Kit]:
+        return self.repo.list_active()
