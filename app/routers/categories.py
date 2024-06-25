@@ -9,3 +9,5 @@ from app.deps import db_session, require_agent, require_manager
 from app.models.user import User
 from app.schemas.catalog import CategoryCreate, CategoryOut
 from app.services.catalog import CategoryService
+
+router = APIRouter(prefix="/categories", tags=["categories"])
