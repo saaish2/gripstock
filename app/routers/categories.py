@@ -23,3 +23,11 @@ def create_category(
         payload.name, description=payload.description, parent_id=payload.parent_id
     )
     return CategoryOut.model_validate(category)
+
+
+@router.get("", response_model=list[CategoryOut])
+def list_categories(
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> list[CategoryOut]:
+    return [CategoryOut.model_validate(c) for c in CategoryService(session).list()]
