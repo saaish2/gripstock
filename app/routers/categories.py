@@ -31,3 +31,12 @@ def list_categories(
     session: Session = Depends(db_session),
 ) -> list[CategoryOut]:
     return [CategoryOut.model_validate(c) for c in CategoryService(session).list()]
+
+
+@router.get("/{category_id}", response_model=CategoryOut)
+def get_category(
+    category_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> CategoryOut:
+    return CategoryOut.model_validate(CategoryService(session).get(category_id))
