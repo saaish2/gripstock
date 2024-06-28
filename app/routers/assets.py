@@ -17,3 +17,5 @@ from app.schemas.catalog import (
 )
 from app.schemas.common import MessageResponse, PagedResponse
 from app.services.catalog import AssetService
+
+router = APIRouter(prefix="/assets", tags=["assets"])
