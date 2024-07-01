@@ -42,3 +42,12 @@ def list_assets(
 ) -> dict:
     page = AssetService(session).search(params, term=term, category_id=category_id, status=status)
     return page.to_dict(lambda a: AssetOut.model_validate(a).model_dump())
+
+
+@router.get("/{asset_id}", response_model=AssetOut)
+def get_asset(
+    asset_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> AssetOut:
+    return AssetOut.model_validate(AssetService(session).get(asset_id))
