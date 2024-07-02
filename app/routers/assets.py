@@ -51,3 +51,14 @@ def get_asset(
     session: Session = Depends(db_session),
 ) -> AssetOut:
     return AssetOut.model_validate(AssetService(session).get(asset_id))
+
+
+@router.patch("/{asset_id}", response_model=AssetOut)
+def update_asset(
+    asset_id: int,
+    payload: AssetUpdate,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> AssetOut:
+    asset = AssetService(session).update(asset_id, payload.model_dump(exclude_unset=True))
+    return AssetOut.model_validate(asset)
