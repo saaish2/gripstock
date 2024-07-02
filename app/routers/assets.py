@@ -62,3 +62,14 @@ def update_asset(
 ) -> AssetOut:
     asset = AssetService(session).update(asset_id, payload.model_dump(exclude_unset=True))
     return AssetOut.model_validate(asset)
+
+
+@router.post("/{asset_id}/status", response_model=AssetOut)
+def change_status(
+    asset_id: int,
+    payload: AssetStatusUpdate,
+    actor: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> AssetOut:
+    asset = AssetService(session).change_status(asset_id, payload.status, actor_id=actor.id)
+    return AssetOut.model_validate(asset)
