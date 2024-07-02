@@ -73,3 +73,13 @@ def change_status(
 ) -> AssetOut:
     asset = AssetService(session).change_status(asset_id, payload.status, actor_id=actor.id)
     return AssetOut.model_validate(asset)
+
+
+@router.delete("/{asset_id}", response_model=MessageResponse)
+def delete_asset(
+    asset_id: int,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> MessageResponse:
+    AssetService(session).soft_delete(asset_id)
+    return MessageResponse(message="asset deleted")
