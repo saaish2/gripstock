@@ -12,3 +12,18 @@ from app.schemas.common import MessageResponse
 from app.services.catalog import KitService
 
 router = APIRouter(prefix="/kits", tags=["kits"])
+
+
+@router.post("", response_model=KitOut, status_code=201)
+def create_kit(
+    payload: KitCreate,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> KitOut:
+    kit = KitService(session).create(
+        payload.name,
+        [item.model_dump() for item in payload.items],
+        description=payload.description,
+        bundle_discount_rate=payload.bundle_discount_rate,
+    )
+    return KitOut.model_validate(kit)
