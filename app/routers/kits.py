@@ -10,3 +10,5 @@ from app.models.user import User
 from app.schemas.catalog import KitCreate, KitOut
 from app.schemas.common import MessageResponse
 from app.services.catalog import KitService
+
+router = APIRouter(prefix="/kits", tags=["kits"])
