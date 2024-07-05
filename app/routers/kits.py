@@ -35,3 +35,12 @@ def list_kits(
     session: Session = Depends(db_session),
 ) -> list[KitOut]:
     return [KitOut.model_validate(k) for k in KitService(session).list_active()]
+
+
+@router.get("/{kit_id}", response_model=KitOut)
+def get_kit(
+    kit_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> KitOut:
+    return KitOut.model_validate(KitService(session).get(kit_id))
