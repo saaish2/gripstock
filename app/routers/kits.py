@@ -27,3 +27,11 @@ def create_kit(
         bundle_discount_rate=payload.bundle_discount_rate,
     )
     return KitOut.model_validate(kit)
+
+
+@router.get("", response_model=list[KitOut])
+def list_kits(
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> list[KitOut]:
+    return [KitOut.model_validate(k) for k in KitService(session).list_active()]
