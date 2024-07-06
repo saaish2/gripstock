@@ -44,3 +44,13 @@ def get_kit(
     session: Session = Depends(db_session),
 ) -> KitOut:
     return KitOut.model_validate(KitService(session).get(kit_id))
+
+
+@router.delete("/{kit_id}", response_model=MessageResponse)
+def deactivate_kit(
+    kit_id: int,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> MessageResponse:
+    KitService(session).deactivate(kit_id)
+    return MessageResponse(message="kit deactivated")
