@@ -10,4 +10,4 @@ The package is organised into thin layers:
 * ``app.workers``       background sweeps (overdue, late fees, webhooks)
 """
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
