@@ -14,3 +14,7 @@ from app.services.catalog import AssetService, CategoryService, KitService, slug
 def test_slugify():
     assert slugify("Cinema Cameras") == "cinema-cameras"
     assert slugify("LED / HMI") == "led-hmi"
+
+
+def _category(session) -> int:
+    return CategoryService(session).create("Cameras").id
