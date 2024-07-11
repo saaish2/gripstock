@@ -18,3 +18,15 @@ def test_slugify():
 
 def _category(session) -> int:
     return CategoryService(session).create("Cameras").id
+
+
+def _asset(session, category_id, barcode="A-1") -> int:
+    return AssetService(session).create(
+        {
+            "category_id": category_id,
+            "name": "Body",
+            "barcode": barcode,
+            "daily_rate": Decimal("100"),
+            "replacement_value": Decimal("1000"),
+        }
+    ).id
