@@ -37,3 +37,11 @@ def test_duplicate_barcode_rejected(session):
     _asset(session, cat, "DUP")
     with pytest.raises(ConflictError):
         _asset(session, cat, "DUP")
+
+
+def test_asset_status_transition(session):
+    cat = _category(session)
+    aid = _asset(session, cat)
+    svc = AssetService(session)
+    svc.change_status(aid, AssetStatus.IN_MAINTENANCE)
+    assert svc.get(aid).status == AssetStatus.IN_MAINTENANCE
