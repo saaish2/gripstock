@@ -30,3 +30,10 @@ def _asset(session, category_id, barcode="A-1") -> int:
             "replacement_value": Decimal("1000"),
         }
     ).id
+
+
+def test_duplicate_barcode_rejected(session):
+    cat = _category(session)
+    _asset(session, cat, "DUP")
+    with pytest.raises(ConflictError):
+        _asset(session, cat, "DUP")
