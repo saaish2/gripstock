@@ -45,3 +45,12 @@ def test_asset_status_transition(session):
     svc = AssetService(session)
     svc.change_status(aid, AssetStatus.IN_MAINTENANCE)
     assert svc.get(aid).status == AssetStatus.IN_MAINTENANCE
+
+
+def test_illegal_asset_transition(session):
+    cat = _category(session)
+    aid = _asset(session, cat)
+    svc = AssetService(session)
+    svc.change_status(aid, AssetStatus.RETIRED)
+    with pytest.raises(InvalidStateError):
+        svc.change_status(aid, AssetStatus.AVAILABLE)
