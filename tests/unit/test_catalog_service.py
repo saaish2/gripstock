@@ -54,3 +54,8 @@ def test_illegal_asset_transition(session):
     svc.change_status(aid, AssetStatus.RETIRED)
     with pytest.raises(InvalidStateError):
         svc.change_status(aid, AssetStatus.AVAILABLE)
+
+
+def test_kit_requires_existing_assets(session):
+    with pytest.raises(NotFoundError):
+        KitService(session).create("Bundle", [{"asset_id": 999}])
