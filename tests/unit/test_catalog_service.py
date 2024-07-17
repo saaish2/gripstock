@@ -59,3 +59,11 @@ def test_illegal_asset_transition(session):
 def test_kit_requires_existing_assets(session):
     with pytest.raises(NotFoundError):
         KitService(session).create("Bundle", [{"asset_id": 999}])
+
+
+def test_kit_creation(session):
+    cat = _category(session)
+    a1 = _asset(session, cat, "K-1")
+    a2 = _asset(session, cat, "K-2")
+    kit = KitService(session).create("Starter", [{"asset_id": a1}, {"asset_id": a2}])
+    assert len(kit.items) == 2
