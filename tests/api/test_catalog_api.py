@@ -17,3 +17,10 @@ def test_list_assets_paginated(client, auth_headers, sample_catalog):
     assert body["pagination"]["size"] == 1
     assert body["pagination"]["total"] >= 2
     assert len(body["items"]) == 1
+
+
+def test_search_assets_by_term(client, auth_headers, sample_catalog):
+    resp = client.get("/assets?term=komodo", headers=auth_headers)
+    assert resp.status_code == 200
+    names = [a["name"] for a in resp.json()["items"]]
+    assert "Komodo" in names
