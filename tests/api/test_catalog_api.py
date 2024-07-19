@@ -52,3 +52,15 @@ def test_asset_status_transition_via_api(client, auth_headers, sample_catalog):
     )
     assert resp.status_code == 200
     assert resp.json()["status"] == "in_maintenance"
+
+
+def test_illegal_status_transition_via_api(client, auth_headers, sample_catalog):
+    asset_id = sample_catalog["asset_b"]["id"]
+    client.post(f"/assets/{asset_id}/status", json={"status": "retired"}, headers=auth_headers)
+    resp = client.post(
+        f"/assets/{asset_id}/status",
+        json={"status": "available"},
+        headers=auth_headers,
+    )
+    assert resp.status_code == 409
+    assert resp.json()["error"]["code"] == "invalid_state"
