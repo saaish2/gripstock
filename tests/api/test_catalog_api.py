@@ -41,3 +41,14 @@ def test_duplicate_barcode_conflict(client, auth_headers, sample_catalog):
     )
     assert resp.status_code == 409
     assert resp.json()["error"]["code"] == "conflict"
+
+
+def test_asset_status_transition_via_api(client, auth_headers, sample_catalog):
+    asset_id = sample_catalog["asset_b"]["id"]
+    resp = client.post(
+        f"/assets/{asset_id}/status",
+        json={"status": "in_maintenance"},
+        headers=auth_headers,
+    )
+    assert resp.status_code == 200
+    assert resp.json()["status"] == "in_maintenance"
