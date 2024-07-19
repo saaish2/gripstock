@@ -24,3 +24,20 @@ def test_search_assets_by_term(client, auth_headers, sample_catalog):
     assert resp.status_code == 200
     names = [a["name"] for a in resp.json()["items"]]
     assert "Komodo" in names
+
+
+def test_duplicate_barcode_conflict(client, auth_headers, sample_catalog):
+    cat_id = sample_catalog["category"]["id"]
+    resp = client.post(
+        "/assets",
+        json={
+            "category_id": cat_id,
+            "name": "Dup",
+            "barcode": "CAM-001",
+            "daily_rate": "10.00",
+            "replacement_value": "100.00",
+        },
+        headers=auth_headers,
+    )
+    assert resp.status_code == 409
+    assert resp.json()["error"]["code"] == "conflict"
