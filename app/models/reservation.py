@@ -9,3 +9,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.enums import ReservationStatus
 from app.models.base import Base, IntPrimaryKey, TimestampMixin
+
+
+class Reservation(Base, IntPrimaryKey, TimestampMixin):
