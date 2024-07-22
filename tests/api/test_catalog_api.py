@@ -64,3 +64,19 @@ def test_illegal_status_transition_via_api(client, auth_headers, sample_catalog)
     )
     assert resp.status_code == 409
     assert resp.json()["error"]["code"] == "invalid_state"
+
+
+def test_create_kit(client, auth_headers, sample_catalog):
+    resp = client.post(
+        "/kits",
+        json={
+            "name": "Starter Kit",
+            "items": [
+                {"asset_id": sample_catalog["asset_a"]["id"]},
+                {"asset_id": sample_catalog["asset_b"]["id"]},
+            ],
+        },
+        headers=auth_headers,
+    )
+    assert resp.status_code == 201
+    assert len(resp.json()["items"]) == 2
