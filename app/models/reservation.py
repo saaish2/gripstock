@@ -12,3 +12,4 @@ from app.models.base import Base, IntPrimaryKey, TimestampMixin
 
 
 class Reservation(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "reservations"
