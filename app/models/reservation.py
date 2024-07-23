@@ -13,3 +13,5 @@ from app.models.base import Base, IntPrimaryKey, TimestampMixin
 
 class Reservation(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "reservations"
+
+    reference: Mapped[str] = mapped_column(String(20), unique=True, index=True, nullable=False)
