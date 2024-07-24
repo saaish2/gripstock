@@ -18,3 +18,6 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     customer_id: Mapped[int] = mapped_column(
         ForeignKey("customers.id", ondelete="RESTRICT"), index=True, nullable=False
     )
+    created_by_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True
+    )
