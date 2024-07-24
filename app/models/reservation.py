@@ -15,3 +15,6 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "reservations"
 
     reference: Mapped[str] = mapped_column(String(20), unique=True, index=True, nullable=False)
+    customer_id: Mapped[int] = mapped_column(
+        ForeignKey("customers.id", ondelete="RESTRICT"), index=True, nullable=False
+    )
