@@ -21,3 +21,6 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     created_by_id: Mapped[int | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
+    status: Mapped[ReservationStatus] = mapped_column(
+        String(20), default=ReservationStatus.PENDING, index=True, nullable=False
+    )
