@@ -26,3 +26,4 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     )
 
     starts_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True, nullable=False)
+    ends_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True, nullable=False)
