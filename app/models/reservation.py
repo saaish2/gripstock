@@ -24,3 +24,5 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     status: Mapped[ReservationStatus] = mapped_column(
         String(20), default=ReservationStatus.PENDING, index=True, nullable=False
     )
+
+    starts_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), index=True, nullable=False)
