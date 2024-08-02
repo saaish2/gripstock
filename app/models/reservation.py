@@ -33,3 +33,6 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     customer: Mapped[Customer] = relationship(back_populates="reservations")  # noqa: F821
+    lines: Mapped[list[ReservationLine]] = relationship(
+        back_populates="reservation", cascade="all, delete-orphan"
+    )
