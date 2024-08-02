@@ -31,3 +31,5 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     returned_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    customer: Mapped[Customer] = relationship(back_populates="reservations")  # noqa: F821
