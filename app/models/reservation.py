@@ -36,3 +36,12 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     lines: Mapped[list[ReservationLine]] = relationship(
         back_populates="reservation", cascade="all, delete-orphan"
     )
+
+    @property
+    def is_open(self) -> bool:
+        return self.status in (
+            ReservationStatus.PENDING,
+            ReservationStatus.CONFIRMED,
+            ReservationStatus.PICKED_UP,
+            ReservationStatus.OVERDUE,
+        )
