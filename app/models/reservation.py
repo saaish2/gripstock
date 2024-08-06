@@ -45,3 +45,8 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
             ReservationStatus.PICKED_UP,
             ReservationStatus.OVERDUE,
         )
+
+    @property
+    def rental_days(self) -> int:
+        delta = self.ends_at - self.starts_at
+        return max(1, -(-delta.days if delta.days else 1))
