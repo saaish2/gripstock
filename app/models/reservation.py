@@ -50,3 +50,6 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
     def rental_days(self) -> int:
         delta = self.ends_at - self.starts_at
         return max(1, -(-delta.days if delta.days else 1))
+
+
+class ReservationLine(Base, IntPrimaryKey):
