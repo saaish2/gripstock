@@ -53,3 +53,4 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
 
 
 class ReservationLine(Base, IntPrimaryKey):
+    __tablename__ = "reservation_lines"
