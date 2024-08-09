@@ -54,3 +54,7 @@ class Reservation(Base, IntPrimaryKey, TimestampMixin):
 
 class ReservationLine(Base, IntPrimaryKey):
     __tablename__ = "reservation_lines"
+
+    reservation_id: Mapped[int] = mapped_column(
+        ForeignKey("reservations.id", ondelete="CASCADE"), index=True, nullable=False
+    )
