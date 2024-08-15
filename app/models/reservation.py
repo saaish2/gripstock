@@ -64,3 +64,4 @@ class ReservationLine(Base, IntPrimaryKey):
     kit_id: Mapped[int | None] = mapped_column(
         ForeignKey("kits.id", ondelete="SET NULL"), nullable=True
     )
+    quantity: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
