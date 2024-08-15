@@ -65,3 +65,5 @@ class ReservationLine(Base, IntPrimaryKey):
         ForeignKey("kits.id", ondelete="SET NULL"), nullable=True
     )
     quantity: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
+
+    reservation: Mapped[Reservation] = relationship(back_populates="lines")
