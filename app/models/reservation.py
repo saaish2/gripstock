@@ -67,3 +67,4 @@ class ReservationLine(Base, IntPrimaryKey):
     quantity: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
 
     reservation: Mapped[Reservation] = relationship(back_populates="lines")
+    asset: Mapped[Asset] = relationship()  # noqa: F821
