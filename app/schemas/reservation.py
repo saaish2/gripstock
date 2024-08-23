@@ -13,3 +13,4 @@ from app.schemas.common import ORMModel
 class ReservationLineIn(BaseModel):
     asset_id: int
     kit_id: int | None = None
+    quantity: int = Field(default=1, ge=1)
