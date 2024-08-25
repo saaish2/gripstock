@@ -17,3 +17,4 @@ class ReservationLineIn(BaseModel):
 
 
 class ReservationCreate(BaseModel):
+    customer_id: int
