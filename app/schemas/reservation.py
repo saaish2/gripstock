@@ -19,3 +19,4 @@ class ReservationLineIn(BaseModel):
 class ReservationCreate(BaseModel):
     customer_id: int
     starts_at: datetime
+    ends_at: datetime
