@@ -22,3 +22,9 @@ class ReservationCreate(BaseModel):
     ends_at: datetime
     notes: str | None = None
     lines: list[ReservationLineIn] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def _check_window(self) -> ReservationCreate:
+        if self.ends_at <= self.starts_at:
+            raise ValueError("ends_at must be after starts_at")
+        return self
