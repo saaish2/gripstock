@@ -21,3 +21,4 @@ class ReservationCreate(BaseModel):
     starts_at: datetime
     ends_at: datetime
     notes: str | None = None
+    lines: list[ReservationLineIn] = Field(min_length=1)
