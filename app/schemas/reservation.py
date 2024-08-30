@@ -31,3 +31,4 @@ class ReservationCreate(BaseModel):
 
 
 class ReservationReschedule(BaseModel):
+    starts_at: datetime
