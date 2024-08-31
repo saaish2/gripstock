@@ -33,3 +33,9 @@ class ReservationCreate(BaseModel):
 class ReservationReschedule(BaseModel):
     starts_at: datetime
     ends_at: datetime
+
+    @model_validator(mode="after")
+    def _check_window(self) -> ReservationReschedule:
+        if self.ends_at <= self.starts_at:
+            raise ValueError("ends_at must be after starts_at")
+        return self
