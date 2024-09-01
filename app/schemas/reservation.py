@@ -39,3 +39,6 @@ class ReservationReschedule(BaseModel):
         if self.ends_at <= self.starts_at:
             raise ValueError("ends_at must be after starts_at")
         return self
+
+
+class ReservationLineOut(ORMModel):
