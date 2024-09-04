@@ -43,3 +43,4 @@ class ReservationReschedule(BaseModel):
 
 class ReservationLineOut(ORMModel):
     id: int
+    asset_id: int
