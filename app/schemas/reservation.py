@@ -45,3 +45,4 @@ class ReservationLineOut(ORMModel):
     id: int
     asset_id: int
     kit_id: int | None = None
+    quantity: int
