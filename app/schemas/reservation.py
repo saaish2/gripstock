@@ -51,3 +51,4 @@ class ReservationLineOut(ORMModel):
 class ReservationOut(ORMModel):
     id: int
     reference: str
+    customer_id: int
