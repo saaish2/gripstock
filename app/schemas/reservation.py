@@ -52,3 +52,4 @@ class ReservationOut(ORMModel):
     id: int
     reference: str
     customer_id: int
+    status: ReservationStatus
