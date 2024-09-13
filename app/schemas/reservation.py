@@ -53,3 +53,4 @@ class ReservationOut(ORMModel):
     reference: str
     customer_id: int
     status: ReservationStatus
+    starts_at: datetime
