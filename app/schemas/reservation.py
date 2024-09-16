@@ -55,3 +55,4 @@ class ReservationOut(ORMModel):
     status: ReservationStatus
     starts_at: datetime
     ends_at: datetime
+    picked_up_at: datetime | None = None
