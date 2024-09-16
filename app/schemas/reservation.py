@@ -54,3 +54,4 @@ class ReservationOut(ORMModel):
     customer_id: int
     status: ReservationStatus
     starts_at: datetime
+    ends_at: datetime
