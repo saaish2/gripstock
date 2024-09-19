@@ -57,3 +57,4 @@ class ReservationOut(ORMModel):
     ends_at: datetime
     picked_up_at: datetime | None = None
     returned_at: datetime | None = None
+    notes: str | None = None
