@@ -58,3 +58,4 @@ class ReservationOut(ORMModel):
     picked_up_at: datetime | None = None
     returned_at: datetime | None = None
     notes: str | None = None
+    lines: list[ReservationLineOut] = Field(default_factory=list)
