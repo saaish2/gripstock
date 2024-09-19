@@ -59,3 +59,4 @@ class ReservationOut(ORMModel):
     returned_at: datetime | None = None
     notes: str | None = None
     lines: list[ReservationLineOut] = Field(default_factory=list)
+    created_at: datetime
