@@ -60,3 +60,6 @@ class ReservationOut(ORMModel):
     notes: str | None = None
     lines: list[ReservationLineOut] = Field(default_factory=list)
     created_at: datetime
+
+
+class AvailabilityQuery(BaseModel):
