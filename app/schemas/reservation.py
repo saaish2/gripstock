@@ -63,3 +63,4 @@ class ReservationOut(ORMModel):
 
 
 class AvailabilityQuery(BaseModel):
+    asset_id: int
