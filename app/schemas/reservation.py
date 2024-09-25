@@ -66,3 +66,6 @@ class AvailabilityQuery(BaseModel):
     asset_id: int
     starts_at: datetime
     ends_at: datetime
+
+
+class AvailabilityResult(BaseModel):
