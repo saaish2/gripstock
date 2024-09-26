@@ -69,3 +69,4 @@ class AvailabilityQuery(BaseModel):
 
 
 class AvailabilityResult(BaseModel):
+    asset_id: int
