@@ -71,3 +71,4 @@ class AvailabilityQuery(BaseModel):
 class AvailabilityResult(BaseModel):
     asset_id: int
     available: bool
+    conflicting_reservation_ids: list[int] = Field(default_factory=list)
