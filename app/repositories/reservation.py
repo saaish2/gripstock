@@ -20,3 +20,4 @@ BLOCKING_STATUSES = (
 
 
 class ReservationRepository(BaseRepository[Reservation]):
+    model = Reservation
