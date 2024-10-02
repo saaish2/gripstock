@@ -17,3 +17,6 @@ BLOCKING_STATUSES = (
     ReservationStatus.PICKED_UP,
     ReservationStatus.OVERDUE,
 )
+
+
+class ReservationRepository(BaseRepository[Reservation]):
