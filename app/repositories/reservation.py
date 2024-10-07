@@ -21,3 +21,7 @@ BLOCKING_STATUSES = (
 
 class ReservationRepository(BaseRepository[Reservation]):
     model = Reservation
+
+    def get_by_reference(self, reference: str) -> Reservation | None:
+        stmt = select(Reservation).where(Reservation.reference == reference)
+        return self.session.execute(stmt).scalar_one_or_none()
