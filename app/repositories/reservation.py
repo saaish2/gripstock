@@ -73,3 +73,9 @@ class ReservationRepository(BaseRepository[Reservation]):
             Reservation.ends_at < now,
         )
         return list(self.session.execute(stmt).scalars().all())
+
+    def lines_for(self, reservation_id: int) -> list[ReservationLine]:
+        stmt = select(ReservationLine).where(
+            ReservationLine.reservation_id == reservation_id
+        )
+        return list(self.session.execute(stmt).scalars().all())
