@@ -66,3 +66,10 @@ class ReservationRepository(BaseRepository[Reservation]):
         if exclude_reservation_id is not None:
             stmt = stmt.where(Reservation.id != exclude_reservation_id)
         return list(self.session.execute(stmt).scalars().all())
+
+    def due_for_overdue_sweep(self, now: datetime) -> list[Reservation]:
+        stmt = select(Reservation).where(
+            Reservation.status == ReservationStatus.PICKED_UP,
+            Reservation.ends_at < now,
+        )
+        return list(self.session.execute(stmt).scalars().all())
