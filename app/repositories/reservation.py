@@ -25,3 +25,15 @@ class ReservationRepository(BaseRepository[Reservation]):
     def get_by_reference(self, reference: str) -> Reservation | None:
         stmt = select(Reservation).where(Reservation.reference == reference)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def search_query(
+        self,
+        customer_id: int | None = None,
+        status: ReservationStatus | None = None,
+    ) -> Select:
+        stmt = select(Reservation)
+        if customer_id is not None:
+            stmt = stmt.where(Reservation.customer_id == customer_id)
+        if status is not None:
+            stmt = stmt.where(Reservation.status == status)
+        return stmt.order_by(Reservation.starts_at.desc())
