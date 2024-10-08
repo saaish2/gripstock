@@ -36,3 +36,18 @@ class ReservationService:
         self.repo = ReservationRepository(session)
         self.assets = AssetRepository(session)
         self.customers = CustomerRepository(session)
+
+    def check_availability(
+        self,
+        asset_id: int,
+        starts_at: datetime,
+        ends_at: datetime,
+        exclude_reservation_id: int | None = None,
+    ) -> list[int]:
+        """Return the ids of reservations that conflict over the window."""
+
+        if ends_at <= starts_at:
+            raise ValidationError("ends_at must be after starts_at")
+        return self.repo.overlapping_line_ids(
+            asset_id, starts_at, ends_at, exclude_reservation_id
+        )
