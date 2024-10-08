@@ -31,3 +31,8 @@ from app.services.references import next_reservation_reference
 
 
 class ReservationService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.repo = ReservationRepository(session)
+        self.assets = AssetRepository(session)
+        self.customers = CustomerRepository(session)
