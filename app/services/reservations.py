@@ -54,3 +54,56 @@ class ReservationService:
 
     def is_available(self, asset_id: int, starts_at: datetime, ends_at: datetime) -> bool:
         return not self.check_availability(asset_id, starts_at, ends_at)
+
+    def create(self, data: dict, actor_id: int | None = None) -> Reservation:
+        customer = self.customers.get_active(data["customer_id"])
+        if customer is None:
+            raise NotFoundError(f"customer {data['customer_id']} not found")
+        if customer.status in (CustomerStatus.BLOCKED, CustomerStatus.ARCHIVED):
+            raise BusinessRuleError(f"customer is {customer.status} and cannot reserve")
+
+        starts_at = data["starts_at"]
+        ends_at = data["ends_at"]
+        if ends_at <= starts_at:
+            raise ValidationError("ends_at must be after starts_at")
+
+        lines = data["lines"]
+        self._validate_lines_available(lines, starts_at, ends_at)
+
+        reservation = Reservation(
+            reference=next_reservation_reference(self.session),
+            customer_id=customer.id,
+            created_by_id=actor_id,
+            starts_at=starts_at,
+            ends_at=ends_at,
+            notes=data.get("notes"),
+        )
+        for line in lines:
+            reservation.lines.append(
+                ReservationLine(
+                    asset_id=line["asset_id"],
+                    kit_id=line.get("kit_id"),
+                    quantity=line.get("quantity", 1),
+                )
+            )
+        self.repo.add(reservation)
+        record_audit(
+            self.session,
+            actor_id=actor_id,
+            action="reservation.created",
+            entity_type="reservation",
+            entity_id=reservation.id,
+            payload={"reference": reservation.reference},
+        )
+        emit_event(
+            self.session,
+            EventType.RESERVATION_CREATED,
+            envelope(
+                EventType.RESERVATION_CREATED,
+                "reservation",
+                reservation.id,
+                reference=reservation.reference,
+                customer_id=reservation.customer_id,
+            ),
+        )
+        return reservation
