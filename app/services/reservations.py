@@ -51,3 +51,6 @@ class ReservationService:
         return self.repo.overlapping_line_ids(
             asset_id, starts_at, ends_at, exclude_reservation_id
         )
+
+    def is_available(self, asset_id: int, starts_at: datetime, ends_at: datetime) -> bool:
+        return not self.check_availability(asset_id, starts_at, ends_at)
