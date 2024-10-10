@@ -9,3 +9,7 @@ All notable changes to gripstock are documented here.
 ## 0.3.0
 
 - Catalog: categories, assets, and kits.
+
+## 0.4.0
+
+- Reservations with availability conflict detection.
