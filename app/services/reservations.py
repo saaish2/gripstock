@@ -107,3 +107,22 @@ class ReservationService:
             ),
         )
         return reservation
+
+    def _validate_lines_available(self, lines: list[dict], starts_at, ends_at) -> None:
+        seen: set[int] = set()
+        for line in lines:
+            asset_id = line["asset_id"]
+            if asset_id in seen:
+                raise ValidationError(f"asset {asset_id} appears more than once")
+            seen.add(asset_id)
+            asset = self.assets.get(asset_id)
+            if asset is None or asset.deleted_at is not None:
+                raise NotFoundError(f"asset {asset_id} not found")
+            if asset.status in (AssetStatus.RETIRED, AssetStatus.LOST):
+                raise BusinessRuleError(f"asset {asset_id} is {asset.status}")
+            conflicts = self.check_availability(asset_id, starts_at, ends_at)
+            if conflicts:
+                raise ConflictError(
+                    f"asset {asset_id} is unavailable for the requested window",
+                    details={"conflicting_reservation_ids": conflicts},
+                )
