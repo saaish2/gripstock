@@ -126,3 +126,9 @@ class ReservationService:
                     f"asset {asset_id} is unavailable for the requested window",
                     details={"conflicting_reservation_ids": conflicts},
                 )
+
+    def get(self, reservation_id: int) -> Reservation:
+        reservation = self.repo.get(reservation_id)
+        if reservation is None:
+            raise NotFoundError(f"reservation {reservation_id} not found")
+        return reservation
