@@ -174,3 +174,23 @@ class ReservationService:
             entity_id=reservation.id,
         )
         return reservation
+
+    def reschedule(self, reservation_id: int, starts_at: datetime, ends_at: datetime) -> Reservation:
+        reservation = self.get(reservation_id)
+        if reservation.status not in (ReservationStatus.PENDING, ReservationStatus.CONFIRMED):
+            raise InvalidStateError("only pending or confirmed reservations can be rescheduled")
+        if ends_at <= starts_at:
+            raise ValidationError("ends_at must be after starts_at")
+        for line in reservation.lines:
+            conflicts = self.check_availability(
+                line.asset_id, starts_at, ends_at, exclude_reservation_id=reservation.id
+            )
+            if conflicts:
+                raise ConflictError(
+                    f"asset {line.asset_id} is unavailable for the new window",
+                    details={"conflicting_reservation_ids": conflicts},
+                )
+        reservation.starts_at = starts_at
+        reservation.ends_at = ends_at
+        self.session.flush()
+        return reservation
