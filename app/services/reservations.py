@@ -139,3 +139,23 @@ class ReservationService:
                 f"cannot move reservation from {reservation.status} to {target}"
             )
         reservation.status = target
+
+    def confirm(self, reservation_id: int, actor_id: int | None = None) -> Reservation:
+        reservation = self.get(reservation_id)
+        self._transition(reservation, ReservationStatus.CONFIRMED)
+        for line in reservation.lines:
+            self._mark_asset(line.asset_id, AssetStatus.RESERVED)
+        self.session.flush()
+        record_audit(
+            self.session,
+            actor_id=actor_id,
+            action="reservation.confirmed",
+            entity_type="reservation",
+            entity_id=reservation.id,
+        )
+        emit_event(
+            self.session,
+            EventType.RESERVATION_CONFIRMED,
+            envelope(EventType.RESERVATION_CONFIRMED, "reservation", reservation.id),
+        )
+        return reservation
