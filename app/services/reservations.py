@@ -194,3 +194,11 @@ class ReservationService:
         reservation.ends_at = ends_at
         self.session.flush()
         return reservation
+
+    def mark_no_show(self, reservation_id: int) -> Reservation:
+        reservation = self.get(reservation_id)
+        self._transition(reservation, ReservationStatus.NO_SHOW)
+        for line in reservation.lines:
+            self._release_asset(line.asset_id)
+        self.session.flush()
+        return reservation
