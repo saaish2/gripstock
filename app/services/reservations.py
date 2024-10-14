@@ -132,3 +132,10 @@ class ReservationService:
         if reservation is None:
             raise NotFoundError(f"reservation {reservation_id} not found")
         return reservation
+
+    def _transition(self, reservation: Reservation, target: ReservationStatus) -> None:
+        if not can_transition(RESERVATION_TRANSITIONS, reservation.status, target):
+            raise InvalidStateError(
+                f"cannot move reservation from {reservation.status} to {target}"
+            )
+        reservation.status = target
