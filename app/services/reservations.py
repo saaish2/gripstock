@@ -159,3 +159,18 @@ class ReservationService:
             envelope(EventType.RESERVATION_CONFIRMED, "reservation", reservation.id),
         )
         return reservation
+
+    def cancel(self, reservation_id: int, actor_id: int | None = None) -> Reservation:
+        reservation = self.get(reservation_id)
+        self._transition(reservation, ReservationStatus.CANCELLED)
+        for line in reservation.lines:
+            self._release_asset(line.asset_id)
+        self.session.flush()
+        record_audit(
+            self.session,
+            actor_id=actor_id,
+            action="reservation.cancelled",
+            entity_type="reservation",
+            entity_id=reservation.id,
+        )
+        return reservation
