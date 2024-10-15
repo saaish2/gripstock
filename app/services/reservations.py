@@ -202,3 +202,8 @@ class ReservationService:
             self._release_asset(line.asset_id)
         self.session.flush()
         return reservation
+
+    def _mark_asset(self, asset_id: int, status: AssetStatus) -> None:
+        asset = self.assets.get(asset_id)
+        if asset is not None:
+            asset.status = status
