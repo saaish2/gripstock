@@ -207,3 +207,8 @@ class ReservationService:
         asset = self.assets.get(asset_id)
         if asset is not None:
             asset.status = status
+
+    def _release_asset(self, asset_id: int) -> None:
+        asset = self.assets.get(asset_id)
+        if asset is not None and asset.status in (AssetStatus.RESERVED, AssetStatus.CHECKED_OUT):
+            asset.status = AssetStatus.AVAILABLE
