@@ -212,3 +212,12 @@ class ReservationService:
         asset = self.assets.get(asset_id)
         if asset is not None and asset.status in (AssetStatus.RESERVED, AssetStatus.CHECKED_OUT):
             asset.status = AssetStatus.AVAILABLE
+
+    def search(
+        self,
+        params: PageParams,
+        customer_id: int | None = None,
+        status: ReservationStatus | None = None,
+    ) -> Page:
+        stmt = self.repo.search_query(customer_id, status)
+        return paginate(self.session, stmt, params)
