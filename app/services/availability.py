@@ -17,3 +17,7 @@ from app.errors import NotFoundError, ValidationError
 from app.models.reservation import Reservation, ReservationLine
 from app.repositories.catalog import AssetRepository
 from app.repositories.reservation import BLOCKING_STATUSES
+
+
+@dataclass(slots=True)
+class BookedInterval:
