@@ -21,3 +21,4 @@ from app.repositories.reservation import BLOCKING_STATUSES
 
 @dataclass(slots=True)
 class BookedInterval:
+    reservation_id: int
