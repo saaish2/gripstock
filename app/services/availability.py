@@ -24,3 +24,4 @@ class BookedInterval:
     reservation_id: int
     reference: str
     starts_at: datetime
+    ends_at: datetime
