@@ -23,3 +23,4 @@ from app.repositories.reservation import BLOCKING_STATUSES
 class BookedInterval:
     reservation_id: int
     reference: str
+    starts_at: datetime
