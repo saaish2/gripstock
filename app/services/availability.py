@@ -30,3 +30,4 @@ class BookedInterval:
 
 @dataclass(slots=True)
 class AssetCalendar:
+    asset_id: int
