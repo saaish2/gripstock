@@ -25,3 +25,4 @@ class BookedInterval:
     reference: str
     starts_at: datetime
     ends_at: datetime
+    status: str
