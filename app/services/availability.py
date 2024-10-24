@@ -26,3 +26,7 @@ class BookedInterval:
     starts_at: datetime
     ends_at: datetime
     status: str
+
+
+@dataclass(slots=True)
+class AssetCalendar:
