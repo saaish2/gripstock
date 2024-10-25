@@ -32,3 +32,4 @@ class BookedInterval:
 class AssetCalendar:
     asset_id: int
     asset_name: str
+    window_start: datetime
