@@ -33,3 +33,4 @@ class AssetCalendar:
     asset_id: int
     asset_name: str
     window_start: datetime
+    window_end: datetime
