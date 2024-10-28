@@ -34,3 +34,4 @@ class AssetCalendar:
     asset_name: str
     window_start: datetime
     window_end: datetime
+    intervals: list[BookedInterval] = field(default_factory=list)
