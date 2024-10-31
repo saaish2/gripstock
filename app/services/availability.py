@@ -39,3 +39,22 @@ class AssetCalendar:
     @property
     def is_free(self) -> bool:
         return not self.intervals
+
+    def to_dict(self) -> dict:
+        return {
+            "asset_id": self.asset_id,
+            "asset_name": self.asset_name,
+            "window_start": self.window_start,
+            "window_end": self.window_end,
+            "is_free": self.is_free,
+            "intervals": [
+                {
+                    "reservation_id": i.reservation_id,
+                    "reference": i.reference,
+                    "starts_at": i.starts_at,
+                    "ends_at": i.ends_at,
+                    "status": i.status,
+                }
+                for i in self.intervals
+            ],
+        }
