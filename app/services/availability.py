@@ -35,3 +35,7 @@ class AssetCalendar:
     window_start: datetime
     window_end: datetime
     intervals: list[BookedInterval] = field(default_factory=list)
+
+    @property
+    def is_free(self) -> bool:
+        return not self.intervals
