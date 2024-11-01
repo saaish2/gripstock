@@ -58,3 +58,6 @@ class AssetCalendar:
                 for i in self.intervals
             ],
         }
+
+
+class AvailabilityService:
