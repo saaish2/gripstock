@@ -21,3 +21,5 @@ from app.schemas.reservation import (
 )
 from app.services.availability import AvailabilityService
 from app.services.reservations import ReservationService
+
+router = APIRouter(prefix="/reservations", tags=["reservations"])
