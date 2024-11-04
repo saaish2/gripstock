@@ -105,3 +105,15 @@ class AvailabilityService:
                 )
             )
         return calendar
+
+    def free_assets(
+        self, asset_ids: list[int], window_start: datetime, window_end: datetime
+    ) -> list[int]:
+        """Return the subset of ``asset_ids`` with no booking in the window."""
+
+        free: list[int] = []
+        for asset_id in asset_ids:
+            calendar = self.asset_calendar(asset_id, window_start, window_end)
+            if calendar.is_free:
+                free.append(asset_id)
+        return free
