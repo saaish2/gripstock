@@ -64,3 +64,44 @@ class AvailabilityService:
     def __init__(self, session: Session) -> None:
         self.session = session
         self.assets = AssetRepository(session)
+
+    def asset_calendar(
+        self, asset_id: int, window_start: datetime, window_end: datetime
+    ) -> AssetCalendar:
+        if window_end <= window_start:
+            raise ValidationError("window_end must be after window_start")
+        asset = self.assets.get(asset_id)
+        if asset is None or asset.deleted_at is not None:
+            raise NotFoundError(f"asset {asset_id} not found")
+
+        stmt = (
+            select(Reservation)
+            .join(ReservationLine, ReservationLine.reservation_id == Reservation.id)
+            .where(
+                and_(
+                    ReservationLine.asset_id == asset_id,
+                    Reservation.status.in_(BLOCKING_STATUSES),
+                    Reservation.starts_at < window_end,
+                    window_start < Reservation.ends_at,
+                )
+            )
+            .order_by(Reservation.starts_at)
+        )
+        reservations = self.session.execute(stmt).scalars().all()
+        calendar = AssetCalendar(
+            asset_id=asset.id,
+            asset_name=asset.name,
+            window_start=window_start,
+            window_end=window_end,
+        )
+        for res in reservations:
+            calendar.intervals.append(
+                BookedInterval(
+                    reservation_id=res.id,
+                    reference=res.reference,
+                    starts_at=res.starts_at,
+                    ends_at=res.ends_at,
+                    status=str(res.status),
+                )
+            )
+        return calendar
