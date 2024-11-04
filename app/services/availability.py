@@ -61,3 +61,6 @@ class AssetCalendar:
 
 
 class AvailabilityService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.assets = AssetRepository(session)
