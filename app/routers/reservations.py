@@ -23,3 +23,14 @@ from app.services.availability import AvailabilityService
 from app.services.reservations import ReservationService
 
 router = APIRouter(prefix="/reservations", tags=["reservations"])
+
+
+@router.post("", response_model=ReservationOut, status_code=201)
+def create_reservation(
+    payload: ReservationCreate,
+    actor: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> ReservationOut:
+    data = payload.model_dump()
+    reservation = ReservationService(session).create(data, actor_id=actor.id)
+    return ReservationOut.model_validate(reservation)
