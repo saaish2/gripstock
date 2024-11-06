@@ -13,3 +13,7 @@ All notable changes to gripstock are documented here.
 ## 0.4.0
 
 - Reservations with availability conflict detection.
+
+## 0.5.0
+
+- Pricing engine with tiered and seasonal rates.
