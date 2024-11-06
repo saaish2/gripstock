@@ -34,3 +34,19 @@ def create_reservation(
     data = payload.model_dump()
     reservation = ReservationService(session).create(data, actor_id=actor.id)
     return ReservationOut.model_validate(reservation)
+
+
+@router.post("/availability", response_model=AvailabilityResult)
+def availability(
+    payload: AvailabilityQuery,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> AvailabilityResult:
+    conflicts = ReservationService(session).check_availability(
+        payload.asset_id, payload.starts_at, payload.ends_at
+    )
+    return AvailabilityResult(
+        asset_id=payload.asset_id,
+        available=not conflicts,
+        conflicting_reservation_ids=conflicts,
+    )
