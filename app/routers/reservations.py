@@ -50,3 +50,15 @@ def availability(
         available=not conflicts,
         conflicting_reservation_ids=conflicts,
     )
+
+
+@router.get("/calendar/{asset_id}")
+def asset_calendar(
+    asset_id: int,
+    starts_at: datetime,
+    ends_at: datetime,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> dict:
+    calendar = AvailabilityService(session).asset_calendar(asset_id, starts_at, ends_at)
+    return calendar.to_dict()
