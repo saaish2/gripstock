@@ -62,3 +62,15 @@ def asset_calendar(
 ) -> dict:
     calendar = AvailabilityService(session).asset_calendar(asset_id, starts_at, ends_at)
     return calendar.to_dict()
+
+
+@router.get("", response_model=PagedResponse[ReservationOut])
+def list_reservations(
+    customer_id: int | None = Query(default=None),
+    status: ReservationStatus | None = Query(default=None),
+    params: PageParams = Depends(pagination),
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> dict:
+    page = ReservationService(session).search(params, customer_id=customer_id, status=status)
+    return page.to_dict(lambda r: ReservationOut.model_validate(r).model_dump())
