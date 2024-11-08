@@ -74,3 +74,12 @@ def list_reservations(
 ) -> dict:
     page = ReservationService(session).search(params, customer_id=customer_id, status=status)
     return page.to_dict(lambda r: ReservationOut.model_validate(r).model_dump())
+
+
+@router.get("/{reservation_id}", response_model=ReservationOut)
+def get_reservation(
+    reservation_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> ReservationOut:
+    return ReservationOut.model_validate(ReservationService(session).get(reservation_id))
