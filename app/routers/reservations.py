@@ -83,3 +83,13 @@ def get_reservation(
     session: Session = Depends(db_session),
 ) -> ReservationOut:
     return ReservationOut.model_validate(ReservationService(session).get(reservation_id))
+
+
+@router.post("/{reservation_id}/confirm", response_model=ReservationOut)
+def confirm(
+    reservation_id: int,
+    actor: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> ReservationOut:
+    reservation = ReservationService(session).confirm(reservation_id, actor_id=actor.id)
+    return ReservationOut.model_validate(reservation)
