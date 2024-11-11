@@ -103,3 +103,16 @@ def cancel(
 ) -> ReservationOut:
     reservation = ReservationService(session).cancel(reservation_id, actor_id=actor.id)
     return ReservationOut.model_validate(reservation)
+
+
+@router.post("/{reservation_id}/reschedule", response_model=ReservationOut)
+def reschedule(
+    reservation_id: int,
+    payload: ReservationReschedule,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> ReservationOut:
+    reservation = ReservationService(session).reschedule(
+        reservation_id, payload.starts_at, payload.ends_at
+    )
+    return ReservationOut.model_validate(reservation)
