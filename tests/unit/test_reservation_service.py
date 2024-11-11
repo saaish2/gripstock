@@ -30,3 +30,8 @@ def fixtures(session):
     session.add_all([asset, customer])
     session.flush()
     return {"asset": asset, "customer": customer}
+
+
+def _window(day_offset: int, length_days: int = 2):
+    start = datetime(2024, 4, 1) + timedelta(days=day_offset)
+    return start, start + timedelta(days=length_days)
