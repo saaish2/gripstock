@@ -35,3 +35,18 @@ def fixtures(session):
 def _window(day_offset: int, length_days: int = 2):
     start = datetime(2024, 4, 1) + timedelta(days=day_offset)
     return start, start + timedelta(days=length_days)
+
+
+def test_create_reservation_assigns_reference(session, fixtures):
+    svc = ReservationService(session)
+    start, end = _window(0)
+    res = svc.create(
+        {
+            "customer_id": fixtures["customer"].id,
+            "starts_at": start,
+            "ends_at": end,
+            "lines": [{"asset_id": fixtures["asset"].id}],
+        }
+    )
+    assert res.reference.startswith("RSV-")
+    assert res.status == ReservationStatus.PENDING
