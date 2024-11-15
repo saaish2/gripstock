@@ -73,3 +73,26 @@ def test_overlapping_window_conflicts(session, fixtures):
                 "lines": [{"asset_id": fixtures["asset"].id}],
             }
         )
+
+
+def test_adjacent_window_is_allowed(session, fixtures):
+    svc = ReservationService(session)
+    start, end = _window(0, 2)  # apr1 - apr3
+    svc.create(
+        {
+            "customer_id": fixtures["customer"].id,
+            "starts_at": start,
+            "ends_at": end,
+            "lines": [{"asset_id": fixtures["asset"].id}],
+        }
+    )
+    # Starts exactly when the first ends — half-open intervals don't overlap.
+    res = svc.create(
+        {
+            "customer_id": fixtures["customer"].id,
+            "starts_at": end,
+            "ends_at": end + timedelta(days=2),
+            "lines": [{"asset_id": fixtures["asset"].id}],
+        }
+    )
+    assert res.status == ReservationStatus.PENDING
