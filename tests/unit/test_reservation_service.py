@@ -50,3 +50,26 @@ def test_create_reservation_assigns_reference(session, fixtures):
     )
     assert res.reference.startswith("RSV-")
     assert res.status == ReservationStatus.PENDING
+
+
+def test_overlapping_window_conflicts(session, fixtures):
+    svc = ReservationService(session)
+    start, end = _window(0, 3)
+    data = {
+        "customer_id": fixtures["customer"].id,
+        "starts_at": start,
+        "ends_at": end,
+        "lines": [{"asset_id": fixtures["asset"].id}],
+    }
+    svc.create(data)
+
+    overlap_start, overlap_end = _window(1, 3)
+    with pytest.raises(ConflictError):
+        svc.create(
+            {
+                "customer_id": fixtures["customer"].id,
+                "starts_at": overlap_start,
+                "ends_at": overlap_end,
+                "lines": [{"asset_id": fixtures["asset"].id}],
+            }
+        )
