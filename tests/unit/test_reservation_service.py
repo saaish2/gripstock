@@ -96,3 +96,20 @@ def test_adjacent_window_is_allowed(session, fixtures):
         }
     )
     assert res.status == ReservationStatus.PENDING
+
+
+def test_cancelled_reservation_frees_inventory(session, fixtures):
+    svc = ReservationService(session)
+    start, end = _window(0, 3)
+    res = svc.create(
+        {
+            "customer_id": fixtures["customer"].id,
+            "starts_at": start,
+            "ends_at": end,
+            "lines": [{"asset_id": fixtures["asset"].id}],
+        }
+    )
+    svc.confirm(res.id)
+    svc.cancel(res.id)
+    # Same window is now free.
+    assert svc.is_available(fixtures["asset"].id, start, end)
