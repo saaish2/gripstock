@@ -129,3 +129,18 @@ def test_confirm_marks_asset_reserved(session, fixtures):
     svc.confirm(res.id)
     session.refresh(fixtures["asset"])
     assert fixtures["asset"].status == AssetStatus.RESERVED
+
+
+def test_cannot_return_directly_from_pending(session, fixtures):
+    svc = ReservationService(session)
+    start, end = _window(0)
+    res = svc.create(
+        {
+            "customer_id": fixtures["customer"].id,
+            "starts_at": start,
+            "ends_at": end,
+            "lines": [{"asset_id": fixtures["asset"].id}],
+        }
+    )
+    with pytest.raises(InvalidStateError):
+        svc.mark_no_show(res.id)  # only valid from confirmed
