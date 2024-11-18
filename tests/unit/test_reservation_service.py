@@ -113,3 +113,19 @@ def test_cancelled_reservation_frees_inventory(session, fixtures):
     svc.cancel(res.id)
     # Same window is now free.
     assert svc.is_available(fixtures["asset"].id, start, end)
+
+
+def test_confirm_marks_asset_reserved(session, fixtures):
+    svc = ReservationService(session)
+    start, end = _window(0)
+    res = svc.create(
+        {
+            "customer_id": fixtures["customer"].id,
+            "starts_at": start,
+            "ends_at": end,
+            "lines": [{"asset_id": fixtures["asset"].id}],
+        }
+    )
+    svc.confirm(res.id)
+    session.refresh(fixtures["asset"])
+    assert fixtures["asset"].status == AssetStatus.RESERVED
