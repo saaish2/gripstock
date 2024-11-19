@@ -144,3 +144,10 @@ def test_cannot_return_directly_from_pending(session, fixtures):
     )
     with pytest.raises(InvalidStateError):
         svc.mark_no_show(res.id)  # only valid from confirmed
+
+
+def test_invalid_window_rejected(session, fixtures):
+    svc = ReservationService(session)
+    start, _ = _window(0)
+    with pytest.raises(ValidationError):
+        svc.check_availability(fixtures["asset"].id, start, start)
