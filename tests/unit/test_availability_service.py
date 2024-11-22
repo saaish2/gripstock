@@ -40,3 +40,14 @@ def booked(session):
         }
     )
     return {"asset": asset, "start": start}
+
+
+def test_calendar_shows_booked_interval(session, booked):
+    svc = AvailabilityService(session)
+    cal = svc.asset_calendar(
+        booked["asset"].id,
+        booked["start"] - timedelta(days=2),
+        booked["start"] + timedelta(days=10),
+    )
+    assert not cal.is_free
+    assert len(cal.intervals) == 1
