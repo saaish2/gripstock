@@ -51,3 +51,10 @@ def test_calendar_shows_booked_interval(session, booked):
     )
     assert not cal.is_free
     assert len(cal.intervals) == 1
+
+
+def test_calendar_free_outside_window(session, booked):
+    svc = AvailabilityService(session)
+    later = booked["start"] + timedelta(days=20)
+    cal = svc.asset_calendar(booked["asset"].id, later, later + timedelta(days=2))
+    assert cal.is_free
