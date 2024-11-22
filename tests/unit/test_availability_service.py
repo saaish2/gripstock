@@ -58,3 +58,11 @@ def test_calendar_free_outside_window(session, booked):
     later = booked["start"] + timedelta(days=20)
     cal = svc.asset_calendar(booked["asset"].id, later, later + timedelta(days=2))
     assert cal.is_free
+
+
+def test_free_assets_filters(session, booked):
+    svc = AvailabilityService(session)
+    free = svc.free_assets(
+        [booked["asset"].id], booked["start"], booked["start"] + timedelta(days=1)
+    )
+    assert free == []
