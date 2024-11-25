@@ -71,3 +71,10 @@ def test_free_assets_filters(session, booked):
 def test_calendar_unknown_asset(session):
     with pytest.raises(NotFoundError):
         AvailabilityService(session).asset_calendar(999, datetime(2025, 1, 1), datetime(2025, 1, 2))
+
+
+def test_calendar_bad_window(session, booked):
+    with pytest.raises(ValidationError):
+        AvailabilityService(session).asset_calendar(
+            booked["asset"].id, booked["start"], booked["start"]
+        )
