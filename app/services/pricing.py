@@ -20,3 +20,5 @@ from datetime import datetime
 from decimal import ROUND_HALF_UP, Decimal
 
 from app.config import Settings
+
+TWO_PLACES = Decimal("0.01")
