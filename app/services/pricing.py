@@ -22,3 +22,13 @@ from decimal import ROUND_HALF_UP, Decimal
 from app.config import Settings
 
 TWO_PLACES = Decimal("0.01")
+
+# Peak production months (summer + holiday) carry a surcharge.
+SEASONAL_MULTIPLIERS: dict[int, Decimal] = {
+    1: Decimal("0.95"),
+    6: Decimal("1.10"),
+    7: Decimal("1.15"),
+    8: Decimal("1.10"),
+    11: Decimal("1.05"),
+    12: Decimal("1.10"),
+}
