@@ -32,3 +32,7 @@ SEASONAL_MULTIPLIERS: dict[int, Decimal] = {
     11: Decimal("1.05"),
     12: Decimal("1.10"),
 }
+
+
+def _money(value: Decimal) -> Decimal:
+    return value.quantize(TWO_PLACES, rounding=ROUND_HALF_UP)
