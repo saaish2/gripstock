@@ -41,3 +41,5 @@ def _money(value: Decimal) -> Decimal:
 @dataclass(slots=True)
 class AssetRates:
     """The pricing-relevant fields lifted off an asset row."""
+
+    asset_id: int
