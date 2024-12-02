@@ -36,3 +36,8 @@ SEASONAL_MULTIPLIERS: dict[int, Decimal] = {
 
 def _money(value: Decimal) -> Decimal:
     return value.quantize(TWO_PLACES, rounding=ROUND_HALF_UP)
+
+
+@dataclass(slots=True)
+class AssetRates:
+    """The pricing-relevant fields lifted off an asset row."""
