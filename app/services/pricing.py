@@ -43,3 +43,4 @@ class AssetRates:
     """The pricing-relevant fields lifted off an asset row."""
 
     asset_id: int
+    daily_rate: Decimal
