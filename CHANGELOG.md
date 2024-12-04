@@ -17,3 +17,7 @@ All notable changes to gripstock are documented here.
 ## 0.5.0
 
 - Pricing engine with tiered and seasonal rates.
+
+## 0.6.0
+
+- Rental orders generated from reservations.
