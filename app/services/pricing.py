@@ -44,3 +44,4 @@ class AssetRates:
 
     asset_id: int
     daily_rate: Decimal
+    weekly_rate: Decimal | None
