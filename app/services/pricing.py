@@ -46,3 +46,4 @@ class AssetRates:
     daily_rate: Decimal
     weekly_rate: Decimal | None
     monthly_rate: Decimal | None
+    replacement_value: Decimal
