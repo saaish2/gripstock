@@ -47,3 +47,7 @@ class AssetRates:
     weekly_rate: Decimal | None
     monthly_rate: Decimal | None
     replacement_value: Decimal
+
+
+@dataclass(slots=True)
+class PricedLine:
