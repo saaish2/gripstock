@@ -51,3 +51,4 @@ class AssetRates:
 
 @dataclass(slots=True)
 class PricedLine:
+    asset_id: int
