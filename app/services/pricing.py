@@ -54,3 +54,4 @@ class PricedLine:
     asset_id: int
     rental_days: int
     base_rate: Decimal
+    seasonal_rate: Decimal
