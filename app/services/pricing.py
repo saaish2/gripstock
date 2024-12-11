@@ -61,3 +61,16 @@ class PricedLine:
     @property
     def net(self) -> Decimal:
         return self.seasonal_rate - self.discount_amount
+
+
+def rental_days_between(starts_at: datetime, ends_at: datetime) -> int:
+    """Number of chargeable days; any partial day rounds up, minimum one."""
+
+    seconds = (ends_at - starts_at).total_seconds()
+    if seconds <= 0:
+        return 1
+    days = seconds / 86400
+    whole = int(days)
+    if days - whole > 0:
+        whole += 1
+    return max(1, whole)
