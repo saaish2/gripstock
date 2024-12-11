@@ -57,3 +57,7 @@ class PricedLine:
     seasonal_rate: Decimal
     discount_amount: Decimal
     deposit_amount: Decimal
+
+    @property
+    def net(self) -> Decimal:
+        return self.seasonal_rate - self.discount_amount
