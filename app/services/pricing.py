@@ -78,3 +78,29 @@ def rental_days_between(starts_at: datetime, ends_at: datetime) -> int:
 
 def seasonal_multiplier(starts_at: datetime) -> Decimal:
     return SEASONAL_MULTIPLIERS.get(starts_at.month, Decimal("1.00"))
+
+
+def tiered_base_cost(rates: AssetRates, days: int, settings: Settings) -> Decimal:
+    """Cheapest decomposition of ``days`` into month/week/day tiers."""
+
+    remaining = days
+    total = Decimal("0.00")
+
+    month_days = settings.monthly_tier_days
+    week_days = settings.weekly_tier_days
+
+    if rates.monthly_rate is not None and remaining >= month_days:
+        months = remaining // month_days
+        total += months * rates.monthly_rate
+        remaining -= months * month_days
+
+    if rates.weekly_rate is not None and remaining >= week_days:
+        weeks = remaining // week_days
+        total += weeks * rates.weekly_rate
+        remaining -= weeks * week_days
+
+    total += remaining * rates.daily_rate
+
+    # Never charge more than the straight daily rate would have cost.
+    straight = days * rates.daily_rate
+    return min(total, straight)
