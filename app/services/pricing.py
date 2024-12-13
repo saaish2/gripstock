@@ -74,3 +74,7 @@ def rental_days_between(starts_at: datetime, ends_at: datetime) -> int:
     if days - whole > 0:
         whole += 1
     return max(1, whole)
+
+
+def seasonal_multiplier(starts_at: datetime) -> Decimal:
+    return SEASONAL_MULTIPLIERS.get(starts_at.month, Decimal("1.00"))
