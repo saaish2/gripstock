@@ -104,3 +104,33 @@ def tiered_base_cost(rates: AssetRates, days: int, settings: Settings) -> Decima
     # Never charge more than the straight daily rate would have cost.
     straight = days * rates.daily_rate
     return min(total, straight)
+
+
+def price_line(
+    rates: AssetRates,
+    starts_at: datetime,
+    ends_at: datetime,
+    *,
+    settings: Settings,
+    customer_discount: Decimal = Decimal("0"),
+    bundle_discount: Decimal = Decimal("0"),
+) -> PricedLine:
+    """Price a single asset over the rental window."""
+
+    days = rental_days_between(starts_at, ends_at)
+    base = tiered_base_cost(rates, days, settings)
+    seasonal = _money(base * seasonal_multiplier(starts_at))
+
+    discount_rate = min(customer_discount + bundle_discount, Decimal("0.75"))
+    discount = _money(seasonal * discount_rate)
+
+    deposit = _money(rates.replacement_value * settings.default_deposit_rate)
+
+    return PricedLine(
+        asset_id=rates.asset_id,
+        rental_days=days,
+        base_rate=_money(base),
+        seasonal_rate=seasonal,
+        discount_amount=discount,
+        deposit_amount=deposit,
+    )
