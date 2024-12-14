@@ -134,3 +134,7 @@ def price_line(
         discount_amount=discount,
         deposit_amount=deposit,
     )
+
+
+@dataclass(slots=True)
+class Quote:
