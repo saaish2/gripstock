@@ -138,3 +138,4 @@ def price_line(
 
 @dataclass(slots=True)
 class Quote:
+    lines: list[PricedLine]
