@@ -139,3 +139,7 @@ def price_line(
 @dataclass(slots=True)
 class Quote:
     lines: list[PricedLine]
+
+    @property
+    def subtotal(self) -> Decimal:
+        return _money(sum((line.seasonal_rate for line in self.lines), Decimal("0.00")))
