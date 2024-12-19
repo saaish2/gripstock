@@ -155,3 +155,26 @@ class Quote:
     @property
     def net_total(self) -> Decimal:
         return _money(self.subtotal - self.discount_total)
+
+
+def build_quote(
+    rate_cards: list[AssetRates],
+    starts_at: datetime,
+    ends_at: datetime,
+    *,
+    settings: Settings,
+    customer_discount: Decimal = Decimal("0"),
+    bundle_discount: Decimal = Decimal("0"),
+) -> Quote:
+    lines = [
+        price_line(
+            card,
+            starts_at,
+            ends_at,
+            settings=settings,
+            customer_discount=customer_discount,
+            bundle_discount=bundle_discount,
+        )
+        for card in rate_cards
+    ]
+    return Quote(lines=lines)
