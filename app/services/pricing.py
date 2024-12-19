@@ -147,3 +147,7 @@ class Quote:
     @property
     def discount_total(self) -> Decimal:
         return _money(sum((line.discount_amount for line in self.lines), Decimal("0.00")))
+
+    @property
+    def deposit_total(self) -> Decimal:
+        return _money(sum((line.deposit_amount for line in self.lines), Decimal("0.00")))
