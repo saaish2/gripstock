@@ -143,3 +143,7 @@ class Quote:
     @property
     def subtotal(self) -> Decimal:
         return _money(sum((line.seasonal_rate for line in self.lines), Decimal("0.00")))
+
+    @property
+    def discount_total(self) -> Decimal:
+        return _money(sum((line.discount_amount for line in self.lines), Decimal("0.00")))
