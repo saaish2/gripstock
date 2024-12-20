@@ -178,3 +178,14 @@ def build_quote(
         for card in rate_cards
     ]
     return Quote(lines=lines)
+
+
+def late_fee_for(
+    daily_rate: Decimal, days_late: int, settings: Settings
+) -> Decimal:
+    """Accrue a late fee at the configured fraction of the daily rate."""
+
+    if days_late <= 0:
+        return Decimal("0.00")
+    per_day = daily_rate * settings.late_fee_daily_rate
+    return _money(per_day * days_late)
