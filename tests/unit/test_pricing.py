@@ -17,3 +17,8 @@ from app.services.pricing import (
     seasonal_multiplier,
     tiered_base_cost,
 )
+
+
+@pytest.fixture()
+def settings():
+    return get_settings()
