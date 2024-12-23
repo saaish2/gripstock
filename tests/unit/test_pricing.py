@@ -22,3 +22,13 @@ from app.services.pricing import (
 @pytest.fixture()
 def settings():
     return get_settings()
+
+
+def _rates(daily="100", weekly=None, monthly=None, replacement="1000") -> AssetRates:
+    return AssetRates(
+        asset_id=1,
+        daily_rate=Decimal(daily),
+        weekly_rate=Decimal(weekly) if weekly else None,
+        monthly_rate=Decimal(monthly) if monthly else None,
+        replacement_value=Decimal(replacement),
+    )
