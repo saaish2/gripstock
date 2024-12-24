@@ -32,3 +32,10 @@ def _rates(daily="100", weekly=None, monthly=None, replacement="1000") -> AssetR
         monthly_rate=Decimal(monthly) if monthly else None,
         replacement_value=Decimal(replacement),
     )
+
+
+def test_rental_days_rounds_partial_up():
+    start = datetime(2024, 3, 1, 9, 0)
+    assert rental_days_between(start, datetime(2024, 3, 1, 12, 0)) == 1
+    assert rental_days_between(start, datetime(2024, 3, 2, 9, 0)) == 1
+    assert rental_days_between(start, datetime(2024, 3, 2, 10, 0)) == 2
