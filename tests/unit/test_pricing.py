@@ -39,3 +39,8 @@ def test_rental_days_rounds_partial_up():
     assert rental_days_between(start, datetime(2024, 3, 1, 12, 0)) == 1
     assert rental_days_between(start, datetime(2024, 3, 2, 9, 0)) == 1
     assert rental_days_between(start, datetime(2024, 3, 2, 10, 0)) == 2
+
+
+def test_rental_days_minimum_one():
+    start = datetime(2024, 3, 1, 9, 0)
+    assert rental_days_between(start, start) == 1
