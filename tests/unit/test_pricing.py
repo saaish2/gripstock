@@ -44,3 +44,9 @@ def test_rental_days_rounds_partial_up():
 def test_rental_days_minimum_one():
     start = datetime(2024, 3, 1, 9, 0)
     assert rental_days_between(start, start) == 1
+
+
+def test_seasonal_multiplier_peak_and_offpeak():
+    assert seasonal_multiplier(datetime(2024, 7, 1)) == Decimal("1.15")
+    assert seasonal_multiplier(datetime(2024, 1, 1)) == Decimal("0.95")
+    assert seasonal_multiplier(datetime(2024, 4, 1)) == Decimal("1.00")
