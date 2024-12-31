@@ -56,3 +56,8 @@ def test_tiered_cost_prefers_weekly(settings):
     rates = _rates(daily="100", weekly="500")
     # 7 days straight = 700; one weekly tier = 500.
     assert tiered_base_cost(rates, 7, settings) == Decimal("500")
+
+
+def test_tiered_cost_never_exceeds_straight_daily(settings):
+    rates = _rates(daily="100", weekly="900")  # absurdly high weekly
+    assert tiered_base_cost(rates, 7, settings) == Decimal("700")
