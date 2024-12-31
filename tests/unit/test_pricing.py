@@ -61,3 +61,9 @@ def test_tiered_cost_prefers_weekly(settings):
 def test_tiered_cost_never_exceeds_straight_daily(settings):
     rates = _rates(daily="100", weekly="900")  # absurdly high weekly
     assert tiered_base_cost(rates, 7, settings) == Decimal("700")
+
+
+def test_tiered_cost_combines_month_week_day(settings):
+    rates = _rates(daily="100", weekly="500", monthly="1500")
+    # 28 + 7 + 2 = 37 days -> 1500 + 500 + 200 = 2200, capped at 3700 straight.
+    assert tiered_base_cost(rates, 37, settings) == Decimal("2200")
