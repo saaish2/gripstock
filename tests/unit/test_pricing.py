@@ -67,3 +67,19 @@ def test_tiered_cost_combines_month_week_day(settings):
     rates = _rates(daily="100", weekly="500", monthly="1500")
     # 28 + 7 + 2 = 37 days -> 1500 + 500 + 200 = 2200, capped at 3700 straight.
     assert tiered_base_cost(rates, 37, settings) == Decimal("2200")
+
+
+def test_price_line_applies_discount_and_deposit(settings):
+    rates = _rates(daily="100", replacement="1000")
+    line = price_line(
+        rates,
+        datetime(2024, 4, 1, 9, 0),
+        datetime(2024, 4, 4, 9, 0),
+        settings=settings,
+        customer_discount=Decimal("0.10"),
+    )
+    assert line.rental_days == 3
+    assert line.seasonal_rate == Decimal("300.00")
+    assert line.discount_amount == Decimal("30.00")
+    assert line.deposit_amount == Decimal("200.00")
+    assert line.net == Decimal("270.00")
