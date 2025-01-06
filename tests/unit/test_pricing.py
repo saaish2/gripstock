@@ -97,3 +97,16 @@ def test_discount_is_capped_at_75_percent(settings):
     )
     # 100% requested, capped at 75%.
     assert line.discount_amount == Decimal("150.00")  # 2 days * 100 * 0.75
+
+
+def test_build_quote_totals(settings):
+    cards = [_rates(daily="100"), _rates(daily="50")]
+    quote = build_quote(
+        cards,
+        datetime(2024, 4, 1, 9, 0),
+        datetime(2024, 4, 3, 10, 0),
+        settings=settings,
+    )
+    assert quote.subtotal == Decimal("450.00")  # (3*100) + (3*50)
+    assert quote.discount_total == Decimal("0.00")
+    assert quote.net_total == Decimal("450.00")
