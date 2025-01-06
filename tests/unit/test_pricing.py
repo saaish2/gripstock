@@ -83,3 +83,17 @@ def test_price_line_applies_discount_and_deposit(settings):
     assert line.discount_amount == Decimal("30.00")
     assert line.deposit_amount == Decimal("200.00")
     assert line.net == Decimal("270.00")
+
+
+def test_discount_is_capped_at_75_percent(settings):
+    rates = _rates(daily="100")
+    line = price_line(
+        rates,
+        datetime(2024, 4, 1),
+        datetime(2024, 4, 2, 1),
+        settings=settings,
+        customer_discount=Decimal("0.50"),
+        bundle_discount=Decimal("0.50"),
+    )
+    # 100% requested, capped at 75%.
+    assert line.discount_amount == Decimal("150.00")  # 2 days * 100 * 0.75
