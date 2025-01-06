@@ -110,3 +110,8 @@ def test_build_quote_totals(settings):
     assert quote.subtotal == Decimal("450.00")  # (3*100) + (3*50)
     assert quote.discount_total == Decimal("0.00")
     assert quote.net_total == Decimal("450.00")
+
+
+def test_late_fee_accrual(settings):
+    assert late_fee_for(Decimal("100"), 0, settings) == Decimal("0.00")
+    assert late_fee_for(Decimal("100"), 3, settings) == Decimal("15.00")
