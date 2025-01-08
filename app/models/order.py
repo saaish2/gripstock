@@ -10,3 +10,6 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.enums import OrderStatus
 from app.models.base import Base, IntPrimaryKey, TimestampMixin
+
+
+class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
