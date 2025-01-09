@@ -13,3 +13,4 @@ from app.models.base import Base, IntPrimaryKey, TimestampMixin
 
 
 class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "rental_orders"
