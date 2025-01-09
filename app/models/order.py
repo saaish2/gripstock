@@ -16,3 +16,6 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "rental_orders"
 
     reference: Mapped[str] = mapped_column(String(20), unique=True, index=True, nullable=False)
+    customer_id: Mapped[int] = mapped_column(
+        ForeignKey("customers.id", ondelete="RESTRICT"), index=True, nullable=False
+    )
