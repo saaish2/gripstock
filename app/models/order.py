@@ -27,3 +27,4 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
     )
 
     starts_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    ends_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
