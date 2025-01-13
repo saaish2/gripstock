@@ -22,3 +22,6 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
     reservation_id: Mapped[int | None] = mapped_column(
         ForeignKey("reservations.id", ondelete="SET NULL"), nullable=True
     )
+    status: Mapped[OrderStatus] = mapped_column(
+        String(20), default=OrderStatus.DRAFT, index=True, nullable=False
+    )
