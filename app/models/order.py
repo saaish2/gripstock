@@ -25,3 +25,5 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
     status: Mapped[OrderStatus] = mapped_column(
         String(20), default=OrderStatus.DRAFT, index=True, nullable=False
     )
+
+    starts_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
