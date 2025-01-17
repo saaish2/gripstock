@@ -32,3 +32,4 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
     subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
     discount_total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
     deposit_total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
+    tax_total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
