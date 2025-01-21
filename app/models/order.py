@@ -36,3 +36,5 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
     grand_total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
 
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    customer: Mapped[Customer] = relationship(back_populates="orders")  # noqa: F821
