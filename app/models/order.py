@@ -38,3 +38,6 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     customer: Mapped[Customer] = relationship(back_populates="orders")  # noqa: F821
+    lines: Mapped[list[OrderLine]] = relationship(
+        back_populates="order", cascade="all, delete-orphan"
+    )
