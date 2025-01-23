@@ -41,3 +41,12 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
     lines: Mapped[list[OrderLine]] = relationship(
         back_populates="order", cascade="all, delete-orphan"
     )
+
+    def recalculate_totals(self) -> None:
+        """Roll line subtotals/discounts/deposits up to the header."""
+
+        self.subtotal = sum((line.line_subtotal for line in self.lines), Decimal("0.00"))
+        self.discount_total = sum((line.discount_amount for line in self.lines), Decimal("0.00"))
+        self.deposit_total = sum((line.deposit_amount for line in self.lines), Decimal("0.00"))
+        net = self.subtotal - self.discount_total
+        self.grand_total = net + self.tax_total
