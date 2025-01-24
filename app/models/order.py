@@ -50,3 +50,6 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
         self.deposit_total = sum((line.deposit_amount for line in self.lines), Decimal("0.00"))
         net = self.subtotal - self.discount_total
         self.grand_total = net + self.tax_total
+
+
+class OrderLine(Base, IntPrimaryKey):
