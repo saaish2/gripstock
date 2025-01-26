@@ -53,3 +53,4 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
 
 
 class OrderLine(Base, IntPrimaryKey):
+    __tablename__ = "order_lines"
