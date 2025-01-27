@@ -58,3 +58,6 @@ class OrderLine(Base, IntPrimaryKey):
     order_id: Mapped[int] = mapped_column(
         ForeignKey("rental_orders.id", ondelete="CASCADE"), index=True, nullable=False
     )
+    asset_id: Mapped[int] = mapped_column(
+        ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
+    )
