@@ -61,3 +61,4 @@ class OrderLine(Base, IntPrimaryKey):
     asset_id: Mapped[int] = mapped_column(
         ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
     )
+    description: Mapped[str] = mapped_column(String(255), nullable=False)
