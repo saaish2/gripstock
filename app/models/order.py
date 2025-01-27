@@ -63,3 +63,4 @@ class OrderLine(Base, IntPrimaryKey):
     )
     description: Mapped[str] = mapped_column(String(255), nullable=False)
     quantity: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
+    rental_days: Mapped[int] = mapped_column(Integer, default=1, nullable=False)
