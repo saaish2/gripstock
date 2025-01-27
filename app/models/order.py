@@ -54,3 +54,7 @@ class RentalOrder(Base, IntPrimaryKey, TimestampMixin):
 
 class OrderLine(Base, IntPrimaryKey):
     __tablename__ = "order_lines"
+
+    order_id: Mapped[int] = mapped_column(
+        ForeignKey("rental_orders.id", ondelete="CASCADE"), index=True, nullable=False
+    )
