@@ -67,3 +67,4 @@ class OrderLine(Base, IntPrimaryKey):
 
     unit_rate: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
     line_subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
+    discount_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
