@@ -21,3 +21,7 @@ All notable changes to gripstock are documented here.
 ## 0.6.0
 
 - Rental orders generated from reservations.
+
+## 0.7.0
+
+- Invoicing, payments, and late-fee accrual.
