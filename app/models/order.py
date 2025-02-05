@@ -69,3 +69,5 @@ class OrderLine(Base, IntPrimaryKey):
     line_subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
     discount_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
     deposit_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
+
+    order: Mapped[RentalOrder] = relationship(back_populates="lines")
