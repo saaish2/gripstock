@@ -71,3 +71,4 @@ class OrderLine(Base, IntPrimaryKey):
     deposit_amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
 
     order: Mapped[RentalOrder] = relationship(back_populates="lines")
+    asset: Mapped[Asset] = relationship()  # noqa: F821
