@@ -9,3 +9,6 @@ from pydantic import BaseModel, Field
 
 from app.enums import InvoiceStatus, OrderStatus, PaymentMethod
 from app.schemas.common import ORMModel
+
+
+class OrderFromReservation(BaseModel):
