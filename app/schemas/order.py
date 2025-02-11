@@ -12,3 +12,4 @@ from app.schemas.common import ORMModel
 
 
 class OrderFromReservation(BaseModel):
+    reservation_id: int
