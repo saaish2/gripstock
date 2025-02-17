@@ -17,3 +17,4 @@ class OrderFromReservation(BaseModel):
 
 
 class OrderLineOut(ORMModel):
+    id: int
