@@ -19,3 +19,4 @@ class OrderFromReservation(BaseModel):
 class OrderLineOut(ORMModel):
     id: int
     asset_id: int
+    description: str
