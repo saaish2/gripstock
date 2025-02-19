@@ -20,3 +20,4 @@ class OrderLineOut(ORMModel):
     id: int
     asset_id: int
     description: str
+    quantity: int
