@@ -21,3 +21,4 @@ class OrderLineOut(ORMModel):
     asset_id: int
     description: str
     quantity: int
+    rental_days: int
