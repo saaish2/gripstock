@@ -23,3 +23,4 @@ class OrderLineOut(ORMModel):
     quantity: int
     rental_days: int
     unit_rate: Decimal
+    line_subtotal: Decimal
