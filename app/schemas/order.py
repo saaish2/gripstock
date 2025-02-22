@@ -25,3 +25,4 @@ class OrderLineOut(ORMModel):
     unit_rate: Decimal
     line_subtotal: Decimal
     discount_amount: Decimal
+    deposit_amount: Decimal
