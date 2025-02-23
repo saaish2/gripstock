@@ -26,3 +26,6 @@ class OrderLineOut(ORMModel):
     line_subtotal: Decimal
     discount_amount: Decimal
     deposit_amount: Decimal
+
+
+class OrderOut(ORMModel):
