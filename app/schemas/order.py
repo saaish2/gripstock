@@ -29,3 +29,4 @@ class OrderLineOut(ORMModel):
 
 
 class OrderOut(ORMModel):
+    id: int
