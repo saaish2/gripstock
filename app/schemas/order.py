@@ -33,3 +33,4 @@ class OrderOut(ORMModel):
     reference: str
     customer_id: int
     reservation_id: int | None = None
+    status: OrderStatus
