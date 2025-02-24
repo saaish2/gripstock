@@ -31,3 +31,4 @@ class OrderLineOut(ORMModel):
 class OrderOut(ORMModel):
     id: int
     reference: str
+    customer_id: int
