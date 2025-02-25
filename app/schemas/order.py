@@ -35,3 +35,4 @@ class OrderOut(ORMModel):
     reservation_id: int | None = None
     status: OrderStatus
     starts_at: datetime
+    ends_at: datetime
