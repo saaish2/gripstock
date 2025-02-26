@@ -36,3 +36,4 @@ class OrderOut(ORMModel):
     status: OrderStatus
     starts_at: datetime
     ends_at: datetime
+    subtotal: Decimal
