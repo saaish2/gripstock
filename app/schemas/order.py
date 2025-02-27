@@ -38,3 +38,4 @@ class OrderOut(ORMModel):
     ends_at: datetime
     subtotal: Decimal
     discount_total: Decimal
+    deposit_total: Decimal
