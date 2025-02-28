@@ -40,3 +40,4 @@ class OrderOut(ORMModel):
     discount_total: Decimal
     deposit_total: Decimal
     tax_total: Decimal
+    grand_total: Decimal
