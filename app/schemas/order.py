@@ -41,3 +41,4 @@ class OrderOut(ORMModel):
     deposit_total: Decimal
     tax_total: Decimal
     grand_total: Decimal
+    lines: list[OrderLineOut] = Field(default_factory=list)
