@@ -42,3 +42,4 @@ class OrderOut(ORMModel):
     tax_total: Decimal
     grand_total: Decimal
     lines: list[OrderLineOut] = Field(default_factory=list)
+    created_at: datetime
