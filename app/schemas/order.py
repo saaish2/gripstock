@@ -46,3 +46,4 @@ class OrderOut(ORMModel):
 
 
 class InvoiceOut(ORMModel):
+    id: int
