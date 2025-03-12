@@ -49,3 +49,4 @@ class InvoiceOut(ORMModel):
     id: int
     number: str
     customer_id: int
+    order_id: int | None = None
