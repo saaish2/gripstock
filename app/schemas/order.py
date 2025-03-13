@@ -50,3 +50,4 @@ class InvoiceOut(ORMModel):
     number: str
     customer_id: int
     order_id: int | None = None
+    status: InvoiceStatus
