@@ -55,3 +55,4 @@ class InvoiceOut(ORMModel):
     due_on: date | None = None
     subtotal: Decimal
     late_fee_total: Decimal
+    damage_total: Decimal
