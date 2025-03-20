@@ -52,3 +52,4 @@ class InvoiceOut(ORMModel):
     order_id: int | None = None
     status: InvoiceStatus
     issued_on: date | None = None
+    due_on: date | None = None
