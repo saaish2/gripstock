@@ -53,3 +53,4 @@ class InvoiceOut(ORMModel):
     status: InvoiceStatus
     issued_on: date | None = None
     due_on: date | None = None
+    subtotal: Decimal
