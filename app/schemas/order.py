@@ -60,3 +60,4 @@ class InvoiceOut(ORMModel):
     total: Decimal
     amount_paid: Decimal
     balance_due: Decimal
+    created_at: datetime
