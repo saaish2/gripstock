@@ -57,3 +57,4 @@ class InvoiceOut(ORMModel):
     late_fee_total: Decimal
     damage_total: Decimal
     tax_total: Decimal
+    total: Decimal
