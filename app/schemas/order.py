@@ -59,3 +59,4 @@ class InvoiceOut(ORMModel):
     tax_total: Decimal
     total: Decimal
     amount_paid: Decimal
+    balance_due: Decimal
