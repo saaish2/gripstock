@@ -58,3 +58,4 @@ class InvoiceOut(ORMModel):
     damage_total: Decimal
     tax_total: Decimal
     total: Decimal
+    amount_paid: Decimal
