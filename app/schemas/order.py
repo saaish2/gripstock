@@ -64,3 +64,4 @@ class InvoiceOut(ORMModel):
 
 
 class PaymentCreate(BaseModel):
+    amount: Decimal = Field(gt=0)
