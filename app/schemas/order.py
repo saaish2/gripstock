@@ -70,3 +70,4 @@ class PaymentCreate(BaseModel):
 
 
 class PaymentOut(ORMModel):
+    id: int
