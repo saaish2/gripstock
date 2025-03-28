@@ -71,3 +71,4 @@ class PaymentCreate(BaseModel):
 
 class PaymentOut(ORMModel):
     id: int
+    invoice_id: int
