@@ -73,3 +73,4 @@ class PaymentOut(ORMModel):
     id: int
     invoice_id: int
     amount: Decimal
+    method: PaymentMethod
