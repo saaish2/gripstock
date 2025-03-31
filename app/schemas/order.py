@@ -74,3 +74,4 @@ class PaymentOut(ORMModel):
     invoice_id: int
     amount: Decimal
     method: PaymentMethod
+    reference: str | None = None
