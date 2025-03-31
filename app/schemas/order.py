@@ -75,3 +75,4 @@ class PaymentOut(ORMModel):
     amount: Decimal
     method: PaymentMethod
     reference: str | None = None
+    received_at: datetime
