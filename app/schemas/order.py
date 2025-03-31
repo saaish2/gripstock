@@ -76,3 +76,4 @@ class PaymentOut(ORMModel):
     method: PaymentMethod
     reference: str | None = None
     received_at: datetime
+    is_refund: bool
