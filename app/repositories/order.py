@@ -10,3 +10,6 @@ from app.enums import InvoiceStatus, OrderStatus
 from app.models.billing import Invoice, Payment
 from app.models.order import OrderLine, RentalOrder
 from app.repositories.base import BaseRepository
+
+
+class OrderRepository(BaseRepository[RentalOrder]):
