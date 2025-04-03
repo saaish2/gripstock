@@ -13,3 +13,4 @@ from app.repositories.base import BaseRepository
 
 
 class OrderRepository(BaseRepository[RentalOrder]):
+    model = RentalOrder
