@@ -18,3 +18,7 @@ class OrderRepository(BaseRepository[RentalOrder]):
     def get_by_reference(self, reference: str) -> RentalOrder | None:
         stmt = select(RentalOrder).where(RentalOrder.reference == reference)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def for_reservation(self, reservation_id: int) -> RentalOrder | None:
+        stmt = select(RentalOrder).where(RentalOrder.reservation_id == reservation_id)
+        return self.session.execute(stmt).scalar_one_or_none()
