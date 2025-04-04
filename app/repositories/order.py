@@ -22,3 +22,13 @@ class OrderRepository(BaseRepository[RentalOrder]):
     def for_reservation(self, reservation_id: int) -> RentalOrder | None:
         stmt = select(RentalOrder).where(RentalOrder.reservation_id == reservation_id)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def search_query(
+        self, customer_id: int | None = None, status: OrderStatus | None = None
+    ) -> Select:
+        stmt = select(RentalOrder)
+        if customer_id is not None:
+            stmt = stmt.where(RentalOrder.customer_id == customer_id)
+        if status is not None:
+            stmt = stmt.where(RentalOrder.status == status)
+        return stmt.order_by(RentalOrder.created_at.desc())
