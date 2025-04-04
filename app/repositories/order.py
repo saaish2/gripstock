@@ -14,3 +14,7 @@ from app.repositories.base import BaseRepository
 
 class OrderRepository(BaseRepository[RentalOrder]):
     model = RentalOrder
+
+    def get_by_reference(self, reference: str) -> RentalOrder | None:
+        stmt = select(RentalOrder).where(RentalOrder.reference == reference)
+        return self.session.execute(stmt).scalar_one_or_none()
