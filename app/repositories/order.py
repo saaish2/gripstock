@@ -36,3 +36,6 @@ class OrderRepository(BaseRepository[RentalOrder]):
     def lines_for(self, order_id: int) -> list[OrderLine]:
         stmt = select(OrderLine).where(OrderLine.order_id == order_id)
         return list(self.session.execute(stmt).scalars().all())
+
+
+class InvoiceRepository(BaseRepository[Invoice]):
