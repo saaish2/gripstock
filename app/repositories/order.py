@@ -32,3 +32,7 @@ class OrderRepository(BaseRepository[RentalOrder]):
         if status is not None:
             stmt = stmt.where(RentalOrder.status == status)
         return stmt.order_by(RentalOrder.created_at.desc())
+
+    def lines_for(self, order_id: int) -> list[OrderLine]:
+        stmt = select(OrderLine).where(OrderLine.order_id == order_id)
+        return list(self.session.execute(stmt).scalars().all())
