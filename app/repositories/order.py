@@ -39,3 +39,4 @@ class OrderRepository(BaseRepository[RentalOrder]):
 
 
 class InvoiceRepository(BaseRepository[Invoice]):
+    model = Invoice
