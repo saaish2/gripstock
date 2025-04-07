@@ -29,3 +29,7 @@ All notable changes to gripstock are documented here.
 ## 0.8.0
 
 - Checkout/check-in with condition inspections.
+
+## 0.9.0
+
+- Damage reports and maintenance work orders.
