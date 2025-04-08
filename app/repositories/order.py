@@ -40,3 +40,7 @@ class OrderRepository(BaseRepository[RentalOrder]):
 
 class InvoiceRepository(BaseRepository[Invoice]):
     model = Invoice
+
+    def get_by_number(self, number: str) -> Invoice | None:
+        stmt = select(Invoice).where(Invoice.number == number)
+        return self.session.execute(stmt).scalar_one_or_none()
