@@ -44,3 +44,13 @@ class InvoiceRepository(BaseRepository[Invoice]):
     def get_by_number(self, number: str) -> Invoice | None:
         stmt = select(Invoice).where(Invoice.number == number)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def search_query(
+        self, customer_id: int | None = None, status: InvoiceStatus | None = None
+    ) -> Select:
+        stmt = select(Invoice)
+        if customer_id is not None:
+            stmt = stmt.where(Invoice.customer_id == customer_id)
+        if status is not None:
+            stmt = stmt.where(Invoice.status == status)
+        return stmt.order_by(Invoice.created_at.desc())
