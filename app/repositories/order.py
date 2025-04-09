@@ -54,3 +54,11 @@ class InvoiceRepository(BaseRepository[Invoice]):
         if status is not None:
             stmt = stmt.where(Invoice.status == status)
         return stmt.order_by(Invoice.created_at.desc())
+
+    def overdue_as_of(self, as_of: date) -> list[Invoice]:
+        stmt = select(Invoice).where(
+            Invoice.status.in_([InvoiceStatus.ISSUED, InvoiceStatus.PARTIALLY_PAID]),
+            Invoice.due_on.is_not(None),
+            Invoice.due_on < as_of,
+        )
+        return list(self.session.execute(stmt).scalars().all())
