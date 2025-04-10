@@ -66,3 +66,6 @@ class InvoiceRepository(BaseRepository[Invoice]):
     def for_order(self, order_id: int) -> Invoice | None:
         stmt = select(Invoice).where(Invoice.order_id == order_id)
         return self.session.execute(stmt).scalar_one_or_none()
+
+
+class PaymentRepository(BaseRepository[Payment]):
