@@ -69,3 +69,4 @@ class InvoiceRepository(BaseRepository[Invoice]):
 
 
 class PaymentRepository(BaseRepository[Payment]):
+    model = Payment
