@@ -70,3 +70,7 @@ class InvoiceRepository(BaseRepository[Invoice]):
 
 class PaymentRepository(BaseRepository[Payment]):
     model = Payment
+
+    def for_invoice(self, invoice_id: int) -> list[Payment]:
+        stmt = select(Payment).where(Payment.invoice_id == invoice_id)
+        return list(self.session.execute(stmt).scalars().all())
