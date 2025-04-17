@@ -18,3 +18,6 @@ from app.repositories.reservation import ReservationRepository
 from app.services.audit import record_audit
 from app.services.pricing import AssetRates, build_quote
 from app.services.references import next_order_reference
+
+
+class OrderService:
