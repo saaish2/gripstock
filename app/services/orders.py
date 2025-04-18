@@ -21,3 +21,11 @@ from app.services.references import next_order_reference
 
 
 class OrderService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.settings = get_settings()
+        self.repo = OrderRepository(session)
+        self.reservations = ReservationRepository(session)
+        self.assets = AssetRepository(session)
+        self.customers = CustomerRepository(session)
+        self.kits = KitRepository(session)
