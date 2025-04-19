@@ -108,3 +108,9 @@ class OrderService:
             payload={"reference": order.reference, "grand_total": str(order.grand_total)},
         )
         return order
+
+    def get(self, order_id: int) -> RentalOrder:
+        order = self.repo.get(order_id)
+        if order is None:
+            raise NotFoundError(f"order {order_id} not found")
+        return order
