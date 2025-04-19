@@ -114,3 +114,11 @@ class OrderService:
         if order is None:
             raise NotFoundError(f"order {order_id} not found")
         return order
+
+    def open(self, order_id: int) -> RentalOrder:
+        order = self.get(order_id)
+        if order.status != OrderStatus.DRAFT:
+            raise BusinessRuleError("only draft orders can be opened")
+        order.status = OrderStatus.OPEN
+        self.session.flush()
+        return order
