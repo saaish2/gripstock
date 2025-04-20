@@ -130,3 +130,11 @@ class OrderService:
         order.status = OrderStatus.CLOSED
         self.session.flush()
         return order
+
+    def cancel(self, order_id: int) -> RentalOrder:
+        order = self.get(order_id)
+        if order.status == OrderStatus.CLOSED:
+            raise BusinessRuleError("closed orders cannot be cancelled")
+        order.status = OrderStatus.CANCELLED
+        self.session.flush()
+        return order
