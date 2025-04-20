@@ -122,3 +122,11 @@ class OrderService:
         order.status = OrderStatus.OPEN
         self.session.flush()
         return order
+
+    def close(self, order_id: int) -> RentalOrder:
+        order = self.get(order_id)
+        if order.status != OrderStatus.OPEN:
+            raise BusinessRuleError("only open orders can be closed")
+        order.status = OrderStatus.CLOSED
+        self.session.flush()
+        return order
