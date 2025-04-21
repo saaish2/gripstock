@@ -19,3 +19,5 @@ from app.errors import ConflictError
 from app.models.base import utcnow
 from app.models.platform import IdempotencyKey
 from app.repositories.operations import IdempotencyRepository
+
+T = TypeVar("T", bound=BaseModel)
