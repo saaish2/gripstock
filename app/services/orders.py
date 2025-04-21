@@ -138,3 +138,12 @@ class OrderService:
         order.status = OrderStatus.CANCELLED
         self.session.flush()
         return order
+
+    def search(
+        self,
+        params: PageParams,
+        customer_id: int | None = None,
+        status: OrderStatus | None = None,
+    ) -> Page:
+        stmt = self.repo.search_query(customer_id, status)
+        return paginate(self.session, stmt, params)
