@@ -13,3 +13,5 @@ from app.schemas.common import PagedResponse
 from app.schemas.order import OrderFromReservation, OrderOut
 from app.services.idempotency import idempotent
 from app.services.orders import OrderService
+
+router = APIRouter(prefix="/orders", tags=["orders"])
