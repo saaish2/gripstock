@@ -15,3 +15,25 @@ from app.services.idempotency import idempotent
 from app.services.orders import OrderService
 
 router = APIRouter(prefix="/orders", tags=["orders"])
+
+
+@router.post("", response_model=OrderOut, status_code=201)
+def create_order(
+    payload: OrderFromReservation,
+    actor: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+    idempotency_key: str | None = Header(default=None),
+) -> OrderOut:
+    def _build() -> OrderOut:
+        order = OrderService(session).create_from_reservation(
+            payload.reservation_id, tax_rate=payload.tax_rate, actor_id=actor.id
+        )
+        return OrderOut.model_validate(order)
+
+    return idempotent(
+        session,
+        key=idempotency_key,
+        method="POST",
+        path="/orders",
+        producer=_build,
+    )
