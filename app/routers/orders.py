@@ -67,3 +67,12 @@ def open_order(
     session: Session = Depends(db_session),
 ) -> OrderOut:
     return OrderOut.model_validate(OrderService(session).open(order_id))
+
+
+@router.post("/{order_id}/close", response_model=OrderOut)
+def close_order(
+    order_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> OrderOut:
+    return OrderOut.model_validate(OrderService(session).close(order_id))
