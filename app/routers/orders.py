@@ -76,3 +76,12 @@ def close_order(
     session: Session = Depends(db_session),
 ) -> OrderOut:
     return OrderOut.model_validate(OrderService(session).close(order_id))
+
+
+@router.post("/{order_id}/cancel", response_model=OrderOut)
+def cancel_order(
+    order_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> OrderOut:
+    return OrderOut.model_validate(OrderService(session).cancel(order_id))
