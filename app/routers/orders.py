@@ -49,3 +49,12 @@ def list_orders(
 ) -> dict:
     page = OrderService(session).search(params, customer_id=customer_id, status=status)
     return page.to_dict(lambda o: OrderOut.model_validate(o).model_dump())
+
+
+@router.get("/{order_id}", response_model=OrderOut)
+def get_order(
+    order_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> OrderOut:
+    return OrderOut.model_validate(OrderService(session).get(order_id))
