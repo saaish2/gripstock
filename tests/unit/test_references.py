@@ -7,3 +7,9 @@ from app.services.references import (
     next_order_reference,
     next_reservation_reference,
 )
+
+
+def test_reservation_reference_format(session):
+    ref = next_reservation_reference(session)
+    assert ref.startswith("RSV-")
+    assert ref == "RSV-001001"
