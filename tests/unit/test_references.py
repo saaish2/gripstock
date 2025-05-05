@@ -17,3 +17,7 @@ def test_reservation_reference_format(session):
 
 def test_order_reference_format(session):
     assert next_order_reference(session) == "ORD-001001"
+
+
+def test_invoice_number_format(session):
+    assert next_invoice_number(session) == "INV-001001"
