@@ -13,3 +13,7 @@ def test_reservation_reference_format(session):
     ref = next_reservation_reference(session)
     assert ref.startswith("RSV-")
     assert ref == "RSV-001001"
+
+
+def test_order_reference_format(session):
+    assert next_order_reference(session) == "ORD-001001"
