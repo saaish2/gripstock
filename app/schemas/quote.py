@@ -8,3 +8,6 @@ from decimal import Decimal
 from pydantic import BaseModel, Field, model_validator
 
 from app.schemas.common import ORMModel
+
+
+class QuoteRequest(BaseModel):
