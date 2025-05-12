@@ -14,3 +14,4 @@ class QuoteRequest(BaseModel):
     customer_id: int | None = None
     starts_at: datetime
     ends_at: datetime
+    asset_ids: list[int] = Field(min_length=1)
