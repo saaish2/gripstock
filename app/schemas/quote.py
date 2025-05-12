@@ -13,3 +13,4 @@ from app.schemas.common import ORMModel
 class QuoteRequest(BaseModel):
     customer_id: int | None = None
     starts_at: datetime
+    ends_at: datetime
