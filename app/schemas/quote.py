@@ -16,3 +16,9 @@ class QuoteRequest(BaseModel):
     ends_at: datetime
     asset_ids: list[int] = Field(min_length=1)
     bundle_discount: Decimal = Field(default=Decimal("0"), ge=0, le=1)
+
+    @model_validator(mode="after")
+    def _check_window(self) -> QuoteRequest:
+        if self.ends_at <= self.starts_at:
+            raise ValueError("ends_at must be after starts_at")
+        return self
