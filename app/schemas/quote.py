@@ -15,3 +15,4 @@ class QuoteRequest(BaseModel):
     starts_at: datetime
     ends_at: datetime
     asset_ids: list[int] = Field(min_length=1)
+    bundle_discount: Decimal = Field(default=Decimal("0"), ge=0, le=1)
