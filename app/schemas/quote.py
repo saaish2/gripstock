@@ -25,3 +25,4 @@ class QuoteRequest(BaseModel):
 
 
 class QuoteLineOut(BaseModel):
+    asset_id: int
