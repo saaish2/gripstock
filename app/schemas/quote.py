@@ -27,3 +27,4 @@ class QuoteRequest(BaseModel):
 class QuoteLineOut(BaseModel):
     asset_id: int
     asset_name: str
+    rental_days: int
