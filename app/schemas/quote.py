@@ -30,3 +30,4 @@ class QuoteLineOut(BaseModel):
     rental_days: int
     base_rate: Decimal
     seasonal_rate: Decimal
+    discount_amount: Decimal
