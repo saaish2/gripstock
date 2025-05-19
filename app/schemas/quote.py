@@ -29,3 +29,4 @@ class QuoteLineOut(BaseModel):
     asset_name: str
     rental_days: int
     base_rate: Decimal
+    seasonal_rate: Decimal
