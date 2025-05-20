@@ -32,3 +32,4 @@ class QuoteLineOut(BaseModel):
     seasonal_rate: Decimal
     discount_amount: Decimal
     deposit_amount: Decimal
+    net: Decimal
