@@ -33,3 +33,6 @@ class QuoteLineOut(BaseModel):
     discount_amount: Decimal
     deposit_amount: Decimal
     net: Decimal
+
+
+class QuoteOut(ORMModel):
