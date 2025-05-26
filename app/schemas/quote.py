@@ -39,3 +39,4 @@ class QuoteOut(ORMModel):
     starts_at: datetime
     ends_at: datetime
     rental_days: int
+    lines: list[QuoteLineOut]
