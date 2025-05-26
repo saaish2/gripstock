@@ -41,3 +41,4 @@ class QuoteOut(ORMModel):
     rental_days: int
     lines: list[QuoteLineOut]
     subtotal: Decimal
+    discount_total: Decimal
