@@ -42,3 +42,4 @@ class QuoteOut(ORMModel):
     lines: list[QuoteLineOut]
     subtotal: Decimal
     discount_total: Decimal
+    deposit_total: Decimal
