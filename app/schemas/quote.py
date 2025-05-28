@@ -43,3 +43,4 @@ class QuoteOut(ORMModel):
     subtotal: Decimal
     discount_total: Decimal
     deposit_total: Decimal
+    net_total: Decimal
