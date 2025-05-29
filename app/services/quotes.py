@@ -21,3 +21,8 @@ from app.services.pricing import AssetRates, build_quote, rental_days_between
 
 
 class QuoteService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.settings = get_settings()
+        self.assets = AssetRepository(session)
+        self.customers = CustomerRepository(session)
