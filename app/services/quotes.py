@@ -18,3 +18,6 @@ from app.errors import NotFoundError, ValidationError
 from app.repositories.catalog import AssetRepository
 from app.repositories.customer import CustomerRepository
 from app.services.pricing import AssetRates, build_quote, rental_days_between
+
+
+class QuoteService:
