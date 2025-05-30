@@ -33,3 +33,7 @@ All notable changes to gripstock are documented here.
 ## 0.9.0
 
 - Damage reports and maintenance work orders.
+
+## 1.0.0
+
+- First stable release: full rental lifecycle.
