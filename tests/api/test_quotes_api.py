@@ -27,3 +27,21 @@ def test_quote_two_assets(client, auth_headers, sample_catalog):
     assert len(body["lines"]) == 2
     # asset_a 650/day * 3 = 1950; asset_b 450/day * 3 = 1350; total 3300.
     assert body["subtotal"] == "3300.00"
+
+
+def test_quote_applies_customer_discount(client, auth_headers, sample_catalog, sample_customer):
+    starts_at, ends_at = _window()
+    resp = client.post(
+        "/quotes",
+        json={
+            "customer_id": sample_customer["id"],
+            "starts_at": starts_at,
+            "ends_at": ends_at,
+            "asset_ids": [sample_catalog["asset_a"]["id"]],
+        },
+        headers=auth_headers,
+    )
+    body = resp.json()
+    # 5% customer discount on 1950 = 97.50.
+    assert body["discount_total"] == "97.50"
+    assert body["net_total"] == "1852.50"
