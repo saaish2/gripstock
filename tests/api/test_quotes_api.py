@@ -55,3 +55,13 @@ def test_quote_rejects_bad_window(client, auth_headers, sample_catalog):
         headers=auth_headers,
     )
     assert resp.status_code == 422
+
+
+def test_quote_unknown_asset(client, auth_headers):
+    starts_at, ends_at = _window()
+    resp = client.post(
+        "/quotes",
+        json={"starts_at": starts_at, "ends_at": ends_at, "asset_ids": [9999]},
+        headers=auth_headers,
+    )
+    assert resp.status_code == 404
