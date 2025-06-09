@@ -45,3 +45,13 @@ def test_quote_applies_customer_discount(client, auth_headers, sample_catalog, s
     # 5% customer discount on 1950 = 97.50.
     assert body["discount_total"] == "97.50"
     assert body["net_total"] == "1852.50"
+
+
+def test_quote_rejects_bad_window(client, auth_headers, sample_catalog):
+    start = datetime(2025, 4, 1, 9, 0).isoformat()
+    resp = client.post(
+        "/quotes",
+        json={"starts_at": start, "ends_at": start, "asset_ids": [sample_catalog["asset_a"]["id"]]},
+        headers=auth_headers,
+    )
+    assert resp.status_code == 422
