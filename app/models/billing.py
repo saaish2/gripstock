@@ -10,3 +10,5 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.enums import InvoiceStatus, PaymentMethod
 from app.models.base import Base, IntPrimaryKey, TimestampMixin
+
+_ZERO = Decimal("0.00")
