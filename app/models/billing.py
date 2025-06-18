@@ -18,3 +18,6 @@ def _d(value: Decimal | None) -> Decimal:
     """Coalesce a not-yet-flushed Numeric column to zero."""
 
     return value if value is not None else _ZERO
+
+
+class Invoice(Base, IntPrimaryKey, TimestampMixin):
