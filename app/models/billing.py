@@ -21,3 +21,4 @@ def _d(value: Decimal | None) -> Decimal:
 
 
 class Invoice(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "invoices"
