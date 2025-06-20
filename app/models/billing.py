@@ -22,3 +22,5 @@ def _d(value: Decimal | None) -> Decimal:
 
 class Invoice(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "invoices"
+
+    number: Mapped[str] = mapped_column(String(24), unique=True, index=True, nullable=False)
