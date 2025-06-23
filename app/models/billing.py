@@ -35,3 +35,4 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
     )
 
     issued_on: Mapped[date | None] = mapped_column(Date, nullable=True)
+    due_on: Mapped[date | None] = mapped_column(Date, nullable=True)
