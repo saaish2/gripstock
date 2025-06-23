@@ -27,3 +27,6 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
     customer_id: Mapped[int] = mapped_column(
         ForeignKey("customers.id", ondelete="RESTRICT"), index=True, nullable=False
     )
+    order_id: Mapped[int | None] = mapped_column(
+        ForeignKey("rental_orders.id", ondelete="SET NULL"), nullable=True
+    )
