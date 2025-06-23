@@ -33,3 +33,5 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
     status: Mapped[InvoiceStatus] = mapped_column(
         String(20), default=InvoiceStatus.DRAFT, index=True, nullable=False
     )
+
+    issued_on: Mapped[date | None] = mapped_column(Date, nullable=True)
