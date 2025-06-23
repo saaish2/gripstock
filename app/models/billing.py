@@ -30,3 +30,6 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
     order_id: Mapped[int | None] = mapped_column(
         ForeignKey("rental_orders.id", ondelete="SET NULL"), nullable=True
     )
+    status: Mapped[InvoiceStatus] = mapped_column(
+        String(20), default=InvoiceStatus.DRAFT, index=True, nullable=False
+    )
