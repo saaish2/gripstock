@@ -36,3 +36,5 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
 
     issued_on: Mapped[date | None] = mapped_column(Date, nullable=True)
     due_on: Mapped[date | None] = mapped_column(Date, nullable=True)
+
+    subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
