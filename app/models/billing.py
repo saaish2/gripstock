@@ -39,3 +39,4 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
 
     subtotal: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
     late_fee_total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
+    damage_total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
