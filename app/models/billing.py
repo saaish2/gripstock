@@ -42,3 +42,4 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
     damage_total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
     tax_total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
     total: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
+    amount_paid: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
