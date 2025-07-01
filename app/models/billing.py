@@ -46,3 +46,7 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
 
     voided_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+    payments: Mapped[list[Payment]] = relationship(
+        back_populates="invoice", cascade="all, delete-orphan"
+    )
