@@ -50,3 +50,7 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
     payments: Mapped[list[Payment]] = relationship(
         back_populates="invoice", cascade="all, delete-orphan"
     )
+
+    @property
+    def balance_due(self) -> Decimal:
+        return _d(self.total) - _d(self.amount_paid)
