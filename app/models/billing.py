@@ -54,3 +54,7 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
     @property
     def balance_due(self) -> Decimal:
         return _d(self.total) - _d(self.amount_paid)
+
+    @property
+    def is_settled(self) -> bool:
+        return self.balance_due <= _ZERO
