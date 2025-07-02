@@ -58,3 +58,8 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
     @property
     def is_settled(self) -> bool:
         return self.balance_due <= _ZERO
+
+    def recalculate_total(self) -> None:
+        self.total = (
+            _d(self.subtotal) + _d(self.late_fee_total) + _d(self.damage_total) + _d(self.tax_total)
+        )
