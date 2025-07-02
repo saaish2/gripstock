@@ -37,3 +37,7 @@ All notable changes to gripstock are documented here.
 ## 1.0.0
 
 - First stable release: full rental lifecycle.
+
+## 1.0.1
+
+- Fix deposit rounding on multi-asset orders.
