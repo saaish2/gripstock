@@ -66,3 +66,4 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
 
 
 class Payment(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "payments"
