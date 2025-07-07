@@ -71,3 +71,4 @@ class Payment(Base, IntPrimaryKey, TimestampMixin):
     invoice_id: Mapped[int] = mapped_column(
         ForeignKey("invoices.id", ondelete="CASCADE"), index=True, nullable=False
     )
+    amount: Mapped[Decimal] = mapped_column(Numeric(12, 2), nullable=False)
