@@ -67,3 +67,7 @@ class Invoice(Base, IntPrimaryKey, TimestampMixin):
 
 class Payment(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "payments"
+
+    invoice_id: Mapped[int] = mapped_column(
+        ForeignKey("invoices.id", ondelete="CASCADE"), index=True, nullable=False
+    )
