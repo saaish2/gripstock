@@ -76,3 +76,5 @@ class Payment(Base, IntPrimaryKey, TimestampMixin):
     reference: Mapped[str | None] = mapped_column(String(120), nullable=True)
     received_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     is_refund: Mapped[bool] = mapped_column(default=False, nullable=False)
+
+    invoice: Mapped[Invoice] = relationship(back_populates="payments")
