@@ -23,3 +23,5 @@ from app.services.audit import record_audit
 from app.services.customers import CustomerService
 from app.services.pricing import late_fee_for
 from app.services.references import next_invoice_number
+
+DEFAULT_NET_TERMS_DAYS = 30
