@@ -28,3 +28,10 @@ DEFAULT_NET_TERMS_DAYS = 30
 
 
 class BillingService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.settings = get_settings()
+        self.invoices = InvoiceRepository(session)
+        self.orders = OrderRepository(session)
+        self.payments = PaymentRepository(session)
+        self.customers = CustomerService(session)
