@@ -61,3 +61,9 @@ class BillingService:
             payload={"number": invoice.number, "total": str(invoice.total)},
         )
         return invoice
+
+    def get(self, invoice_id: int) -> Invoice:
+        invoice = self.invoices.get(invoice_id)
+        if invoice is None:
+            raise NotFoundError(f"invoice {invoice_id} not found")
+        return invoice
