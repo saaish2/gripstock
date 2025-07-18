@@ -67,3 +67,8 @@ class BillingService:
         if invoice is None:
             raise NotFoundError(f"invoice {invoice_id} not found")
         return invoice
+
+    def _transition(self, invoice: Invoice, target: InvoiceStatus) -> None:
+        if not can_transition(INVOICE_TRANSITIONS, invoice.status, target):
+            raise InvalidStateError(f"cannot move invoice from {invoice.status} to {target}")
+        invoice.status = target
