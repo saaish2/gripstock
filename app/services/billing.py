@@ -161,3 +161,12 @@ class BillingService:
             self.customers.adjust_balance(invoice.customer_id, amount)
         self.session.flush()
         return invoice
+
+    def sweep_overdue(self, as_of: date | None = None) -> int:
+        as_of = as_of or utcnow().date()
+        overdue = self.invoices.overdue_as_of(as_of)
+        for invoice in overdue:
+            if invoice.status != InvoiceStatus.OVERDUE:
+                invoice.status = InvoiceStatus.OVERDUE
+        self.session.flush()
+        return len(overdue)
