@@ -94,3 +94,46 @@ class BillingService:
             self.customers.adjust_balance(invoice.customer_id, -previous_balance)
         self.session.flush()
         return invoice
+
+    def record_payment(
+        self,
+        invoice_id: int,
+        amount: Decimal,
+        method: PaymentMethod,
+        reference: str | None = None,
+        actor_id: int | None = None,
+    ) -> Payment:
+        invoice = self.get(invoice_id)
+        if invoice.status in (InvoiceStatus.DRAFT, InvoiceStatus.VOID):
+            raise BusinessRuleError(f"cannot pay a {invoice.status} invoice")
+        if amount <= 0:
+            raise BusinessRuleError("payment amount must be positive")
+        if amount > invoice.balance_due:
+            raise BusinessRuleError("payment exceeds the invoice balance due")
+
+        payment = Payment(
+            invoice_id=invoice.id,
+            amount=amount,
+            method=method,
+            reference=reference,
+            received_at=utcnow(),
+        )
+        self.payments.add(payment)
+        invoice.amount_paid += amount
+        self.customers.adjust_balance(invoice.customer_id, -amount)
+
+        if invoice.is_settled:
+            self._transition(invoice, InvoiceStatus.PAID)
+        else:
+            if invoice.status != InvoiceStatus.PARTIALLY_PAID:
+                self._transition(invoice, InvoiceStatus.PARTIALLY_PAID)
+        self.session.flush()
+        record_audit(
+            self.session,
+            actor_id=actor_id,
+            action="invoice.payment_recorded",
+            entity_type="invoice",
+            entity_id=invoice.id,
+            payload={"amount": str(amount), "method": method},
+        )
+        return payment
