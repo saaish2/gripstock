@@ -170,3 +170,12 @@ class BillingService:
                 invoice.status = InvoiceStatus.OVERDUE
         self.session.flush()
         return len(overdue)
+
+    def search(
+        self,
+        params: PageParams,
+        customer_id: int | None = None,
+        status: InvoiceStatus | None = None,
+    ) -> Page:
+        stmt = self.invoices.search_query(customer_id, status)
+        return paginate(self.session, stmt, params)
