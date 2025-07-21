@@ -150,3 +150,14 @@ class BillingService:
         self.customers.adjust_balance(invoice.customer_id, fee)
         self.session.flush()
         return invoice
+
+    def add_damage_charge(self, invoice_id: int, amount: Decimal) -> Invoice:
+        invoice = self.get(invoice_id)
+        if amount <= 0:
+            raise BusinessRuleError("damage charge must be positive")
+        invoice.damage_total += amount
+        invoice.recalculate_total()
+        if invoice.status != InvoiceStatus.DRAFT:
+            self.customers.adjust_balance(invoice.customer_id, amount)
+        self.session.flush()
+        return invoice
