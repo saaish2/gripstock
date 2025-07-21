@@ -137,3 +137,16 @@ class BillingService:
             payload={"amount": str(amount), "method": method},
         )
         return payment
+
+    def accrue_late_fee(self, invoice_id: int, daily_rate: Decimal, days_late: int) -> Invoice:
+        invoice = self.get(invoice_id)
+        fee = late_fee_for(daily_rate, days_late, self.settings)
+        if fee <= 0:
+            return invoice
+        invoice.late_fee_total += fee
+        invoice.recalculate_total()
+        if invoice.status in (InvoiceStatus.ISSUED, InvoiceStatus.PARTIALLY_PAID):
+            self._transition(invoice, InvoiceStatus.OVERDUE)
+        self.customers.adjust_balance(invoice.customer_id, fee)
+        self.session.flush()
+        return invoice
