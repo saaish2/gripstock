@@ -82,3 +82,15 @@ class BillingService:
         self.customers.adjust_balance(invoice.customer_id, invoice.balance_due)
         self.session.flush()
         return invoice
+
+    def void(self, invoice_id: int) -> Invoice:
+        invoice = self.get(invoice_id)
+        if invoice.amount_paid > 0:
+            raise BusinessRuleError("cannot void an invoice that has received payment")
+        previous_balance = invoice.balance_due
+        self._transition(invoice, InvoiceStatus.VOID)
+        invoice.voided_at = utcnow()
+        if invoice.status == InvoiceStatus.VOID and previous_balance > 0:
+            self.customers.adjust_balance(invoice.customer_id, -previous_balance)
+        self.session.flush()
+        return invoice
