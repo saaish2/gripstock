@@ -72,3 +72,13 @@ class BillingService:
         if not can_transition(INVOICE_TRANSITIONS, invoice.status, target):
             raise InvalidStateError(f"cannot move invoice from {invoice.status} to {target}")
         invoice.status = target
+
+    def issue(self, invoice_id: int, net_terms_days: int = DEFAULT_NET_TERMS_DAYS) -> Invoice:
+        invoice = self.get(invoice_id)
+        self._transition(invoice, InvoiceStatus.ISSUED)
+        today = utcnow().date()
+        invoice.issued_on = today
+        invoice.due_on = today + timedelta(days=net_terms_days)
+        self.customers.adjust_balance(invoice.customer_id, invoice.balance_due)
+        self.session.flush()
+        return invoice
