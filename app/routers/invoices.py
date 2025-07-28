@@ -25,3 +25,15 @@ def create_invoice(
 ) -> InvoiceOut:
     invoice = BillingService(session).create_for_order(order_id, actor_id=actor.id)
     return InvoiceOut.model_validate(invoice)
+
+
+@router.get("", response_model=PagedResponse[InvoiceOut])
+def list_invoices(
+    customer_id: int | None = Query(default=None),
+    status: InvoiceStatus | None = Query(default=None),
+    params: PageParams = Depends(pagination),
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> dict:
+    page = BillingService(session).search(params, customer_id=customer_id, status=status)
+    return page.to_dict(lambda i: InvoiceOut.model_validate(i).model_dump())
