@@ -37,3 +37,12 @@ def list_invoices(
 ) -> dict:
     page = BillingService(session).search(params, customer_id=customer_id, status=status)
     return page.to_dict(lambda i: InvoiceOut.model_validate(i).model_dump())
+
+
+@router.get("/{invoice_id}", response_model=InvoiceOut)
+def get_invoice(
+    invoice_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> InvoiceOut:
+    return InvoiceOut.model_validate(BillingService(session).get(invoice_id))
