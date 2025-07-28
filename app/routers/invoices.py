@@ -13,3 +13,5 @@ from app.repositories.order import PaymentRepository
 from app.schemas.common import PagedResponse
 from app.schemas.order import InvoiceOut, PaymentCreate, PaymentOut
 from app.services.billing import BillingService
+
+router = APIRouter(prefix="/invoices", tags=["invoices"])
