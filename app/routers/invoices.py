@@ -15,3 +15,13 @@ from app.schemas.order import InvoiceOut, PaymentCreate, PaymentOut
 from app.services.billing import BillingService
 
 router = APIRouter(prefix="/invoices", tags=["invoices"])
+
+
+@router.post("/from-order/{order_id}", response_model=InvoiceOut, status_code=201)
+def create_invoice(
+    order_id: int,
+    actor: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> InvoiceOut:
+    invoice = BillingService(session).create_for_order(order_id, actor_id=actor.id)
+    return InvoiceOut.model_validate(invoice)
