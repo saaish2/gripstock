@@ -46,3 +46,12 @@ def get_invoice(
     session: Session = Depends(db_session),
 ) -> InvoiceOut:
     return InvoiceOut.model_validate(BillingService(session).get(invoice_id))
+
+
+@router.post("/{invoice_id}/issue", response_model=InvoiceOut)
+def issue_invoice(
+    invoice_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> InvoiceOut:
+    return InvoiceOut.model_validate(BillingService(session).issue(invoice_id))
