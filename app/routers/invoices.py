@@ -64,3 +64,16 @@ def void_invoice(
     session: Session = Depends(db_session),
 ) -> InvoiceOut:
     return InvoiceOut.model_validate(BillingService(session).void(invoice_id))
+
+
+@router.post("/{invoice_id}/payments", response_model=PaymentOut, status_code=201)
+def record_payment(
+    invoice_id: int,
+    payload: PaymentCreate,
+    actor: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> PaymentOut:
+    payment = BillingService(session).record_payment(
+        invoice_id, payload.amount, payload.method, payload.reference, actor_id=actor.id
+    )
+    return PaymentOut.model_validate(payment)
