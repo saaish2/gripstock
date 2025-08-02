@@ -77,3 +77,13 @@ def record_payment(
         invoice_id, payload.amount, payload.method, payload.reference, actor_id=actor.id
     )
     return PaymentOut.model_validate(payment)
+
+
+@router.get("/{invoice_id}/payments", response_model=list[PaymentOut])
+def list_payments(
+    invoice_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> list[PaymentOut]:
+    payments = PaymentRepository(session).for_invoice(invoice_id)
+    return [PaymentOut.model_validate(p) for p in payments]
