@@ -41,3 +41,7 @@ All notable changes to gripstock are documented here.
 ## 1.0.1
 
 - Fix deposit rounding on multi-asset orders.
+
+## 1.1.0
+
+- Webhooks with retry and exponential backoff.
