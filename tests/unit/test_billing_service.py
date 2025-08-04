@@ -28,3 +28,11 @@ def invoice(session) -> Invoice:
     session.add(inv)
     session.flush()
     return inv
+
+
+def test_issue_sets_due_date_and_balance(session, invoice):
+    svc = BillingService(session)
+    issued = svc.issue(invoice.id, net_terms_days=30)
+    assert issued.status == InvoiceStatus.ISSUED
+    assert issued.due_on is not None
+    assert issued.balance_due == Decimal("1000.00")
