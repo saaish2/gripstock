@@ -36,3 +36,12 @@ def test_issue_sets_due_date_and_balance(session, invoice):
     assert issued.status == InvoiceStatus.ISSUED
     assert issued.due_on is not None
     assert issued.balance_due == Decimal("1000.00")
+
+
+def test_full_payment_marks_paid(session, invoice):
+    svc = BillingService(session)
+    svc.issue(invoice.id)
+    svc.record_payment(invoice.id, Decimal("1000.00"), PaymentMethod.CARD)
+    session.refresh(invoice)
+    assert invoice.status == InvoiceStatus.PAID
+    assert invoice.is_settled
