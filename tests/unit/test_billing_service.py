@@ -45,3 +45,12 @@ def test_full_payment_marks_paid(session, invoice):
     session.refresh(invoice)
     assert invoice.status == InvoiceStatus.PAID
     assert invoice.is_settled
+
+
+def test_partial_payment_marks_partial(session, invoice):
+    svc = BillingService(session)
+    svc.issue(invoice.id)
+    svc.record_payment(invoice.id, Decimal("400.00"), PaymentMethod.ACH)
+    session.refresh(invoice)
+    assert invoice.status == InvoiceStatus.PARTIALLY_PAID
+    assert invoice.balance_due == Decimal("600.00")
