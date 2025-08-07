@@ -54,3 +54,10 @@ def test_partial_payment_marks_partial(session, invoice):
     session.refresh(invoice)
     assert invoice.status == InvoiceStatus.PARTIALLY_PAID
     assert invoice.balance_due == Decimal("600.00")
+
+
+def test_overpayment_rejected(session, invoice):
+    svc = BillingService(session)
+    svc.issue(invoice.id)
+    with pytest.raises(BusinessRuleError):
+        svc.record_payment(invoice.id, Decimal("1500.00"), PaymentMethod.CASH)
