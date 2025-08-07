@@ -67,3 +67,10 @@ def test_cannot_pay_draft(session, invoice):
     svc = BillingService(session)
     with pytest.raises(BusinessRuleError):
         svc.record_payment(invoice.id, Decimal("10.00"), PaymentMethod.CASH)
+
+
+def test_void_unpaid_invoice(session, invoice):
+    svc = BillingService(session)
+    svc.issue(invoice.id)
+    voided = svc.void(invoice.id)
+    assert voided.status == InvoiceStatus.VOID
