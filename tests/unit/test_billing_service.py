@@ -61,3 +61,9 @@ def test_overpayment_rejected(session, invoice):
     svc.issue(invoice.id)
     with pytest.raises(BusinessRuleError):
         svc.record_payment(invoice.id, Decimal("1500.00"), PaymentMethod.CASH)
+
+
+def test_cannot_pay_draft(session, invoice):
+    svc = BillingService(session)
+    with pytest.raises(BusinessRuleError):
+        svc.record_payment(invoice.id, Decimal("10.00"), PaymentMethod.CASH)
