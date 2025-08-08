@@ -82,3 +82,13 @@ def test_cannot_void_paid_invoice(session, invoice):
     svc.record_payment(invoice.id, Decimal("1000.00"), PaymentMethod.CARD)
     with pytest.raises(BusinessRuleError):
         svc.void(invoice.id)
+
+
+def test_late_fee_moves_to_overdue(session, invoice):
+    svc = BillingService(session)
+    svc.issue(invoice.id)
+    svc.accrue_late_fee(invoice.id, Decimal("100.00"), 3)
+    session.refresh(invoice)
+    assert invoice.status == InvoiceStatus.OVERDUE
+    assert invoice.late_fee_total == Decimal("15.00")
+    assert invoice.total == Decimal("1015.00")
