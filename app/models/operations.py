@@ -13,3 +13,4 @@ from app.models.base import Base, IntPrimaryKey, TimestampMixin
 
 
 class Inspection(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "inspections"
