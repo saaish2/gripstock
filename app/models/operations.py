@@ -14,3 +14,7 @@ from app.models.base import Base, IntPrimaryKey, TimestampMixin
 
 class Inspection(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "inspections"
+
+    reservation_id: Mapped[int] = mapped_column(
+        ForeignKey("reservations.id", ondelete="CASCADE"), index=True, nullable=False
+    )
