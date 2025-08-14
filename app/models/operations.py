@@ -22,3 +22,4 @@ class Inspection(Base, IntPrimaryKey, TimestampMixin):
         ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
     )
     phase: Mapped[str] = mapped_column(String(12), nullable=False)  # checkout | checkin
+    condition: Mapped[AssetCondition] = mapped_column(String(20), nullable=False)
