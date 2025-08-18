@@ -27,3 +27,4 @@ class Inspection(Base, IntPrimaryKey, TimestampMixin):
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
     performed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    notes: Mapped[str | None] = mapped_column(Text, nullable=True)
