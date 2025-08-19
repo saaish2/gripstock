@@ -28,3 +28,6 @@ class Inspection(Base, IntPrimaryKey, TimestampMixin):
     )
     performed_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     notes: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+
+class DamageReport(Base, IntPrimaryKey, TimestampMixin):
