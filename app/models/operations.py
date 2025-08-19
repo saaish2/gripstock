@@ -31,3 +31,4 @@ class Inspection(Base, IntPrimaryKey, TimestampMixin):
 
 
 class DamageReport(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "damage_reports"
