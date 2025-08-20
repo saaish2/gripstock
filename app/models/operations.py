@@ -36,3 +36,6 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
     asset_id: Mapped[int] = mapped_column(
         ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
     )
+    reservation_id: Mapped[int | None] = mapped_column(
+        ForeignKey("reservations.id", ondelete="SET NULL"), nullable=True
+    )
