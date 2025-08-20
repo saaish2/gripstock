@@ -32,3 +32,7 @@ class Inspection(Base, IntPrimaryKey, TimestampMixin):
 
 class DamageReport(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "damage_reports"
+
+    asset_id: Mapped[int] = mapped_column(
+        ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
+    )
