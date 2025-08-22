@@ -39,3 +39,4 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
     reservation_id: Mapped[int | None] = mapped_column(
         ForeignKey("reservations.id", ondelete="SET NULL"), nullable=True
     )
+    severity: Mapped[DamageSeverity] = mapped_column(String(20), nullable=False)
