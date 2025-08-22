@@ -40,3 +40,4 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
         ForeignKey("reservations.id", ondelete="SET NULL"), nullable=True
     )
     severity: Mapped[DamageSeverity] = mapped_column(String(20), nullable=False)
+    description: Mapped[str] = mapped_column(Text, nullable=False)
