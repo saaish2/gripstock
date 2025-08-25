@@ -41,3 +41,6 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
     )
     severity: Mapped[DamageSeverity] = mapped_column(String(20), nullable=False)
     description: Mapped[str] = mapped_column(Text, nullable=False)
+    estimated_repair_cost: Mapped[Decimal] = mapped_column(
+        Numeric(12, 2), default=Decimal("0.00"), nullable=False
+    )
