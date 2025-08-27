@@ -44,3 +44,4 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
     estimated_repair_cost: Mapped[Decimal] = mapped_column(
         Numeric(12, 2), default=Decimal("0.00"), nullable=False
     )
+    billable: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
