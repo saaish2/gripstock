@@ -45,3 +45,4 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
         Numeric(12, 2), default=Decimal("0.00"), nullable=False
     )
     billable: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    resolved: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
