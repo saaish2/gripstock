@@ -46,3 +46,6 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
     )
     billable: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
     resolved: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+    reported_by_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True
+    )
