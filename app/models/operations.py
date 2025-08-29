@@ -49,3 +49,5 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
     reported_by_id: Mapped[int | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
+
+    asset: Mapped[Asset] = relationship()  # noqa: F821
