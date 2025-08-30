@@ -45,3 +45,7 @@ All notable changes to gripstock are documented here.
 ## 1.1.0
 
 - Webhooks with retry and exponential backoff.
+
+## 1.2.0
+
+- API keys and idempotent order creation.
