@@ -59,3 +59,6 @@ class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
     asset_id: Mapped[int] = mapped_column(
         ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
     )
+    status: Mapped[MaintenanceStatus] = mapped_column(
+        String(20), default=MaintenanceStatus.OPEN, index=True, nullable=False
+    )
