@@ -54,3 +54,4 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
 
 
 class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "maintenance_orders"
