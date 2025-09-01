@@ -51,3 +51,6 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
     )
 
     asset: Mapped[Asset] = relationship()  # noqa: F821
+
+
+class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
