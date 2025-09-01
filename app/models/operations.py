@@ -55,3 +55,7 @@ class DamageReport(Base, IntPrimaryKey, TimestampMixin):
 
 class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "maintenance_orders"
+
+    asset_id: Mapped[int] = mapped_column(
+        ForeignKey("assets.id", ondelete="RESTRICT"), index=True, nullable=False
+    )
