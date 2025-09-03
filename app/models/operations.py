@@ -62,3 +62,4 @@ class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
     status: Mapped[MaintenanceStatus] = mapped_column(
         String(20), default=MaintenanceStatus.OPEN, index=True, nullable=False
     )
+    summary: Mapped[str] = mapped_column(String(255), nullable=False)
