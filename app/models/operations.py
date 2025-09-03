@@ -63,3 +63,4 @@ class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
         String(20), default=MaintenanceStatus.OPEN, index=True, nullable=False
     )
     summary: Mapped[str] = mapped_column(String(255), nullable=False)
+    details: Mapped[str | None] = mapped_column(Text, nullable=True)
