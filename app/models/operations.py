@@ -65,3 +65,4 @@ class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
     summary: Mapped[str] = mapped_column(String(255), nullable=False)
     details: Mapped[str | None] = mapped_column(Text, nullable=True)
     labor_cost: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
+    parts_cost: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
