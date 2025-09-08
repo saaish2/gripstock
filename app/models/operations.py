@@ -68,3 +68,5 @@ class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
     parts_cost: Mapped[Decimal] = mapped_column(Numeric(12, 2), default=Decimal("0.00"))
     opened_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
     closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    asset: Mapped[Asset] = relationship()  # noqa: F821
