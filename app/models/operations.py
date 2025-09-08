@@ -70,3 +70,7 @@ class MaintenanceOrder(Base, IntPrimaryKey, TimestampMixin):
     closed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     asset: Mapped[Asset] = relationship()  # noqa: F821
+
+    @property
+    def total_cost(self) -> Decimal:
+        return self.labor_cost + self.parts_cost
