@@ -14,3 +14,6 @@ from app.enums import (
     WebhookStatus,
 )
 from app.schemas.common import ORMModel
+
+
+class CheckoutLine(BaseModel):
