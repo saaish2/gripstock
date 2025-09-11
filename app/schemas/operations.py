@@ -19,3 +19,4 @@ from app.schemas.common import ORMModel
 class CheckoutLine(BaseModel):
     asset_id: int
     condition: AssetCondition = AssetCondition.GOOD
+    notes: str | None = None
