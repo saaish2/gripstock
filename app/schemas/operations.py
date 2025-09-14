@@ -20,3 +20,6 @@ class CheckoutLine(BaseModel):
     asset_id: int
     condition: AssetCondition = AssetCondition.GOOD
     notes: str | None = None
+
+
+class CheckinLine(BaseModel):
