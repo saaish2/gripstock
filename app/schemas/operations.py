@@ -23,3 +23,4 @@ class CheckoutLine(BaseModel):
 
 
 class CheckinLine(BaseModel):
+    asset_id: int
