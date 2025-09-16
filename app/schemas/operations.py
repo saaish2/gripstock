@@ -27,3 +27,4 @@ class CheckinLine(BaseModel):
     condition: AssetCondition
     notes: str | None = None
     damage_severity: DamageSeverity | None = None
+    damage_description: str | None = None
