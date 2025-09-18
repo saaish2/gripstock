@@ -28,3 +28,4 @@ class CheckinLine(BaseModel):
     notes: str | None = None
     damage_severity: DamageSeverity | None = None
     damage_description: str | None = None
+    estimated_repair_cost: Decimal = Field(default=Decimal("0.00"), ge=0)
