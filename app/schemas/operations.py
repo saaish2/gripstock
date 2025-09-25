@@ -34,3 +34,4 @@ class CheckinLine(BaseModel):
 class InspectionOut(ORMModel):
     id: int
     reservation_id: int
+    asset_id: int
