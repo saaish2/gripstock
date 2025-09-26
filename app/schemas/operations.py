@@ -36,3 +36,4 @@ class InspectionOut(ORMModel):
     reservation_id: int
     asset_id: int
     phase: str
+    condition: AssetCondition
