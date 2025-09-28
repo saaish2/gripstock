@@ -37,3 +37,4 @@ class InspectionOut(ORMModel):
     asset_id: int
     phase: str
     condition: AssetCondition
+    performed_at: datetime
