@@ -49,3 +49,7 @@ All notable changes to gripstock are documented here.
 ## 1.2.0
 
 - API keys and idempotent order creation.
+
+## 1.2.1
+
+- Fix idempotency replay for mismatched routes.
