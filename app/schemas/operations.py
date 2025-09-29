@@ -38,3 +38,6 @@ class InspectionOut(ORMModel):
     phase: str
     condition: AssetCondition
     performed_at: datetime
+
+
+class DamageReportOut(ORMModel):
