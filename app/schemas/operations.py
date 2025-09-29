@@ -41,3 +41,4 @@ class InspectionOut(ORMModel):
 
 
 class DamageReportOut(ORMModel):
+    id: int
