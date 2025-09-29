@@ -42,3 +42,4 @@ class InspectionOut(ORMModel):
 
 class DamageReportOut(ORMModel):
     id: int
+    asset_id: int
