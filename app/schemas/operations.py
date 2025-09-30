@@ -45,3 +45,4 @@ class DamageReportOut(ORMModel):
     asset_id: int
     reservation_id: int | None = None
     severity: DamageSeverity
+    description: str
