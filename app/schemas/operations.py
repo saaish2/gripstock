@@ -46,3 +46,4 @@ class DamageReportOut(ORMModel):
     reservation_id: int | None = None
     severity: DamageSeverity
     description: str
+    estimated_repair_cost: Decimal
