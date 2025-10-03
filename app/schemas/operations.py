@@ -47,3 +47,4 @@ class DamageReportOut(ORMModel):
     severity: DamageSeverity
     description: str
     estimated_repair_cost: Decimal
+    billable: bool
