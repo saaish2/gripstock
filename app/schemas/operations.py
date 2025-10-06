@@ -48,3 +48,4 @@ class DamageReportOut(ORMModel):
     description: str
     estimated_repair_cost: Decimal
     billable: bool
+    resolved: bool
