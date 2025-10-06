@@ -50,3 +50,6 @@ class DamageReportOut(ORMModel):
     billable: bool
     resolved: bool
     created_at: datetime
+
+
+class MaintenanceCreate(BaseModel):
