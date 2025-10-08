@@ -54,3 +54,4 @@ class DamageReportOut(ORMModel):
 
 class MaintenanceCreate(BaseModel):
     asset_id: int
+    summary: str = Field(min_length=1, max_length=255)
