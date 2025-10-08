@@ -53,3 +53,4 @@ class DamageReportOut(ORMModel):
 
 
 class MaintenanceCreate(BaseModel):
+    asset_id: int
