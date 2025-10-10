@@ -59,3 +59,4 @@ class MaintenanceCreate(BaseModel):
 
 
 class MaintenanceUpdate(BaseModel):
+    status: MaintenanceStatus | None = None
