@@ -66,3 +66,4 @@ class MaintenanceUpdate(BaseModel):
 
 
 class MaintenanceOut(ORMModel):
+    id: int
