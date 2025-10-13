@@ -60,3 +60,4 @@ class MaintenanceCreate(BaseModel):
 
 class MaintenanceUpdate(BaseModel):
     status: MaintenanceStatus | None = None
+    labor_cost: Decimal | None = Field(default=None, ge=0)
