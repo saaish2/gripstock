@@ -63,3 +63,6 @@ class MaintenanceUpdate(BaseModel):
     labor_cost: Decimal | None = Field(default=None, ge=0)
     parts_cost: Decimal | None = Field(default=None, ge=0)
     details: str | None = None
+
+
+class MaintenanceOut(ORMModel):
