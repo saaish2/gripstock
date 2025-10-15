@@ -71,3 +71,4 @@ class MaintenanceOut(ORMModel):
     status: MaintenanceStatus
     summary: str
     labor_cost: Decimal
+    parts_cost: Decimal
