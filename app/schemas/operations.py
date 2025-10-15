@@ -68,3 +68,4 @@ class MaintenanceUpdate(BaseModel):
 class MaintenanceOut(ORMModel):
     id: int
     asset_id: int
+    status: MaintenanceStatus
