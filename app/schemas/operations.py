@@ -70,3 +70,4 @@ class MaintenanceOut(ORMModel):
     asset_id: int
     status: MaintenanceStatus
     summary: str
+    labor_cost: Decimal
