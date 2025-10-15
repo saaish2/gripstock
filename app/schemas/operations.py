@@ -69,3 +69,4 @@ class MaintenanceOut(ORMModel):
     id: int
     asset_id: int
     status: MaintenanceStatus
+    summary: str
