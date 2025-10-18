@@ -74,3 +74,4 @@ class MaintenanceOut(ORMModel):
     parts_cost: Decimal
     total_cost: Decimal
     opened_at: datetime
+    closed_at: datetime | None = None
