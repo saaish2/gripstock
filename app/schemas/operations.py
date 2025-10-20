@@ -78,3 +78,4 @@ class MaintenanceOut(ORMModel):
 
 
 class ApiKeyCreate(BaseModel):
+    label: str = Field(min_length=1, max_length=120)
