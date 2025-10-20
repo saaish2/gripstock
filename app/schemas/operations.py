@@ -75,3 +75,6 @@ class MaintenanceOut(ORMModel):
     total_cost: Decimal
     opened_at: datetime
     closed_at: datetime | None = None
+
+
+class ApiKeyCreate(BaseModel):
