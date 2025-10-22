@@ -53,3 +53,7 @@ All notable changes to gripstock are documented here.
 ## 1.2.1
 
 - Fix idempotency replay for mismatched routes.
+
+## 1.3.0
+
+- Audit log and dashboard reporting.
