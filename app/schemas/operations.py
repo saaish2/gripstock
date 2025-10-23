@@ -83,3 +83,4 @@ class ApiKeyCreate(BaseModel):
 
 
 class ApiKeyOut(ORMModel):
+    id: int
