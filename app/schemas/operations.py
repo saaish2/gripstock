@@ -85,3 +85,4 @@ class ApiKeyCreate(BaseModel):
 class ApiKeyOut(ORMModel):
     id: int
     label: str
+    prefix: str
