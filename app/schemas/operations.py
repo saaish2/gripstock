@@ -87,3 +87,4 @@ class ApiKeyOut(ORMModel):
     label: str
     prefix: str
     scopes: str
+    last_used_at: datetime | None = None
