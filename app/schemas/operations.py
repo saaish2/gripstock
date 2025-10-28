@@ -89,3 +89,6 @@ class ApiKeyOut(ORMModel):
     scopes: str
     last_used_at: datetime | None = None
     created_at: datetime
+
+
+class ApiKeyCreated(ApiKeyOut):
