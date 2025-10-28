@@ -93,3 +93,6 @@ class ApiKeyOut(ORMModel):
 
 class ApiKeyCreated(ApiKeyOut):
     plaintext_key: str
+
+
+class WebhookCreate(BaseModel):
