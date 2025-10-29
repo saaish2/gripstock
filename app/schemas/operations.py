@@ -97,3 +97,4 @@ class ApiKeyCreated(ApiKeyOut):
 
 class WebhookCreate(BaseModel):
     url: str = Field(min_length=1, max_length=500)
+    secret: str = Field(min_length=8, max_length=120)
