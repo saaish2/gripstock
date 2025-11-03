@@ -102,3 +102,4 @@ class WebhookCreate(BaseModel):
 
 
 class WebhookOut(ORMModel):
+    id: int
