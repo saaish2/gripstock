@@ -104,3 +104,4 @@ class WebhookCreate(BaseModel):
 class WebhookOut(ORMModel):
     id: int
     url: str
+    event_types: str
