@@ -105,3 +105,4 @@ class WebhookOut(ORMModel):
     id: int
     url: str
     event_types: str
+    is_active: bool
