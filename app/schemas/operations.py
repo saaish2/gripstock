@@ -107,3 +107,6 @@ class WebhookOut(ORMModel):
     event_types: str
     is_active: bool
     created_at: datetime
+
+
+class WebhookDeliveryOut(ORMModel):
