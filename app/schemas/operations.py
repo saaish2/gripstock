@@ -110,3 +110,4 @@ class WebhookOut(ORMModel):
 
 
 class WebhookDeliveryOut(ORMModel):
+    id: int
