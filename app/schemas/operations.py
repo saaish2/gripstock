@@ -114,3 +114,4 @@ class WebhookDeliveryOut(ORMModel):
     endpoint_id: int
     event_type: str
     status: WebhookStatus
+    attempts: int
