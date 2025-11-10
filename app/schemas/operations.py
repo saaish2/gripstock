@@ -113,3 +113,4 @@ class WebhookDeliveryOut(ORMModel):
     id: int
     endpoint_id: int
     event_type: str
+    status: WebhookStatus
