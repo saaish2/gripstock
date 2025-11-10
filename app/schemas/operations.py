@@ -115,3 +115,4 @@ class WebhookDeliveryOut(ORMModel):
     event_type: str
     status: WebhookStatus
     attempts: int
+    last_error: str | None = None
