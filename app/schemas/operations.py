@@ -111,3 +111,4 @@ class WebhookOut(ORMModel):
 
 class WebhookDeliveryOut(ORMModel):
     id: int
+    endpoint_id: int
