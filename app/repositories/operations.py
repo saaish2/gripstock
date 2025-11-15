@@ -16,3 +16,6 @@ from app.models.platform import (
     WebhookEndpoint,
 )
 from app.repositories.base import BaseRepository
+
+
+class InspectionRepository(BaseRepository[Inspection]):
