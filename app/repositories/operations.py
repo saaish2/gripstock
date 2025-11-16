@@ -19,3 +19,4 @@ from app.repositories.base import BaseRepository
 
 
 class InspectionRepository(BaseRepository[Inspection]):
+    model = Inspection
