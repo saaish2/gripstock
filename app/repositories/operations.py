@@ -27,3 +27,4 @@ class InspectionRepository(BaseRepository[Inspection]):
 
 
 class DamageReportRepository(BaseRepository[DamageReport]):
+    model = DamageReport
