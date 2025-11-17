@@ -28,3 +28,7 @@ class InspectionRepository(BaseRepository[Inspection]):
 
 class DamageReportRepository(BaseRepository[DamageReport]):
     model = DamageReport
+
+    def unresolved(self) -> list[DamageReport]:
+        stmt = select(DamageReport).where(DamageReport.resolved.is_(False))
+        return list(self.session.execute(stmt).scalars().all())
