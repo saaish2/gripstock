@@ -24,3 +24,6 @@ class InspectionRepository(BaseRepository[Inspection]):
     def for_reservation(self, reservation_id: int) -> list[Inspection]:
         stmt = select(Inspection).where(Inspection.reservation_id == reservation_id)
         return list(self.session.execute(stmt).scalars().all())
+
+
+class DamageReportRepository(BaseRepository[DamageReport]):
