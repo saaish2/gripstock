@@ -57,3 +57,7 @@ All notable changes to gripstock are documented here.
 ## 1.3.0
 
 - Audit log and dashboard reporting.
+
+## 1.4.0
+
+- Background sweeps for overdue rentals.
