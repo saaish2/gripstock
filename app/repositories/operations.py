@@ -32,3 +32,7 @@ class DamageReportRepository(BaseRepository[DamageReport]):
     def unresolved(self) -> list[DamageReport]:
         stmt = select(DamageReport).where(DamageReport.resolved.is_(False))
         return list(self.session.execute(stmt).scalars().all())
+
+    def for_reservation(self, reservation_id: int) -> list[DamageReport]:
+        stmt = select(DamageReport).where(DamageReport.reservation_id == reservation_id)
+        return list(self.session.execute(stmt).scalars().all())
