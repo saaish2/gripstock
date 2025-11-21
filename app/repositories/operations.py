@@ -36,3 +36,6 @@ class DamageReportRepository(BaseRepository[DamageReport]):
     def for_reservation(self, reservation_id: int) -> list[DamageReport]:
         stmt = select(DamageReport).where(DamageReport.reservation_id == reservation_id)
         return list(self.session.execute(stmt).scalars().all())
+
+
+class MaintenanceRepository(BaseRepository[MaintenanceOrder]):
