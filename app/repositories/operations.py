@@ -49,3 +49,9 @@ class MaintenanceRepository(BaseRepository[MaintenanceOrder]):
             ),
         )
         return list(self.session.execute(stmt).scalars().all())
+
+    def search_query(self, status: MaintenanceStatus | None = None) -> Select:
+        stmt = select(MaintenanceOrder)
+        if status is not None:
+            stmt = stmt.where(MaintenanceOrder.status == status)
+        return stmt.order_by(MaintenanceOrder.opened_at.desc())
