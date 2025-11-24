@@ -40,3 +40,12 @@ class DamageReportRepository(BaseRepository[DamageReport]):
 
 class MaintenanceRepository(BaseRepository[MaintenanceOrder]):
     model = MaintenanceOrder
+
+    def open_for_asset(self, asset_id: int) -> list[MaintenanceOrder]:
+        stmt = select(MaintenanceOrder).where(
+            MaintenanceOrder.asset_id == asset_id,
+            MaintenanceOrder.status.in_(
+                [MaintenanceStatus.OPEN, MaintenanceStatus.IN_PROGRESS]
+            ),
+        )
+        return list(self.session.execute(stmt).scalars().all())
