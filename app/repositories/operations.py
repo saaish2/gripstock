@@ -58,3 +58,4 @@ class MaintenanceRepository(BaseRepository[MaintenanceOrder]):
 
 
 class AuditLogRepository(BaseRepository[AuditLog]):
+    model = AuditLog
