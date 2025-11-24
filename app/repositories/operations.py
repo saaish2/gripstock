@@ -59,3 +59,7 @@ class MaintenanceRepository(BaseRepository[MaintenanceOrder]):
 
 class AuditLogRepository(BaseRepository[AuditLog]):
     model = AuditLog
+
+    def recent(self, limit: int = 100) -> list[AuditLog]:
+        stmt = select(AuditLog).order_by(AuditLog.created_at.desc()).limit(limit)
+        return list(self.session.execute(stmt).scalars().all())
