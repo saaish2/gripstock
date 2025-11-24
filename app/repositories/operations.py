@@ -39,3 +39,4 @@ class DamageReportRepository(BaseRepository[DamageReport]):
 
 
 class MaintenanceRepository(BaseRepository[MaintenanceOrder]):
+    model = MaintenanceOrder
