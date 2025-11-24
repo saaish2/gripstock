@@ -55,3 +55,6 @@ class MaintenanceRepository(BaseRepository[MaintenanceOrder]):
         if status is not None:
             stmt = stmt.where(MaintenanceOrder.status == status)
         return stmt.order_by(MaintenanceOrder.opened_at.desc())
+
+
+class AuditLogRepository(BaseRepository[AuditLog]):
