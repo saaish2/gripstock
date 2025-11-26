@@ -71,3 +71,6 @@ class AuditLogRepository(BaseRepository[AuditLog]):
             .order_by(AuditLog.created_at.desc())
         )
         return list(self.session.execute(stmt).scalars().all())
+
+
+class ApiKeyRepository(BaseRepository[ApiKey]):
