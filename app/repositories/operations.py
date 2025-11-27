@@ -74,3 +74,4 @@ class AuditLogRepository(BaseRepository[AuditLog]):
 
 
 class ApiKeyRepository(BaseRepository[ApiKey]):
+    model = ApiKey
