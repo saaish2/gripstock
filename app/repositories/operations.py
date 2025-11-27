@@ -75,3 +75,7 @@ class AuditLogRepository(BaseRepository[AuditLog]):
 
 class ApiKeyRepository(BaseRepository[ApiKey]):
     model = ApiKey
+
+    def get_by_fingerprint(self, fingerprint: str) -> ApiKey | None:
+        stmt = select(ApiKey).where(ApiKey.fingerprint == fingerprint)
+        return self.session.execute(stmt).scalar_one_or_none()
