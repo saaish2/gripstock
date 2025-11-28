@@ -79,3 +79,7 @@ class ApiKeyRepository(BaseRepository[ApiKey]):
     def get_by_fingerprint(self, fingerprint: str) -> ApiKey | None:
         stmt = select(ApiKey).where(ApiKey.fingerprint == fingerprint)
         return self.session.execute(stmt).scalar_one_or_none()
+
+    def list_active(self) -> list[ApiKey]:
+        stmt = select(ApiKey).where(ApiKey.revoked_at.is_(None))
+        return list(self.session.execute(stmt).scalars().all())
