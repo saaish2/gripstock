@@ -94,3 +94,4 @@ class WebhookRepository(BaseRepository[WebhookEndpoint]):
 
 
 class WebhookDeliveryRepository(BaseRepository[WebhookDelivery]):
+    model = WebhookDelivery
