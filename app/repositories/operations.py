@@ -86,3 +86,4 @@ class ApiKeyRepository(BaseRepository[ApiKey]):
 
 
 class WebhookRepository(BaseRepository[WebhookEndpoint]):
+    model = WebhookEndpoint
