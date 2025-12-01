@@ -95,3 +95,16 @@ class WebhookRepository(BaseRepository[WebhookEndpoint]):
 
 class WebhookDeliveryRepository(BaseRepository[WebhookDelivery]):
     model = WebhookDelivery
+
+    def due(self, now: datetime, limit: int = 50) -> list[WebhookDelivery]:
+        stmt = (
+            select(WebhookDelivery)
+            .where(
+                WebhookDelivery.status == WebhookStatus.PENDING,
+                (WebhookDelivery.next_attempt_at.is_(None))
+                | (WebhookDelivery.next_attempt_at <= now),
+            )
+            .order_by(WebhookDelivery.created_at)
+            .limit(limit)
+        )
+        return list(self.session.execute(stmt).scalars().all())
