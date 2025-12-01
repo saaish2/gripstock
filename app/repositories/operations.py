@@ -87,3 +87,7 @@ class ApiKeyRepository(BaseRepository[ApiKey]):
 
 class WebhookRepository(BaseRepository[WebhookEndpoint]):
     model = WebhookEndpoint
+
+    def active_endpoints(self) -> list[WebhookEndpoint]:
+        stmt = select(WebhookEndpoint).where(WebhookEndpoint.is_active.is_(True))
+        return list(self.session.execute(stmt).scalars().all())
