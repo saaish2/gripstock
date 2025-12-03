@@ -108,3 +108,6 @@ class WebhookDeliveryRepository(BaseRepository[WebhookDelivery]):
             .limit(limit)
         )
         return list(self.session.execute(stmt).scalars().all())
+
+
+class IdempotencyRepository(BaseRepository[IdempotencyKey]):
