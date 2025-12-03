@@ -111,3 +111,4 @@ class WebhookDeliveryRepository(BaseRepository[WebhookDelivery]):
 
 
 class IdempotencyRepository(BaseRepository[IdempotencyKey]):
+    model = IdempotencyKey
