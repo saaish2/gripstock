@@ -112,3 +112,7 @@ class WebhookDeliveryRepository(BaseRepository[WebhookDelivery]):
 
 class IdempotencyRepository(BaseRepository[IdempotencyKey]):
     model = IdempotencyKey
+
+    def get_by_key(self, key: str) -> IdempotencyKey | None:
+        stmt = select(IdempotencyKey).where(IdempotencyKey.key == key)
+        return self.session.execute(stmt).scalar_one_or_none()
