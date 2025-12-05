@@ -23,3 +23,6 @@ from app.repositories.operations import (
 )
 from app.repositories.reservation import ReservationRepository
 from app.services.audit import record_audit
+
+# Conditions that route an asset straight into maintenance on check-in.
+_MAINTENANCE_CONDITIONS = {AssetCondition.POOR, AssetCondition.UNUSABLE}
