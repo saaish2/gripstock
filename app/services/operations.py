@@ -29,3 +29,9 @@ _MAINTENANCE_CONDITIONS = {AssetCondition.POOR, AssetCondition.UNUSABLE}
 
 
 class CheckoutService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.reservations = ReservationRepository(session)
+        self.assets = AssetRepository(session)
+        self.inspections = InspectionRepository(session)
+        self.damage = DamageReportRepository(session)
