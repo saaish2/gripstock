@@ -26,3 +26,6 @@ from app.services.audit import record_audit
 
 # Conditions that route an asset straight into maintenance on check-in.
 _MAINTENANCE_CONDITIONS = {AssetCondition.POOR, AssetCondition.UNUSABLE}
+
+
+class CheckoutService:
