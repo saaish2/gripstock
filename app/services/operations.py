@@ -135,3 +135,6 @@ class CheckoutService:
             payload={"damage_reports": len(damage_reports)},
         )
         return reservation, damage_reports
+
+
+class MaintenanceService:
