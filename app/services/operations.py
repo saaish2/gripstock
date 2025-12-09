@@ -138,3 +138,7 @@ class CheckoutService:
 
 
 class MaintenanceService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.repo = MaintenanceRepository(session)
+        self.assets = AssetRepository(session)
