@@ -142,3 +142,19 @@ class MaintenanceService:
         self.session = session
         self.repo = MaintenanceRepository(session)
         self.assets = AssetRepository(session)
+
+    def open(self, asset_id: int, summary: str, details: str | None = None) -> MaintenanceOrder:
+        asset = self.assets.get(asset_id)
+        if asset is None:
+            raise NotFoundError(f"asset {asset_id} not found")
+        order = MaintenanceOrder(
+            asset_id=asset_id,
+            summary=summary,
+            details=details,
+            opened_at=utcnow(),
+        )
+        self.repo.add(order)
+        if asset.status == AssetStatus.AVAILABLE:
+            asset.status = AssetStatus.IN_MAINTENANCE
+        self.session.flush()
+        return order
