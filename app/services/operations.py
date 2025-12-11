@@ -158,3 +158,16 @@ class MaintenanceService:
             asset.status = AssetStatus.IN_MAINTENANCE
         self.session.flush()
         return order
+
+    def update(self, order_id: int, changes: dict) -> MaintenanceOrder:
+        order = self.repo.get(order_id)
+        if order is None:
+            raise NotFoundError(f"maintenance order {order_id} not found")
+        target_status = changes.get("status")
+        for field in ("labor_cost", "parts_cost", "details"):
+            if changes.get(field) is not None:
+                setattr(order, field, changes[field])
+        if target_status is not None and target_status != order.status:
+            self._apply_status(order, target_status)
+        self.session.flush()
+        return order
