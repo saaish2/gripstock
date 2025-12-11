@@ -61,3 +61,7 @@ All notable changes to gripstock are documented here.
 ## 1.4.0
 
 - Background sweeps for overdue rentals.
+
+## 1.5.0
+
+- Quote endpoint for non-binding estimates.
