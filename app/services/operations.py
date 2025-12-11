@@ -171,3 +171,13 @@ class MaintenanceService:
             self._apply_status(order, target_status)
         self.session.flush()
         return order
+
+    def _apply_status(self, order: MaintenanceOrder, target: MaintenanceStatus) -> None:
+        if order.status in (MaintenanceStatus.COMPLETED, MaintenanceStatus.CANCELLED):
+            raise InvalidStateError(f"maintenance order is already {order.status}")
+        order.status = target
+        if target in (MaintenanceStatus.COMPLETED, MaintenanceStatus.CANCELLED):
+            order.closed_at = utcnow()
+            asset = self.assets.get(order.asset_id)
+            if asset is not None and asset.status == AssetStatus.IN_MAINTENANCE:
+                asset.status = AssetStatus.AVAILABLE
