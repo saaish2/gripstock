@@ -26,3 +26,4 @@ from app.schemas.reservation import ReservationOut
 from app.services.operations import CheckoutService, MaintenanceService
 
 router = APIRouter(prefix="/operations", tags=["operations"])
+maintenance_router = APIRouter(prefix="/maintenance", tags=["maintenance"])
