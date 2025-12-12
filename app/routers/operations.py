@@ -27,3 +27,16 @@ from app.services.operations import CheckoutService, MaintenanceService
 
 router = APIRouter(prefix="/operations", tags=["operations"])
 maintenance_router = APIRouter(prefix="/maintenance", tags=["maintenance"])
+
+
+@router.post("/reservations/{reservation_id}/checkout", response_model=ReservationOut)
+def check_out(
+    reservation_id: int,
+    lines: list[CheckoutLine],
+    actor: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> ReservationOut:
+    reservation = CheckoutService(session).check_out(
+        reservation_id, [line.model_dump() for line in lines], actor_id=actor.id
+    )
+    return ReservationOut.model_validate(reservation)
