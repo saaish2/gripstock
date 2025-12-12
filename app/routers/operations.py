@@ -24,3 +24,5 @@ from app.schemas.operations import (
 )
 from app.schemas.reservation import ReservationOut
 from app.services.operations import CheckoutService, MaintenanceService
+
+router = APIRouter(prefix="/operations", tags=["operations"])
