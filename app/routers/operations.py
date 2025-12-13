@@ -40,3 +40,16 @@ def check_out(
         reservation_id, [line.model_dump() for line in lines], actor_id=actor.id
     )
     return ReservationOut.model_validate(reservation)
+
+
+@router.post("/reservations/{reservation_id}/checkin", response_model=ReservationOut)
+def check_in(
+    reservation_id: int,
+    lines: list[CheckinLine],
+    actor: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> ReservationOut:
+    reservation, _damage = CheckoutService(session).check_in(
+        reservation_id, [line.model_dump() for line in lines], actor_id=actor.id
+    )
+    return ReservationOut.model_validate(reservation)
