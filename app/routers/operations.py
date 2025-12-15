@@ -53,3 +53,13 @@ def check_in(
         reservation_id, [line.model_dump() for line in lines], actor_id=actor.id
     )
     return ReservationOut.model_validate(reservation)
+
+
+@router.get("/reservations/{reservation_id}/inspections", response_model=list[InspectionOut])
+def list_inspections(
+    reservation_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> list[InspectionOut]:
+    rows = InspectionRepository(session).for_reservation(reservation_id)
+    return [InspectionOut.model_validate(r) for r in rows]
