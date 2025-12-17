@@ -63,3 +63,13 @@ def list_inspections(
 ) -> list[InspectionOut]:
     rows = InspectionRepository(session).for_reservation(reservation_id)
     return [InspectionOut.model_validate(r) for r in rows]
+
+
+@router.get("/reservations/{reservation_id}/damage", response_model=list[DamageReportOut])
+def list_damage(
+    reservation_id: int,
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> list[DamageReportOut]:
+    rows = DamageReportRepository(session).for_reservation(reservation_id)
+    return [DamageReportOut.model_validate(r) for r in rows]
