@@ -83,3 +83,14 @@ def open_maintenance(
 ) -> MaintenanceOut:
     order = MaintenanceService(session).open(payload.asset_id, payload.summary, payload.details)
     return MaintenanceOut.model_validate(order)
+
+
+@maintenance_router.patch("/{order_id}", response_model=MaintenanceOut)
+def update_maintenance(
+    order_id: int,
+    payload: MaintenanceUpdate,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> MaintenanceOut:
+    order = MaintenanceService(session).update(order_id, payload.model_dump(exclude_unset=True))
+    return MaintenanceOut.model_validate(order)
