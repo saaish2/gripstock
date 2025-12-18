@@ -73,3 +73,13 @@ def list_damage(
 ) -> list[DamageReportOut]:
     rows = DamageReportRepository(session).for_reservation(reservation_id)
     return [DamageReportOut.model_validate(r) for r in rows]
+
+
+@maintenance_router.post("", response_model=MaintenanceOut, status_code=201)
+def open_maintenance(
+    payload: MaintenanceCreate,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> MaintenanceOut:
+    order = MaintenanceService(session).open(payload.asset_id, payload.summary, payload.details)
+    return MaintenanceOut.model_validate(order)
