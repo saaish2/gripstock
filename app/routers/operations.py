@@ -94,3 +94,14 @@ def update_maintenance(
 ) -> MaintenanceOut:
     order = MaintenanceService(session).update(order_id, payload.model_dump(exclude_unset=True))
     return MaintenanceOut.model_validate(order)
+
+
+@maintenance_router.get("", response_model=list[MaintenanceOut])
+def list_maintenance(
+    status: MaintenanceStatus | None = Query(default=None),
+    _: User = Depends(require_agent),
+    session: Session = Depends(db_session),
+) -> list[MaintenanceOut]:
+    stmt = MaintenanceRepository(session).search_query(status)
+    rows = session.execute(stmt).scalars().all()
+    return [MaintenanceOut.model_validate(r) for r in rows]
