@@ -69,3 +69,30 @@ def test_full_lifecycle(client, auth_headers, sample_catalog, sample_customer):
     assert payment.status_code == 201
     final = client.get(f"/invoices/{invoice_id}", headers=auth_headers)
     assert final.json()["status"] == "paid"
+
+
+def test_checkout_and_checkin(client, auth_headers, sample_catalog, sample_customer):
+    asset_a = sample_catalog["asset_a"]["id"]
+    res = _reservation(client, auth_headers, sample_customer["id"], [asset_a])
+    reservation_id = res.json()["id"]
+    client.post(f"/reservations/{reservation_id}/confirm", headers=auth_headers)
+
+    checkout = client.post(
+        f"/operations/reservations/{reservation_id}/checkout",
+        json=[{"asset_id": asset_a, "condition": "good"}],
+        headers=auth_headers,
+    )
+    assert checkout.status_code == 200
+    assert checkout.json()["status"] == "picked_up"
+
+    checkin = client.post(
+        f"/operations/reservations/{reservation_id}/checkin",
+        json=[{"asset_id": asset_a, "condition": "good"}],
+        headers=auth_headers,
+    )
+    assert checkin.status_code == 200
+    assert checkin.json()["status"] == "returned"
+
+    # Asset is available again
+    asset = client.get(f"/assets/{asset_a}", headers=auth_headers)
+    assert asset.json()["status"] == "available"
