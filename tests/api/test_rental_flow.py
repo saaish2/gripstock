@@ -96,3 +96,36 @@ def test_checkout_and_checkin(client, auth_headers, sample_catalog, sample_custo
     # Asset is available again
     asset = client.get(f"/assets/{asset_a}", headers=auth_headers)
     assert asset.json()["status"] == "available"
+
+
+def test_checkin_with_damage_routes_to_maintenance(client, auth_headers, sample_catalog, sample_customer):
+    asset_a = sample_catalog["asset_a"]["id"]
+    res = _reservation(client, auth_headers, sample_customer["id"], [asset_a])
+    reservation_id = res.json()["id"]
+    client.post(f"/reservations/{reservation_id}/confirm", headers=auth_headers)
+    client.post(
+        f"/operations/reservations/{reservation_id}/checkout",
+        json=[{"asset_id": asset_a, "condition": "good"}],
+        headers=auth_headers,
+    )
+    checkin = client.post(
+        f"/operations/reservations/{reservation_id}/checkin",
+        json=[
+            {
+                "asset_id": asset_a,
+                "condition": "fair",
+                "damage_severity": "minor",
+                "damage_description": "scuffed housing",
+                "estimated_repair_cost": "120.00",
+            }
+        ],
+        headers=auth_headers,
+    )
+    assert checkin.status_code == 200
+    asset = client.get(f"/assets/{asset_a}", headers=auth_headers)
+    assert asset.json()["status"] == "in_maintenance"
+
+    damage = client.get(
+        f"/operations/reservations/{reservation_id}/damage", headers=auth_headers
+    )
+    assert len(damage.json()) == 1
