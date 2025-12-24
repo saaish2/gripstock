@@ -23,3 +23,49 @@ def _reservation(client, headers, customer_id, asset_ids):
         },
         headers=headers,
     )
+
+
+def test_full_lifecycle(client, auth_headers, sample_catalog, sample_customer):
+    asset_a = sample_catalog["asset_a"]["id"]
+    asset_b = sample_catalog["asset_b"]["id"]
+    customer_id = sample_customer["id"]
+
+    # Reserve
+    res = _reservation(client, auth_headers, customer_id, [asset_a, asset_b])
+    assert res.status_code == 201, res.text
+    reservation_id = res.json()["id"]
+    assert res.json()["status"] == "pending"
+
+    # Confirm
+    confirmed = client.post(f"/reservations/{reservation_id}/confirm", headers=auth_headers)
+    assert confirmed.status_code == 200
+    assert confirmed.json()["status"] == "confirmed"
+
+    # Create order from reservation
+    order = client.post(
+        "/orders",
+        json={"reservation_id": reservation_id, "tax_rate": "0.08"},
+        headers=auth_headers,
+    )
+    assert order.status_code == 201, order.text
+    order_body = order.json()
+    assert order_body["grand_total"] is not None
+    assert len(order_body["lines"]) == 2
+
+    # Generate + issue invoice
+    invoice = client.post(f"/invoices/from-order/{order_body['id']}", headers=auth_headers)
+    assert invoice.status_code == 201
+    invoice_id = invoice.json()["id"]
+    issued = client.post(f"/invoices/{invoice_id}/issue", headers=auth_headers)
+    assert issued.json()["status"] == "issued"
+    total = issued.json()["total"]
+
+    # Pay in full
+    payment = client.post(
+        f"/invoices/{invoice_id}/payments",
+        json={"amount": total, "method": "card"},
+        headers=auth_headers,
+    )
+    assert payment.status_code == 201
+    final = client.get(f"/invoices/{invoice_id}", headers=auth_headers)
+    assert final.json()["status"] == "paid"
