@@ -129,3 +129,12 @@ def test_checkin_with_damage_routes_to_maintenance(client, auth_headers, sample_
         f"/operations/reservations/{reservation_id}/damage", headers=auth_headers
     )
     assert len(damage.json()) == 1
+
+
+def test_double_booking_conflict(client, auth_headers, sample_catalog, sample_customer):
+    asset_a = sample_catalog["asset_a"]["id"]
+    first = _reservation(client, auth_headers, sample_customer["id"], [asset_a])
+    assert first.status_code == 201
+    second = _reservation(client, auth_headers, sample_customer["id"], [asset_a])
+    assert second.status_code == 409
+    assert "conflicting_reservation_ids" in second.json()["error"]["details"]
