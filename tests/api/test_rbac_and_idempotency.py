@@ -25,3 +25,13 @@ def agent_headers(client) -> dict:
         json={"email": "agent@test.com", "password": "agentpass12"},
     ).json()["token"]
     return {"Authorization": f"Bearer {token}"}
+
+
+def test_agent_cannot_create_user(client, agent_headers):
+    resp = client.post(
+        "/users",
+        json={"email": "x@y.com", "full_name": "X", "password": "password12"},
+        headers=agent_headers,
+    )
+    assert resp.status_code == 403
+    assert resp.json()["error"]["code"] == "permission_denied"
