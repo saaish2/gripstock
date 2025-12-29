@@ -60,3 +60,32 @@ def test_agent_can_create_customer(client, agent_headers):
         headers=agent_headers,
     )
     assert resp.status_code == 201
+
+
+def test_idempotent_order_creation(client, auth_headers, sample_catalog, sample_customer):
+    asset_a = sample_catalog["asset_a"]["id"]
+    start = (datetime(2025, 6, 1, 9, 0) + timedelta(days=1)).isoformat()
+    end = (datetime(2025, 6, 1, 9, 0) + timedelta(days=4)).isoformat()
+    res = client.post(
+        "/reservations",
+        json={
+            "customer_id": sample_customer["id"],
+            "starts_at": start,
+            "ends_at": end,
+            "lines": [{"asset_id": asset_a}],
+        },
+        headers=auth_headers,
+    ).json()
+    client.post(f"/reservations/{res['id']}/confirm", headers=auth_headers)
+
+    key_headers = {**auth_headers, "Idempotency-Key": "order-key-123"}
+    first = client.post(
+        "/orders", json={"reservation_id": res["id"]}, headers=key_headers
+    )
+    assert first.status_code == 201
+    second = client.post(
+        "/orders", json={"reservation_id": res["id"]}, headers=key_headers
+    )
+    assert second.status_code == 201
+    # Same reference returned — order was not created twice.
+    assert first.json()["reference"] == second.json()["reference"]
