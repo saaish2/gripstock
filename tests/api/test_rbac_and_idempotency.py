@@ -35,3 +35,19 @@ def test_agent_cannot_create_user(client, agent_headers):
     )
     assert resp.status_code == 403
     assert resp.json()["error"]["code"] == "permission_denied"
+
+
+def test_agent_cannot_create_asset(client, agent_headers, sample_catalog):
+    cat_id = sample_catalog["category"]["id"]
+    resp = client.post(
+        "/assets",
+        json={
+            "category_id": cat_id,
+            "name": "X",
+            "barcode": "ZZ-1",
+            "daily_rate": "1.00",
+            "replacement_value": "1.00",
+        },
+        headers=agent_headers,
+    )
+    assert resp.status_code == 403
