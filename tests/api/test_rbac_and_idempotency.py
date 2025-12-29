@@ -51,3 +51,12 @@ def test_agent_cannot_create_asset(client, agent_headers, sample_catalog):
         headers=agent_headers,
     )
     assert resp.status_code == 403
+
+
+def test_agent_can_create_customer(client, agent_headers):
+    resp = client.post(
+        "/customers",
+        json={"name": "C", "contact_email": "c@c.com"},
+        headers=agent_headers,
+    )
+    assert resp.status_code == 201
