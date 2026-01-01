@@ -12,3 +12,4 @@ from app.models.base import Base, IntPrimaryKey, TimestampMixin
 
 
 class AuditLog(Base, IntPrimaryKey):
+    __tablename__ = "audit_logs"
