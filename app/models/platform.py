@@ -13,3 +13,7 @@ from app.models.base import Base, IntPrimaryKey, TimestampMixin
 
 class AuditLog(Base, IntPrimaryKey):
     __tablename__ = "audit_logs"
+
+    actor_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), index=True, nullable=True
+    )
