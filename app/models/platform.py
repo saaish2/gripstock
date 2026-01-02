@@ -17,3 +17,4 @@ class AuditLog(Base, IntPrimaryKey):
     actor_id: Mapped[int | None] = mapped_column(
         ForeignKey("users.id", ondelete="SET NULL"), index=True, nullable=True
     )
+    action: Mapped[str] = mapped_column(String(80), index=True, nullable=False)
