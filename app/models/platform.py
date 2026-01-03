@@ -18,3 +18,4 @@ class AuditLog(Base, IntPrimaryKey):
         ForeignKey("users.id", ondelete="SET NULL"), index=True, nullable=True
     )
     action: Mapped[str] = mapped_column(String(80), index=True, nullable=False)
+    entity_type: Mapped[str] = mapped_column(String(60), index=True, nullable=False)
