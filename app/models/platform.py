@@ -20,3 +20,4 @@ class AuditLog(Base, IntPrimaryKey):
     action: Mapped[str] = mapped_column(String(80), index=True, nullable=False)
     entity_type: Mapped[str] = mapped_column(String(60), index=True, nullable=False)
     entity_id: Mapped[str] = mapped_column(String(60), index=True, nullable=False)
+    payload: Mapped[str | None] = mapped_column(Text, nullable=True)
