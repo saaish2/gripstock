@@ -24,3 +24,6 @@ class AuditLog(Base, IntPrimaryKey):
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), index=True, nullable=False
     )
+
+
+class ApiKey(Base, IntPrimaryKey, TimestampMixin):
