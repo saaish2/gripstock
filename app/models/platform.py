@@ -27,3 +27,4 @@ class AuditLog(Base, IntPrimaryKey):
 
 
 class ApiKey(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "api_keys"
