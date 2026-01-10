@@ -28,3 +28,5 @@ class AuditLog(Base, IntPrimaryKey):
 
 class ApiKey(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "api_keys"
+
+    label: Mapped[str] = mapped_column(String(120), nullable=False)
