@@ -33,3 +33,6 @@ class ApiKey(Base, IntPrimaryKey, TimestampMixin):
     fingerprint: Mapped[str] = mapped_column(String(64), unique=True, index=True, nullable=False)
     prefix: Mapped[str] = mapped_column(String(12), nullable=False)
     scopes: Mapped[str] = mapped_column(String(255), default="", nullable=False)
+    created_by_id: Mapped[int | None] = mapped_column(
+        ForeignKey("users.id", ondelete="SET NULL"), nullable=True
+    )
