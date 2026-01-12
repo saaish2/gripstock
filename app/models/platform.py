@@ -31,3 +31,4 @@ class ApiKey(Base, IntPrimaryKey, TimestampMixin):
 
     label: Mapped[str] = mapped_column(String(120), nullable=False)
     fingerprint: Mapped[str] = mapped_column(String(64), unique=True, index=True, nullable=False)
+    prefix: Mapped[str] = mapped_column(String(12), nullable=False)
