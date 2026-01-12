@@ -38,3 +38,7 @@ class ApiKey(Base, IntPrimaryKey, TimestampMixin):
     )
     last_used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+
+    @property
+    def is_active(self) -> bool:
+        return self.revoked_at is None
