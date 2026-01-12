@@ -42,3 +42,6 @@ class ApiKey(Base, IntPrimaryKey, TimestampMixin):
     @property
     def is_active(self) -> bool:
         return self.revoked_at is None
+
+    def scope_list(self) -> list[str]:
+        return [s for s in self.scopes.split(",") if s]
