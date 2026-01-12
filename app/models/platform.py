@@ -37,3 +37,4 @@ class ApiKey(Base, IntPrimaryKey, TimestampMixin):
         ForeignKey("users.id", ondelete="SET NULL"), nullable=True
     )
     last_used_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    revoked_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
