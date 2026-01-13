@@ -48,3 +48,4 @@ class ApiKey(Base, IntPrimaryKey, TimestampMixin):
 
 
 class WebhookEndpoint(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "webhook_endpoints"
