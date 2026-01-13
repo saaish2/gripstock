@@ -45,3 +45,6 @@ class ApiKey(Base, IntPrimaryKey, TimestampMixin):
 
     def scope_list(self) -> list[str]:
         return [s for s in self.scopes.split(",") if s]
+
+
+class WebhookEndpoint(Base, IntPrimaryKey, TimestampMixin):
