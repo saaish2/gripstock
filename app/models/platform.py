@@ -51,3 +51,4 @@ class WebhookEndpoint(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "webhook_endpoints"
 
     url: Mapped[str] = mapped_column(String(500), nullable=False)
+    secret: Mapped[str] = mapped_column(String(120), nullable=False)
