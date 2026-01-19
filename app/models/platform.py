@@ -53,3 +53,4 @@ class WebhookEndpoint(Base, IntPrimaryKey, TimestampMixin):
     url: Mapped[str] = mapped_column(String(500), nullable=False)
     secret: Mapped[str] = mapped_column(String(120), nullable=False)
     event_types: Mapped[str] = mapped_column(String(500), default="", nullable=False)
+    is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
