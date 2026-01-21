@@ -58,3 +58,7 @@ class WebhookEndpoint(Base, IntPrimaryKey, TimestampMixin):
     deliveries: Mapped[list[WebhookDelivery]] = relationship(
         back_populates="endpoint", cascade="all, delete-orphan"
     )
+
+    def subscribes_to(self, event_type: str) -> bool:
+        types = {t for t in self.event_types.split(",") if t}
+        return "*" in types or event_type in types
