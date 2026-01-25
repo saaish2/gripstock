@@ -65,3 +65,4 @@ class WebhookEndpoint(Base, IntPrimaryKey, TimestampMixin):
 
 
 class WebhookDelivery(Base, IntPrimaryKey, TimestampMixin):
+    __tablename__ = "webhook_deliveries"
