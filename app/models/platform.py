@@ -70,3 +70,4 @@ class WebhookDelivery(Base, IntPrimaryKey, TimestampMixin):
     endpoint_id: Mapped[int] = mapped_column(
         ForeignKey("webhook_endpoints.id", ondelete="CASCADE"), index=True, nullable=False
     )
+    event_type: Mapped[str] = mapped_column(String(80), index=True, nullable=False)
