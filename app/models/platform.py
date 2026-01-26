@@ -66,3 +66,7 @@ class WebhookEndpoint(Base, IntPrimaryKey, TimestampMixin):
 
 class WebhookDelivery(Base, IntPrimaryKey, TimestampMixin):
     __tablename__ = "webhook_deliveries"
+
+    endpoint_id: Mapped[int] = mapped_column(
+        ForeignKey("webhook_endpoints.id", ondelete="CASCADE"), index=True, nullable=False
+    )
