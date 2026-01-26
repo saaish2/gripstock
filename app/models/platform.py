@@ -75,3 +75,4 @@ class WebhookDelivery(Base, IntPrimaryKey, TimestampMixin):
     status: Mapped[WebhookStatus] = mapped_column(
         String(20), default=WebhookStatus.PENDING, index=True, nullable=False
     )
+    attempts: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
