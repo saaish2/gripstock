@@ -72,3 +72,6 @@ class WebhookDelivery(Base, IntPrimaryKey, TimestampMixin):
     )
     event_type: Mapped[str] = mapped_column(String(80), index=True, nullable=False)
     payload: Mapped[str] = mapped_column(Text, nullable=False)
+    status: Mapped[WebhookStatus] = mapped_column(
+        String(20), default=WebhookStatus.PENDING, index=True, nullable=False
+    )
