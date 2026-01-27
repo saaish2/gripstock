@@ -76,3 +76,6 @@ class WebhookDelivery(Base, IntPrimaryKey, TimestampMixin):
         String(20), default=WebhookStatus.PENDING, index=True, nullable=False
     )
     attempts: Mapped[int] = mapped_column(Integer, default=0, nullable=False)
+    next_attempt_at: Mapped[datetime | None] = mapped_column(
+        DateTime(timezone=True), index=True, nullable=True
+    )
