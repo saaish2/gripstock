@@ -65,3 +65,7 @@ All notable changes to gripstock are documented here.
 ## 1.5.0
 
 - Quote endpoint for non-binding estimates.
+
+## 1.6.0
+
+- Availability calendar per asset.
