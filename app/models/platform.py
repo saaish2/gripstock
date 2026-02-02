@@ -83,3 +83,6 @@ class WebhookDelivery(Base, IntPrimaryKey, TimestampMixin):
     delivered_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     endpoint: Mapped[WebhookEndpoint] = relationship(back_populates="deliveries")
+
+
+class IdempotencyKey(Base, IntPrimaryKey):
