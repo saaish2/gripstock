@@ -86,3 +86,4 @@ class WebhookDelivery(Base, IntPrimaryKey, TimestampMixin):
 
 
 class IdempotencyKey(Base, IntPrimaryKey):
+    __tablename__ = "idempotency_keys"
