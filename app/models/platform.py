@@ -89,3 +89,4 @@ class IdempotencyKey(Base, IntPrimaryKey):
     __tablename__ = "idempotency_keys"
 
     key: Mapped[str] = mapped_column(String(120), unique=True, index=True, nullable=False)
+    method: Mapped[str] = mapped_column(String(10), nullable=False)
