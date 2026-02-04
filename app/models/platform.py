@@ -92,3 +92,4 @@ class IdempotencyKey(Base, IntPrimaryKey):
     method: Mapped[str] = mapped_column(String(10), nullable=False)
     path: Mapped[str] = mapped_column(String(255), nullable=False)
     response_code: Mapped[int] = mapped_column(Integer, nullable=False)
+    response_body: Mapped[str] = mapped_column(Text, nullable=False)
