@@ -93,3 +93,6 @@ class IdempotencyKey(Base, IntPrimaryKey):
     path: Mapped[str] = mapped_column(String(255), nullable=False)
     response_code: Mapped[int] = mapped_column(Integer, nullable=False)
     response_body: Mapped[str] = mapped_column(Text, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), index=True, nullable=False
+    )
