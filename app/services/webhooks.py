@@ -29,3 +29,8 @@ def sign_payload(secret: str, body: str) -> str:
 
 
 class WebhookService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.settings = get_settings()
+        self.endpoints = WebhookRepository(session)
+        self.deliveries = WebhookDeliveryRepository(session)
