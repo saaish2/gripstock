@@ -20,3 +20,9 @@ from app.errors import NotFoundError
 from app.models.base import utcnow
 from app.models.platform import WebhookDelivery, WebhookEndpoint
 from app.repositories.operations import WebhookDeliveryRepository, WebhookRepository
+
+
+def sign_payload(secret: str, body: str) -> str:
+    """Return the hex HMAC-SHA256 signature for a webhook body."""
+
+    return hmac.new(secret.encode(), body.encode(), hashlib.sha256).hexdigest()
