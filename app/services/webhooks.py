@@ -26,3 +26,6 @@ def sign_payload(secret: str, body: str) -> str:
     """Return the hex HMAC-SHA256 signature for a webhook body."""
 
     return hmac.new(secret.encode(), body.encode(), hashlib.sha256).hexdigest()
+
+
+class WebhookService:
