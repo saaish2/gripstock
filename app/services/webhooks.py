@@ -34,3 +34,12 @@ class WebhookService:
         self.settings = get_settings()
         self.endpoints = WebhookRepository(session)
         self.deliveries = WebhookDeliveryRepository(session)
+
+    def register(self, url: str, secret: str, event_types: list[str]) -> WebhookEndpoint:
+        endpoint = WebhookEndpoint(
+            url=url,
+            secret=secret,
+            event_types=",".join(event_types) if event_types else "*",
+        )
+        self.endpoints.add(endpoint)
+        return endpoint
