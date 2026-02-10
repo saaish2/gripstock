@@ -43,3 +43,9 @@ class WebhookService:
         )
         self.endpoints.add(endpoint)
         return endpoint
+
+    def get(self, endpoint_id: int) -> WebhookEndpoint:
+        endpoint = self.endpoints.get(endpoint_id)
+        if endpoint is None:
+            raise NotFoundError(f"webhook endpoint {endpoint_id} not found")
+        return endpoint
