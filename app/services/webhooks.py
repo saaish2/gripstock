@@ -49,3 +49,9 @@ class WebhookService:
         if endpoint is None:
             raise NotFoundError(f"webhook endpoint {endpoint_id} not found")
         return endpoint
+
+    def deactivate(self, endpoint_id: int) -> WebhookEndpoint:
+        endpoint = self.get(endpoint_id)
+        endpoint.is_active = False
+        self.session.flush()
+        return endpoint
