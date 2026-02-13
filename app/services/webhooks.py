@@ -55,3 +55,21 @@ class WebhookService:
         endpoint.is_active = False
         self.session.flush()
         return endpoint
+
+    def emit(self, event_type: str, payload: dict) -> list[WebhookDelivery]:
+        """Fan an event out to every subscribed endpoint as a pending delivery."""
+
+        body = json.dumps(payload, default=str, separators=(",", ":"))
+        created: list[WebhookDelivery] = []
+        for endpoint in self.endpoints.active_endpoints():
+            if not endpoint.subscribes_to(event_type):
+                continue
+            delivery = WebhookDelivery(
+                endpoint_id=endpoint.id,
+                event_type=event_type,
+                payload=body,
+                next_attempt_at=utcnow(),
+            )
+            self.deliveries.add(delivery)
+            created.append(delivery)
+        return created
