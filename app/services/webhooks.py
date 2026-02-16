@@ -79,3 +79,14 @@ class WebhookService:
         delivery.delivered_at = utcnow()
         delivery.attempts += 1
         self.session.flush()
+
+    def mark_failed_attempt(self, delivery: WebhookDelivery, error: str) -> None:
+        delivery.attempts += 1
+        delivery.last_error = error[:500]
+        if delivery.attempts >= self.settings.webhook_max_attempts:
+            delivery.status = WebhookStatus.FAILED
+            delivery.next_attempt_at = None
+        else:
+            backoff = self.settings.webhook_backoff_seconds * (2 ** (delivery.attempts - 1))
+            delivery.next_attempt_at = utcnow() + timedelta(seconds=backoff)
+        self.session.flush()
