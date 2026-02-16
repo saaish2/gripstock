@@ -90,3 +90,6 @@ class WebhookService:
             backoff = self.settings.webhook_backoff_seconds * (2 ** (delivery.attempts - 1))
             delivery.next_attempt_at = utcnow() + timedelta(seconds=backoff)
         self.session.flush()
+
+    def signature_for(self, endpoint: WebhookEndpoint, body: str) -> str:
+        return sign_payload(endpoint.secret, body)
