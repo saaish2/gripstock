@@ -73,3 +73,9 @@ class WebhookService:
             self.deliveries.add(delivery)
             created.append(delivery)
         return created
+
+    def mark_delivered(self, delivery: WebhookDelivery) -> None:
+        delivery.status = WebhookStatus.DELIVERED
+        delivery.delivered_at = utcnow()
+        delivery.attempts += 1
+        self.session.flush()
