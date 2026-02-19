@@ -12,3 +12,6 @@ from app.security import fingerprint_token, generate_api_key
 
 
 class ApiKeyService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
+        self.repo = ApiKeyRepository(session)
