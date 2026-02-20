@@ -27,3 +27,11 @@ class ApiKeyService:
         )
         self.repo.add(key)
         return key, plaintext
+
+    def authenticate(self, plaintext: str) -> ApiKey:
+        key = self.repo.get_by_fingerprint(fingerprint_token(plaintext))
+        if key is None or not key.is_active:
+            raise AuthenticationError("invalid or revoked API key")
+        key.last_used_at = utcnow()
+        self.session.flush()
+        return key
