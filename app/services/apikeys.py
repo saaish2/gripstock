@@ -35,3 +35,12 @@ class ApiKeyService:
         key.last_used_at = utcnow()
         self.session.flush()
         return key
+
+    def revoke(self, key_id: int) -> ApiKey:
+        key = self.repo.get(key_id)
+        if key is None:
+            raise NotFoundError(f"api key {key_id} not found")
+        if key.revoked_at is None:
+            key.revoked_at = utcnow()
+            self.session.flush()
+        return key
