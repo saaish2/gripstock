@@ -44,3 +44,6 @@ class ApiKeyService:
             key.revoked_at = utcnow()
             self.session.flush()
         return key
+
+    def list_active(self) -> list[ApiKey]:
+        return self.repo.list_active()
