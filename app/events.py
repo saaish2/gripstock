@@ -1,0 +1,16 @@
+"""Domain-event constants and a thin dispatcher.
+
+Services describe what happened in terms of stable event names; the dispatcher
+turns those into webhook deliveries. Keeping the catalogue in one place means
+the webhook subscription UI and the docs can enumerate exactly what a customer
+can listen for.
+"""
+
+from __future__ import annotations
+
+from typing import Any
+
+from sqlalchemy.orm import Session
+
+from app.logging import get_logger, log_event
+from app.services.webhooks import WebhookService
