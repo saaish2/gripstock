@@ -14,3 +14,5 @@ from sqlalchemy.orm import Session
 
 from app.logging import get_logger, log_event
 from app.services.webhooks import WebhookService
+
+logger = get_logger("events")
