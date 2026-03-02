@@ -22,3 +22,4 @@ class EventType:
     RESERVATION_CREATED = "reservation.created"
     RESERVATION_CONFIRMED = "reservation.confirmed"
     RESERVATION_CANCELLED = "reservation.cancelled"
+    RESERVATION_CHECKED_OUT = "reservation.checked_out"
