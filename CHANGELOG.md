@@ -69,3 +69,7 @@ All notable changes to gripstock are documented here.
 ## 1.6.0
 
 - Availability calendar per asset.
+
+## 1.6.1
+
+- Fix naive/aware datetime comparison on SQLite.
