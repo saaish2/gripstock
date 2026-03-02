@@ -20,3 +20,4 @@ logger = get_logger("events")
 
 class EventType:
     RESERVATION_CREATED = "reservation.created"
+    RESERVATION_CONFIRMED = "reservation.confirmed"
