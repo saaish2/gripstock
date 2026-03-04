@@ -24,3 +24,4 @@ class EventType:
     RESERVATION_CANCELLED = "reservation.cancelled"
     RESERVATION_CHECKED_OUT = "reservation.checked_out"
     RESERVATION_CHECKED_IN = "reservation.checked_in"
+    ORDER_CREATED = "order.created"
