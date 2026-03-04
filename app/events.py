@@ -25,3 +25,4 @@ class EventType:
     RESERVATION_CHECKED_OUT = "reservation.checked_out"
     RESERVATION_CHECKED_IN = "reservation.checked_in"
     ORDER_CREATED = "order.created"
+    INVOICE_ISSUED = "invoice.issued"
