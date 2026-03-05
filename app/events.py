@@ -27,3 +27,4 @@ class EventType:
     ORDER_CREATED = "order.created"
     INVOICE_ISSUED = "invoice.issued"
     INVOICE_PAID = "invoice.paid"
+    PAYMENT_RECEIVED = "payment.received"
