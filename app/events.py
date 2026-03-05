@@ -28,3 +28,4 @@ class EventType:
     INVOICE_ISSUED = "invoice.issued"
     INVOICE_PAID = "invoice.paid"
     PAYMENT_RECEIVED = "payment.received"
+    ASSET_RETIRED = "asset.retired"
