@@ -30,3 +30,18 @@ class EventType:
     PAYMENT_RECEIVED = "payment.received"
     ASSET_RETIRED = "asset.retired"
     DAMAGE_REPORTED = "damage.reported"
+
+
+ALL_EVENTS: tuple[str, ...] = (
+    EventType.RESERVATION_CREATED,
+    EventType.RESERVATION_CONFIRMED,
+    EventType.RESERVATION_CANCELLED,
+    EventType.RESERVATION_CHECKED_OUT,
+    EventType.RESERVATION_CHECKED_IN,
+    EventType.ORDER_CREATED,
+    EventType.INVOICE_ISSUED,
+    EventType.INVOICE_PAID,
+    EventType.PAYMENT_RECEIVED,
+    EventType.ASSET_RETIRED,
+    EventType.DAMAGE_REPORTED,
+)
