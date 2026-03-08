@@ -45,3 +45,7 @@ ALL_EVENTS: tuple[str, ...] = (
     EventType.ASSET_RETIRED,
     EventType.DAMAGE_REPORTED,
 )
+
+
+def is_known_event(event_type: str) -> bool:
+    return event_type in ALL_EVENTS
