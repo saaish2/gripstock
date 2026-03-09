@@ -59,3 +59,15 @@ def emit_event(session: Session, event_type: str, payload: dict[str, Any]) -> in
     deliveries = WebhookService(session).emit(event_type, payload)
     log_event(logger, "events.emitted", event_type=event_type, deliveries=len(deliveries))
     return len(deliveries)
+
+
+def envelope(event_type: str, entity_type: str, entity_id: Any, **fields: Any) -> dict[str, Any]:
+    """Build a consistent webhook payload envelope."""
+
+    body: dict[str, Any] = {
+        "event": event_type,
+        "entity_type": entity_type,
+        "entity_id": str(entity_id),
+    }
+    body.update(fields)
+    return body
