@@ -49,3 +49,13 @@ ALL_EVENTS: tuple[str, ...] = (
 
 def is_known_event(event_type: str) -> bool:
     return event_type in ALL_EVENTS
+
+
+def emit_event(session: Session, event_type: str, payload: dict[str, Any]) -> int:
+    """Fan a domain event out to subscribed webhooks; return delivery count."""
+
+    if not is_known_event(event_type):
+        log_event(logger, "events.unknown", event_type=event_type)
+    deliveries = WebhookService(session).emit(event_type, payload)
+    log_event(logger, "events.emitted", event_type=event_type, deliveries=len(deliveries))
+    return len(deliveries)
