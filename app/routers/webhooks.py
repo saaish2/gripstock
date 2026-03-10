@@ -10,3 +10,5 @@ from app.models.user import User
 from app.schemas.common import MessageResponse
 from app.schemas.operations import WebhookCreate, WebhookOut
 from app.services.webhooks import WebhookService
+
+router = APIRouter(prefix="/webhooks", tags=["webhooks"])
