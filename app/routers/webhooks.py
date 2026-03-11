@@ -22,3 +22,12 @@ def register_webhook(
 ) -> WebhookOut:
     endpoint = WebhookService(session).register(payload.url, payload.secret, payload.event_types)
     return WebhookOut.model_validate(endpoint)
+
+
+@router.get("", response_model=list[WebhookOut])
+def list_webhooks(
+    _: User = Depends(require_admin),
+    session: Session = Depends(db_session),
+) -> list[WebhookOut]:
+    endpoints = WebhookService(session).endpoints.active_endpoints()
+    return [WebhookOut.model_validate(e) for e in endpoints]
