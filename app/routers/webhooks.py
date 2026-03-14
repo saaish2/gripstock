@@ -31,3 +31,13 @@ def list_webhooks(
 ) -> list[WebhookOut]:
     endpoints = WebhookService(session).endpoints.active_endpoints()
     return [WebhookOut.model_validate(e) for e in endpoints]
+
+
+@router.delete("/{endpoint_id}", response_model=MessageResponse)
+def deactivate_webhook(
+    endpoint_id: int,
+    _: User = Depends(require_admin),
+    session: Session = Depends(db_session),
+) -> MessageResponse:
+    WebhookService(session).deactivate(endpoint_id)
+    return MessageResponse(message="webhook deactivated")
