@@ -10,3 +10,5 @@ from app.models.user import User
 from app.schemas.common import MessageResponse
 from app.schemas.operations import ApiKeyCreate, ApiKeyCreated, ApiKeyOut
 from app.services.apikeys import ApiKeyService
+
+router = APIRouter(prefix="/api-keys", tags=["api-keys"])
