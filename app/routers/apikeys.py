@@ -24,3 +24,11 @@ def issue_key(
     out = ApiKeyCreated.model_validate(key)
     out.plaintext_key = plaintext
     return out
+
+
+@router.get("", response_model=list[ApiKeyOut])
+def list_keys(
+    _: User = Depends(require_admin),
+    session: Session = Depends(db_session),
+) -> list[ApiKeyOut]:
+    return [ApiKeyOut.model_validate(k) for k in ApiKeyService(session).list_active()]
