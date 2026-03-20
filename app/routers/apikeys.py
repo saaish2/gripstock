@@ -32,3 +32,13 @@ def list_keys(
     session: Session = Depends(db_session),
 ) -> list[ApiKeyOut]:
     return [ApiKeyOut.model_validate(k) for k in ApiKeyService(session).list_active()]
+
+
+@router.delete("/{key_id}", response_model=MessageResponse)
+def revoke_key(
+    key_id: int,
+    _: User = Depends(require_admin),
+    session: Session = Depends(db_session),
+) -> MessageResponse:
+    ApiKeyService(session).revoke(key_id)
+    return MessageResponse(message="api key revoked")
