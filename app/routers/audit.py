@@ -11,3 +11,6 @@ from app.repositories.operations import AuditLogRepository
 from app.schemas.common import ORMModel
 
 router = APIRouter(prefix="/audit", tags=["audit"])
+
+
+class AuditEntryOut(ORMModel):
