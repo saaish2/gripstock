@@ -16,3 +16,4 @@ router = APIRouter(prefix="/audit", tags=["audit"])
 class AuditEntryOut(ORMModel):
     id: int
     actor_id: int | None = None
+    action: str
