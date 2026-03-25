@@ -18,3 +18,4 @@ class AuditEntryOut(ORMModel):
     actor_id: int | None = None
     action: str
     entity_type: str
+    entity_id: str
