@@ -19,3 +19,4 @@ class AuditEntryOut(ORMModel):
     action: str
     entity_type: str
     entity_id: str
+    payload: str | None = None
