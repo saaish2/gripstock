@@ -20,3 +20,13 @@ class AuditEntryOut(ORMModel):
     entity_type: str
     entity_id: str
     payload: str | None = None
+
+
+@router.get("", response_model=list[AuditEntryOut])
+def recent(
+    limit: int = Query(default=100, ge=1, le=500),
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> list[AuditEntryOut]:
+    rows = AuditLogRepository(session).recent(limit)
+    return [AuditEntryOut.model_validate(r) for r in rows]
