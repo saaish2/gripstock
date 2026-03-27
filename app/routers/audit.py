@@ -30,3 +30,14 @@ def recent(
 ) -> list[AuditEntryOut]:
     rows = AuditLogRepository(session).recent(limit)
     return [AuditEntryOut.model_validate(r) for r in rows]
+
+
+@router.get("/{entity_type}/{entity_id}", response_model=list[AuditEntryOut])
+def for_entity(
+    entity_type: str,
+    entity_id: str,
+    _: User = Depends(require_manager),
+    session: Session = Depends(db_session),
+) -> list[AuditEntryOut]:
+    rows = AuditLogRepository(session).for_entity(entity_type, entity_id)
+    return [AuditEntryOut.model_validate(r) for r in rows]
