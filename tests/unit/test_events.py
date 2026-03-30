@@ -12,3 +12,9 @@ from app.models.catalog import Asset, Category
 from app.models.customer import Customer
 from app.services.reservations import ReservationService
 from app.services.webhooks import WebhookService
+
+
+def test_known_events():
+    assert is_known_event(EventType.RESERVATION_CREATED)
+    assert not is_known_event("nope.invalid")
+    assert len(ALL_EVENTS) >= 10
