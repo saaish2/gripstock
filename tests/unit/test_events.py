@@ -26,3 +26,9 @@ def test_envelope_shape():
     assert body["entity_type"] == "order"
     assert body["entity_id"] == "7"
     assert body["reference"] == "ORD-1"
+
+
+def test_emit_creates_deliveries(session):
+    WebhookService(session).register("https://x.example/h", "secret-val", ["*"])
+    count = emit_event(session, EventType.INVOICE_PAID, envelope(EventType.INVOICE_PAID, "invoice", 1))
+    assert count == 1
