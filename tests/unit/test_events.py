@@ -18,3 +18,11 @@ def test_known_events():
     assert is_known_event(EventType.RESERVATION_CREATED)
     assert not is_known_event("nope.invalid")
     assert len(ALL_EVENTS) >= 10
+
+
+def test_envelope_shape():
+    body = envelope(EventType.ORDER_CREATED, "order", 7, reference="ORD-1")
+    assert body["event"] == "order.created"
+    assert body["entity_type"] == "order"
+    assert body["entity_id"] == "7"
+    assert body["reference"] == "ORD-1"
