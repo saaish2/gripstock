@@ -32,3 +32,33 @@ def test_emit_creates_deliveries(session):
     WebhookService(session).register("https://x.example/h", "secret-val", ["*"])
     count = emit_event(session, EventType.INVOICE_PAID, envelope(EventType.INVOICE_PAID, "invoice", 1))
     assert count == 1
+
+
+def test_reservation_create_emits_event(session):
+    category = Category(name="Lighting", slug="lighting")
+    session.add(category)
+    session.flush()
+    asset = Asset(
+        category_id=category.id,
+        name="Light",
+        barcode="L-9",
+        daily_rate=Decimal("50"),
+        replacement_value=Decimal("900"),
+    )
+    customer = Customer(name="C", contact_email="c@e.com", credit_limit=Decimal("5000"))
+    session.add_all([asset, customer])
+    session.flush()
+
+    WebhookService(session).register("https://x.example/h", "secret-val", ["reservation.created"])
+    start = datetime(2025, 7, 1)
+    ReservationService(session).create(
+        {
+            "customer_id": customer.id,
+            "starts_at": start,
+            "ends_at": start + timedelta(days=2),
+            "lines": [{"asset_id": asset.id}],
+        }
+    )
+    deliveries = WebhookService(session).deliveries.due(utcnow() + timedelta(minutes=1))
+    assert any(d.event_type == "reservation.created" for d in deliveries)
+    assert all(d.status == WebhookStatus.PENDING for d in deliveries)
