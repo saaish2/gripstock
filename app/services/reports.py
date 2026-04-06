@@ -24,3 +24,4 @@ from app.models.reservation import Reservation
 
 @dataclass(slots=True)
 class InventorySnapshot:
+    total: int
