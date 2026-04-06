@@ -20,3 +20,7 @@ from app.models.catalog import Asset, Category
 from app.models.customer import Customer
 from app.models.operations import MaintenanceOrder
 from app.models.reservation import Reservation
+
+
+@dataclass(slots=True)
+class InventorySnapshot:
