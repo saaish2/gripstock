@@ -26,3 +26,11 @@ from app.models.reservation import Reservation
 class InventorySnapshot:
     total: int
     by_status: dict[str, int] = field(default_factory=dict)
+
+    @property
+    def utilisation(self) -> float:
+        if self.total == 0:
+            return 0.0
+        in_use = self.by_status.get(AssetStatus.CHECKED_OUT, 0)
+        reserved = self.by_status.get(AssetStatus.RESERVED, 0)
+        return round((in_use + reserved) / self.total, 4)
