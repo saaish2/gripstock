@@ -25,3 +25,4 @@ from app.models.reservation import Reservation
 @dataclass(slots=True)
 class InventorySnapshot:
     total: int
+    by_status: dict[str, int] = field(default_factory=dict)
