@@ -34,3 +34,6 @@ class InventorySnapshot:
         in_use = self.by_status.get(AssetStatus.CHECKED_OUT, 0)
         reserved = self.by_status.get(AssetStatus.RESERVED, 0)
         return round((in_use + reserved) / self.total, 4)
+
+
+class ReportService:
