@@ -39,3 +39,13 @@ class InventorySnapshot:
 class ReportService:
     def __init__(self, session: Session) -> None:
         self.session = session
+
+    def inventory_snapshot(self) -> InventorySnapshot:
+        rows = self.session.execute(
+            select(Asset.status, func.count())
+            .where(Asset.deleted_at.is_(None))
+            .group_by(Asset.status)
+        ).all()
+        by_status = {str(status): count for status, count in rows}
+        total = sum(by_status.values())
+        return InventorySnapshot(total=total, by_status=by_status)
