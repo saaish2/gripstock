@@ -37,3 +37,5 @@ class InventorySnapshot:
 
 
 class ReportService:
+    def __init__(self, session: Session) -> None:
+        self.session = session
