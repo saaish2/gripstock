@@ -49,3 +49,18 @@ class ReportService:
         by_status = {str(status): count for status, count in rows}
         total = sum(by_status.values())
         return InventorySnapshot(total=total, by_status=by_status)
+
+    def revenue_summary(self) -> dict[str, Decimal]:
+        billed = self.session.execute(
+            select(func.coalesce(func.sum(Invoice.total), 0)).where(
+                Invoice.status != InvoiceStatus.VOID
+            )
+        ).scalar_one()
+        collected = self.session.execute(
+            select(func.coalesce(func.sum(Invoice.amount_paid), 0))
+        ).scalar_one()
+        return {
+            "billed": Decimal(str(billed)),
+            "collected": Decimal(str(collected)),
+            "outstanding": Decimal(str(billed)) - Decimal(str(collected)),
+        }
