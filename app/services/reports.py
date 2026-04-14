@@ -64,3 +64,11 @@ class ReportService:
             "collected": Decimal(str(collected)),
             "outstanding": Decimal(str(billed)) - Decimal(str(collected)),
         }
+
+    def overdue_exposure(self) -> dict[str, object]:
+        rows = self.session.execute(
+            select(func.count(), func.coalesce(func.sum(Invoice.total - Invoice.amount_paid), 0))
+            .where(Invoice.status == InvoiceStatus.OVERDUE)
+        ).one()
+        count, amount = rows
+        return {"count": count, "amount": Decimal(str(amount))}
