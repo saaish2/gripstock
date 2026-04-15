@@ -72,3 +72,16 @@ class ReportService:
         ).one()
         count, amount = rows
         return {"count": count, "amount": Decimal(str(amount))}
+
+    def active_reservations(self, now: datetime) -> int:
+        return self.session.execute(
+            select(func.count()).where(
+                Reservation.status.in_(
+                    [
+                        ReservationStatus.CONFIRMED,
+                        ReservationStatus.PICKED_UP,
+                        ReservationStatus.OVERDUE,
+                    ]
+                )
+            )
+        ).scalar_one()
