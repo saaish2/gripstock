@@ -85,3 +85,24 @@ class ReportService:
                 )
             )
         ).scalar_one()
+
+    def revenue_by_category(self) -> list[dict]:
+        """Billed revenue grouped by the category of each invoiced asset.
+
+        Walks invoice → order → order_lines → asset → category and sums the
+        line subtotals so finance can see which gear types earn their keep.
+        """
+
+        from app.models.order import OrderLine, RentalOrder
+
+        rows = self.session.execute(
+            select(Category.name, func.coalesce(func.sum(OrderLine.line_subtotal), 0))
+            .join(Asset, Asset.category_id == Category.id)
+            .join(OrderLine, OrderLine.asset_id == Asset.id)
+            .join(RentalOrder, RentalOrder.id == OrderLine.order_id)
+            .join(Invoice, Invoice.order_id == RentalOrder.id)
+            .where(Invoice.status != InvoiceStatus.VOID)
+            .group_by(Category.name)
+            .order_by(func.sum(OrderLine.line_subtotal).desc())
+        ).all()
+        return [{"category": name, "revenue": Decimal(str(total))} for name, total in rows]
