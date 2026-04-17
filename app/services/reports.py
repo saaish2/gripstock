@@ -106,3 +106,14 @@ class ReportService:
             .order_by(func.sum(OrderLine.line_subtotal).desc())
         ).all()
         return [{"category": name, "revenue": Decimal(str(total))} for name, total in rows]
+
+    def maintenance_summary(self) -> dict[str, object]:
+        rows = self.session.execute(
+            select(MaintenanceOrder.status, func.count()).group_by(MaintenanceOrder.status)
+        ).all()
+        by_status = {str(status): count for status, count in rows}
+        open_cost = self.session.execute(
+            select(func.coalesce(func.sum(MaintenanceOrder.labor_cost + MaintenanceOrder.parts_cost), 0))
+            .where(MaintenanceOrder.status != MaintenanceStatus.CANCELLED)
+        ).scalar_one()
+        return {"by_status": by_status, "total_cost": Decimal(str(open_cost))}
