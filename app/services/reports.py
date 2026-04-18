@@ -117,3 +117,15 @@ class ReportService:
             .where(MaintenanceOrder.status != MaintenanceStatus.CANCELLED)
         ).scalar_one()
         return {"by_status": by_status, "total_cost": Decimal(str(open_cost))}
+
+    def top_customers_by_balance(self, limit: int = 5) -> list[dict]:
+        rows = self.session.execute(
+            select(Customer.id, Customer.name, Customer.outstanding_balance)
+            .where(Customer.outstanding_balance > 0)
+            .order_by(Customer.outstanding_balance.desc())
+            .limit(limit)
+        ).all()
+        return [
+            {"customer_id": cid, "name": name, "outstanding_balance": Decimal(str(bal))}
+            for cid, name, bal in rows
+        ]
