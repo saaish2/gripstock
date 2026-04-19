@@ -129,3 +129,17 @@ class ReportService:
             {"customer_id": cid, "name": name, "outstanding_balance": Decimal(str(bal))}
             for cid, name, bal in rows
         ]
+
+    def dashboard(self, now: datetime) -> dict[str, object]:
+        snapshot = self.inventory_snapshot()
+        return {
+            "inventory": {
+                "total": snapshot.total,
+                "by_status": snapshot.by_status,
+                "utilisation": snapshot.utilisation,
+            },
+            "revenue": self.revenue_summary(),
+            "overdue": self.overdue_exposure(),
+            "active_reservations": self.active_reservations(now),
+            "top_customers": self.top_customers_by_balance(),
+        }
