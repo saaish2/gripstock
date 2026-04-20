@@ -19,3 +19,16 @@ def dashboard(
     session: Session = Depends(db_session),
 ) -> dict:
     return ReportService(session).dashboard(utcnow())
+
+
+@router.get("/inventory")
+def inventory(
+    _: User = Depends(require_viewer),
+    session: Session = Depends(db_session),
+) -> dict:
+    snapshot = ReportService(session).inventory_snapshot()
+    return {
+        "total": snapshot.total,
+        "by_status": snapshot.by_status,
+        "utilisation": snapshot.utilisation,
+    }
