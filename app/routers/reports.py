@@ -32,3 +32,11 @@ def inventory(
         "by_status": snapshot.by_status,
         "utilisation": snapshot.utilisation,
     }
+
+
+@router.get("/revenue")
+def revenue(
+    _: User = Depends(require_viewer),
+    session: Session = Depends(db_session),
+) -> dict:
+    return ReportService(session).revenue_summary()
