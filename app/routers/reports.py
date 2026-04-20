@@ -40,3 +40,11 @@ def revenue(
     session: Session = Depends(db_session),
 ) -> dict:
     return ReportService(session).revenue_summary()
+
+
+@router.get("/overdue")
+def overdue(
+    _: User = Depends(require_viewer),
+    session: Session = Depends(db_session),
+) -> dict:
+    return ReportService(session).overdue_exposure()
