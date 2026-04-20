@@ -11,3 +11,11 @@ from app.models.user import User
 from app.services.reports import ReportService
 
 router = APIRouter(prefix="/reports", tags=["reports"])
+
+
+@router.get("/dashboard")
+def dashboard(
+    _: User = Depends(require_viewer),
+    session: Session = Depends(db_session),
+) -> dict:
+    return ReportService(session).dashboard(utcnow())
