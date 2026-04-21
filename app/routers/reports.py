@@ -56,3 +56,11 @@ def revenue_by_category(
     session: Session = Depends(db_session),
 ) -> dict:
     return {"categories": ReportService(session).revenue_by_category()}
+
+
+@router.get("/maintenance")
+def maintenance_summary(
+    _: User = Depends(require_viewer),
+    session: Session = Depends(db_session),
+) -> dict:
+    return ReportService(session).maintenance_summary()
