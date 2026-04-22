@@ -77,3 +77,7 @@ All notable changes to gripstock are documented here.
 ## 1.7.0
 
 - Revenue-by-category and maintenance reports.
+
+## 1.8.0
+
+- Hardening pass: stricter RBAC and validation.
