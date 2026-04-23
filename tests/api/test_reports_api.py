@@ -16,3 +16,9 @@ def test_inventory_report(client, auth_headers, sample_catalog):
     resp = client.get("/reports/inventory", headers=auth_headers)
     assert resp.status_code == 200
     assert "by_status" in resp.json()
+
+
+def test_revenue_report(client, auth_headers):
+    resp = client.get("/reports/revenue", headers=auth_headers)
+    assert resp.status_code == 200
+    assert "billed" in resp.json()
