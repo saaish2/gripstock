@@ -22,3 +22,10 @@ def test_revenue_report(client, auth_headers):
     resp = client.get("/reports/revenue", headers=auth_headers)
     assert resp.status_code == 200
     assert "billed" in resp.json()
+
+
+def test_audit_log_populated(client, auth_headers, sample_catalog):
+    resp = client.get("/audit", headers=auth_headers)
+    assert resp.status_code == 200
+    actions = [entry["action"] for entry in resp.json()]
+    assert "asset.created" in actions
