@@ -51,3 +51,11 @@ def sweep_invoice_late_fees(session: Session, now: datetime | None = None) -> di
             billing.accrue_late_fee(invoice.id, daily, 1)
             accrued_total += 1
     return {"invoices_touched": accrued_total, "as_of": today.isoformat()}
+
+
+def run_all(session: Session, now: datetime | None = None) -> dict:
+    now = now or utcnow()
+    return {
+        "reservations": sweep_overdue_reservations(session, now),
+        "late_fees": sweep_invoice_late_fees(session, now),
+    }
