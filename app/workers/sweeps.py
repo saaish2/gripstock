@@ -17,3 +17,16 @@ from app.repositories.order import InvoiceRepository
 from app.repositories.reservation import ReservationRepository
 from app.services.billing import BillingService
 from app.services.pricing import late_fee_for
+
+
+def sweep_overdue_reservations(session: Session, now: datetime | None = None) -> dict:
+    """Flip picked-up reservations past their return window to OVERDUE."""
+
+    now = now or utcnow()
+    repo = ReservationRepository(session)
+    affected = 0
+    for reservation in repo.due_for_overdue_sweep(now):
+        reservation.status = ReservationStatus.OVERDUE
+        affected += 1
+    session.flush()
+    return {"swept": affected, "as_of": now.isoformat()}
