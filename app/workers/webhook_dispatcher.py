@@ -18,3 +18,6 @@ from app.repositories.operations import WebhookDeliveryRepository, WebhookReposi
 from app.services.webhooks import WebhookService
 
 logger = get_logger("webhooks")
+
+
+class Transport(Protocol):
