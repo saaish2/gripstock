@@ -16,3 +16,5 @@ from app.logging import get_logger
 from app.models.base import utcnow
 from app.repositories.operations import WebhookDeliveryRepository, WebhookRepository
 from app.services.webhooks import WebhookService
+
+logger = get_logger("webhooks")
