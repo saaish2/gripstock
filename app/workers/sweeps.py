@@ -30,3 +30,24 @@ def sweep_overdue_reservations(session: Session, now: datetime | None = None) ->
         affected += 1
     session.flush()
     return {"swept": affected, "as_of": now.isoformat()}
+
+
+def sweep_invoice_late_fees(session: Session, now: datetime | None = None) -> dict:
+    """Accrue late fees on every overdue invoice and mark them OVERDUE."""
+
+    now = now or utcnow()
+    today = now.date()
+    billing = BillingService(session)
+    invoices = InvoiceRepository(session)
+
+    accrued_total = 0
+    for invoice in invoices.overdue_as_of(today):
+        days_late = (today - invoice.due_on).days if invoice.due_on else 0
+        if days_late <= 0:
+            continue
+        daily = invoice.subtotal / max(1, days_late)
+        fee = late_fee_for(daily, 1, billing.settings)
+        if fee > 0:
+            billing.accrue_late_fee(invoice.id, daily, 1)
+            accrued_total += 1
+    return {"invoices_touched": accrued_total, "as_of": today.isoformat()}
