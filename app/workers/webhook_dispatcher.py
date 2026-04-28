@@ -21,3 +21,5 @@ logger = get_logger("webhooks")
 
 
 class Transport(Protocol):
+    def __call__(self, url: str, body: str, signature: str) -> int:  # pragma: no cover
+        ...
