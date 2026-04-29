@@ -29,3 +29,39 @@ def _noop_transport(url: str, body: str, signature: str) -> int:
     """Default transport used in tests — pretends every POST succeeds."""
 
     return 200
+
+
+def dispatch_due(
+    session: Session,
+    transport: Callable[[str, str, str], int] = _noop_transport,
+    limit: int = 50,
+) -> dict:
+    """Attempt delivery of every due webhook, applying backoff on failure."""
+
+    service = WebhookService(session)
+    deliveries = WebhookDeliveryRepository(session)
+    endpoints = WebhookRepository(session)
+
+    delivered = 0
+    failed = 0
+    for delivery in deliveries.due(utcnow(), limit=limit):
+        endpoint = endpoints.get(delivery.endpoint_id)
+        if endpoint is None or not endpoint.is_active:
+            service.mark_failed_attempt(delivery, "endpoint missing or inactive")
+            failed += 1
+            continue
+        signature = service.signature_for(endpoint, delivery.payload)
+        try:
+            status = transport(endpoint.url, delivery.payload, signature)
+        except Exception as exc:  # noqa: BLE001 - transport errors are expected
+            service.mark_failed_attempt(delivery, str(exc))
+            failed += 1
+            continue
+        if 200 <= status < 300:
+            service.mark_delivered(delivery)
+            delivered += 1
+        else:
+            service.mark_failed_attempt(delivery, f"non-2xx status {status}")
+            failed += 1
+
+    return {"delivered": delivered, "failed": failed}
