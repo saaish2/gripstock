@@ -23,3 +23,9 @@ logger = get_logger("webhooks")
 class Transport(Protocol):
     def __call__(self, url: str, body: str, signature: str) -> int:  # pragma: no cover
         ...
+
+
+def _noop_transport(url: str, body: str, signature: str) -> int:
+    """Default transport used in tests — pretends every POST succeeds."""
+
+    return 200
