@@ -23,3 +23,12 @@ def _cmd_initdb(_: argparse.Namespace) -> int:
     create_all()
     print("database schema created")
     return 0
+
+
+def _cmd_seed(_: argparse.Namespace) -> int:
+    from scripts.seed import seed_all
+
+    with session_scope() as session:
+        summary = seed_all(session)
+    print(f"seeded: {summary}")
+    return 0
