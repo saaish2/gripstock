@@ -39,3 +39,10 @@ def _cmd_sweep(_: argparse.Namespace) -> int:
         result = run_all(session)
     print(f"sweeps complete: {result}")
     return 0
+
+
+def _cmd_dispatch(_: argparse.Namespace) -> int:
+    with session_scope() as session:
+        result = dispatch_due(session)
+    print(f"webhook dispatch: {result}")
+    return 0
