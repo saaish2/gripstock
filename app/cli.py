@@ -32,3 +32,10 @@ def _cmd_seed(_: argparse.Namespace) -> int:
         summary = seed_all(session)
     print(f"seeded: {summary}")
     return 0
+
+
+def _cmd_sweep(_: argparse.Namespace) -> int:
+    with session_scope() as session:
+        result = run_all(session)
+    print(f"sweeps complete: {result}")
+    return 0
