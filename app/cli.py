@@ -46,3 +46,14 @@ def _cmd_dispatch(_: argparse.Namespace) -> int:
         result = dispatch_due(session)
     print(f"webhook dispatch: {result}")
     return 0
+
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(prog="gripstock")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    sub.add_parser("initdb", help="create database schema").set_defaults(func=_cmd_initdb)
+    sub.add_parser("seed", help="load demo data").set_defaults(func=_cmd_seed)
+    sub.add_parser("sweep", help="run overdue + late-fee sweeps").set_defaults(func=_cmd_sweep)
+    sub.add_parser("dispatch-webhooks", help="flush webhook queue").set_defaults(func=_cmd_dispatch)
+    return parser
