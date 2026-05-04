@@ -57,3 +57,9 @@ def build_parser() -> argparse.ArgumentParser:
     sub.add_parser("sweep", help="run overdue + late-fee sweeps").set_defaults(func=_cmd_sweep)
     sub.add_parser("dispatch-webhooks", help="flush webhook queue").set_defaults(func=_cmd_dispatch)
     return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = build_parser()
+    args = parser.parse_args(argv if argv is not None else sys.argv[1:])
+    return args.func(args)
