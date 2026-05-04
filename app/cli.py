@@ -63,3 +63,7 @@ def main(argv: list[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv if argv is not None else sys.argv[1:])
     return args.func(args)
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
