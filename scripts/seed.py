@@ -19,3 +19,11 @@ from app.services.auth import AuthService
 from app.services.catalog import AssetService, CategoryService
 from app.services.customers import CustomerService
 from app.services.reservations import ReservationService
+
+CATEGORIES = [
+    ("Cameras", "Cinema and mirrorless camera bodies"),
+    ("Lenses", "Prime and zoom cinema lenses"),
+    ("Lighting", "LED panels, HMIs, and tungsten fixtures"),
+    ("Grip", "Stands, clamps, flags, and rigging"),
+    ("Audio", "Recorders, mics, and wireless kits"),
+]
