@@ -27,3 +27,12 @@ CATEGORIES = [
     ("Grip", "Stands, clamps, flags, and rigging"),
     ("Audio", "Recorders, mics, and wireless kits"),
 ]
+
+ASSETS = [
+    ("Cameras", "ARRI Alexa Mini", "ARRI", "AMIRA-001", Decimal("650"), Decimal("48000")),
+    ("Cameras", "RED Komodo 6K", "RED", "KMD-014", Decimal("450"), Decimal("32000")),
+    ("Lenses", "Zeiss Supreme 50mm", "Zeiss", "ZS-050", Decimal("120"), Decimal("18000")),
+    ("Lighting", "Aputure 600d Pro", "Aputure", "AP-600", Decimal("85"), Decimal("1900")),
+    ("Grip", "C-Stand 40in", "Matthews", "CS-040", Decimal("12"), Decimal("260")),
+    ("Audio", "Sound Devices MixPre-6", "Sound Devices", "SD-006", Decimal("70"), Decimal("1200")),
+]
