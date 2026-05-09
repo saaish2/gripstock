@@ -46,3 +46,10 @@ def picked_up_reservation(session):
     res.status = ReservationStatus.PICKED_UP
     session.flush()
     return res
+
+
+def test_overdue_sweep_flips_status(session, picked_up_reservation):
+    result = sweep_overdue_reservations(session, utcnow())
+    assert result["swept"] == 1
+    session.refresh(picked_up_reservation)
+    assert picked_up_reservation.status == ReservationStatus.OVERDUE
