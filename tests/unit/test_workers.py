@@ -53,3 +53,15 @@ def test_overdue_sweep_flips_status(session, picked_up_reservation):
     assert result["swept"] == 1
     session.refresh(picked_up_reservation)
     assert picked_up_reservation.status == ReservationStatus.OVERDUE
+
+
+def test_webhook_emit_and_dispatch(session):
+    svc = WebhookService(session)
+    svc.register("https://example.test/hook", "secret-value", ["reservation.created"])
+    deliveries = svc.emit("reservation.created", {"id": 1})
+    assert len(deliveries) == 1
+
+    result = dispatch_due(session, transport=lambda url, body, sig: 200)
+    assert result["delivered"] == 1
+    session.refresh(deliveries[0])
+    assert deliveries[0].status == WebhookStatus.DELIVERED
