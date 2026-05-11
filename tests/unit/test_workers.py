@@ -65,3 +65,14 @@ def test_webhook_emit_and_dispatch(session):
     assert result["delivered"] == 1
     session.refresh(deliveries[0])
     assert deliveries[0].status == WebhookStatus.DELIVERED
+
+
+def test_webhook_backoff_on_failure(session):
+    svc = WebhookService(session)
+    svc.register("https://example.test/hook", "secret-value", ["*"])
+    deliveries = svc.emit("asset.created", {"id": 2})
+    dispatch_due(session, transport=lambda url, body, sig: 500)
+    session.refresh(deliveries[0])
+    assert deliveries[0].attempts == 1
+    assert deliveries[0].status == WebhookStatus.PENDING
+    assert deliveries[0].next_attempt_at is not None
