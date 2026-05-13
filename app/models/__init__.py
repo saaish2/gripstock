@@ -19,3 +19,28 @@ from app.models.platform import (
 )
 from app.models.reservation import Reservation, ReservationLine
 from app.models.user import Session, User
+
+__all__ = [
+    "Base",
+    "User",
+    "Session",
+    "Customer",
+    "Category",
+    "Asset",
+    "Kit",
+    "KitItem",
+    "Reservation",
+    "ReservationLine",
+    "RentalOrder",
+    "OrderLine",
+    "Invoice",
+    "Payment",
+    "Inspection",
+    "DamageReport",
+    "MaintenanceOrder",
+    "AuditLog",
+    "ApiKey",
+    "WebhookEndpoint",
+    "WebhookDelivery",
+    "IdempotencyKey",
+]
