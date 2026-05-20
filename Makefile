@@ -5,3 +5,6 @@ install:
 
 dev:
 	pip install -e ".[dev]"
+
+initdb:
+	gripstock initdb
