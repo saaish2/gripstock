@@ -8,3 +8,6 @@ dev:
 
 initdb:
 	gripstock initdb
+
+seed:
+	gripstock seed
