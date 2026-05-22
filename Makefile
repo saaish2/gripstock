@@ -11,3 +11,6 @@ initdb:
 
 seed:
 	gripstock seed
+
+run:
+	uvicorn app.main:app --reload
