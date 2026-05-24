@@ -17,3 +17,6 @@ run:
 
 test:
 	pytest
+
+cov:
+	pytest --cov=app --cov-report=term-missing
