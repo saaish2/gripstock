@@ -28,3 +28,6 @@ lint:
 fmt:
 	ruff check --fix app tests
 	ruff format app tests
+
+migrate:
+	alembic upgrade head
