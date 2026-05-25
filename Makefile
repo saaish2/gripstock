@@ -24,3 +24,7 @@ cov:
 lint:
 	ruff check app tests
 	mypy app
+
+fmt:
+	ruff check --fix app tests
+	ruff format app tests
