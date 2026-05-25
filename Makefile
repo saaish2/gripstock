@@ -20,3 +20,7 @@ test:
 
 cov:
 	pytest --cov=app --cov-report=term-missing
+
+lint:
+	ruff check app tests
+	mypy app
