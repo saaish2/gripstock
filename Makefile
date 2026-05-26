@@ -34,3 +34,8 @@ migrate:
 
 sweep:
 	gripstock sweep
+
+clean:
+	rm -f gripstock.db
+	find . -type d -name __pycache__ -prune -exec rm -rf {} +
+	rm -rf .pytest_cache .ruff_cache .mypy_cache
