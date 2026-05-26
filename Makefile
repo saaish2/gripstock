@@ -31,3 +31,6 @@ fmt:
 
 migrate:
 	alembic upgrade head
+
+sweep:
+	gripstock sweep
