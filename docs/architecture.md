@@ -77,3 +77,8 @@ applies exactly this predicate, scoped to reservations in a *blocking* status
 (pending, confirmed, picked_up, overdue), so cancelled and returned rentals
 free their inventory immediately.
 
+## Idempotency
+
+`POST /orders` accepts an `Idempotency-Key` header. The first success is
+persisted; replays with the same key return the stored response verbatim,
+making order creation safe to retry without double-booking.
