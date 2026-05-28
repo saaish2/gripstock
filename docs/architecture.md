@@ -22,3 +22,17 @@ models/          SQLAlchemy ORM entities + reusable mixins.
 database         SQLite (dev/test) or PostgreSQL (prod) via SQLAlchemy.
 ```
 
+## Module map
+
+| Layer        | Module                | Responsibility                              |
+|--------------|-----------------------|---------------------------------------------|
+| Config       | `app/config.py`       | Env-driven settings singleton               |
+| Logging      | `app/logging.py`      | Structured logging + request-id context     |
+| Errors       | `app/errors.py`       | Domain error hierarchy + HTTP translation   |
+| Security     | `app/security.py`     | Password hashing, token + API-key handling  |
+| Pricing      | `app/services/pricing.py` | Pure rental pricing engine              |
+| Reservations | `app/services/reservations.py` | Availability + lifecycle           |
+| Billing      | `app/services/billing.py` | Invoices, payments, late fees           |
+| Operations   | `app/services/operations.py` | Checkout/checkin, damage, maintenance |
+| Workers      | `app/workers/`        | Overdue + late-fee sweeps, webhook dispatch |
+
