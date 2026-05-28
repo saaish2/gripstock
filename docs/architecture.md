@@ -69,3 +69,11 @@ draft / issued / partially_paid / overdue ──void──▶ void
 Allowed transitions are encoded as adjacency tables in `app/enums.py`; the
 service layer rejects any move not present there with an `InvalidStateError`.
 
+## Availability detection
+
+Two half-open intervals `[a_start, a_end)` and `[b_start, b_end)` overlap iff
+`a_start < b_end and b_start < a_end`. `ReservationRepository.overlapping_line_ids`
+applies exactly this predicate, scoped to reservations in a *blocking* status
+(pending, confirmed, picked_up, overdue), so cancelled and returned rentals
+free their inventory immediately.
+
