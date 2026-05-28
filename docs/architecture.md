@@ -36,3 +36,36 @@ database         SQLite (dev/test) or PostgreSQL (prod) via SQLAlchemy.
 | Operations   | `app/services/operations.py` | Checkout/checkin, damage, maintenance |
 | Workers      | `app/workers/`        | Overdue + late-fee sweeps, webhook dispatch |
 
+## Core state machines
+
+### Reservation
+
+```
+pending ──confirm──▶ confirmed ──checkout──▶ picked_up ──checkin──▶ returned
+   │                    │                        │
+ cancel               cancel / no_show       (past due)
+   ▼                    ▼                        ▼
+cancelled           cancelled / no_show       overdue ──checkin──▶ returned
+```
+
+### Asset
+
+```
+available ⇄ reserved ──▶ checked_out ──▶ available
+    │                        │
+    ├──▶ in_maintenance ──▶ available
+    └──▶ retired (terminal)        lost ──▶ available
+```
+
+### Invoice
+
+```
+draft ──issue──▶ issued ──▶ partially_paid ──▶ paid
+                   │              │
+                   └──▶ overdue ◀─┘
+draft / issued / partially_paid / overdue ──void──▶ void
+```
+
+Allowed transitions are encoded as adjacency tables in `app/enums.py`; the
+service layer rejects any move not present there with an `InvalidStateError`.
+
