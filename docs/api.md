@@ -15,3 +15,11 @@ role for each endpoint is listed below.
 | GET    | `/auth/me`              | any     | Current user profile              |
 | POST   | `/auth/change-password` | any     | Rotate password, revoke sessions  |
 
+## Users (admin)
+
+| Method | Path           | Description          |
+|--------|----------------|----------------------|
+| POST   | `/users`       | Create a user        |
+| GET    | `/users`       | List active users    |
+| PATCH  | `/users/{id}`  | Update role/active   |
+
