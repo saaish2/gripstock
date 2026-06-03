@@ -48,3 +48,14 @@ role for each endpoint is listed below.
 | POST   | `/kits`                 | manager | Create kit (bundle)         |
 | GET    | `/kits`                 | agent   | List active kits            |
 
+## Reservations
+
+| Method | Path                              | Role  | Description                  |
+|--------|-----------------------------------|-------|------------------------------|
+| POST   | `/reservations`                   | agent | Create (conflict-checked)    |
+| POST   | `/reservations/availability`      | agent | Check a single asset window  |
+| GET    | `/reservations`                   | agent | Search + paginate            |
+| POST   | `/reservations/{id}/confirm`      | agent | Hold inventory               |
+| POST   | `/reservations/{id}/cancel`       | agent | Release inventory            |
+| POST   | `/reservations/{id}/reschedule`   | agent | Move window (re-checked)     |
+
