@@ -34,3 +34,17 @@ role for each endpoint is listed below.
 | POST   | `/customers/{id}/status`   | manager | Change account status  |
 | DELETE | `/customers/{id}`          | manager | Archive (soft delete)  |
 
+## Catalog
+
+| Method | Path                    | Role    | Description                 |
+|--------|-------------------------|---------|-----------------------------|
+| POST   | `/categories`           | manager | Create category             |
+| GET    | `/categories`           | agent   | List                        |
+| POST   | `/assets`               | manager | Create asset                |
+| GET    | `/assets`               | agent   | Search (term/category/status) |
+| PATCH  | `/assets/{id}`          | manager | Update asset                |
+| POST   | `/assets/{id}/status`   | manager | Transition asset status     |
+| DELETE | `/assets/{id}`          | manager | Soft delete                 |
+| POST   | `/kits`                 | manager | Create kit (bundle)         |
+| GET    | `/kits`                 | agent   | List active kits            |
+
