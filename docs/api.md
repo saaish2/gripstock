@@ -23,3 +23,14 @@ role for each endpoint is listed below.
 | GET    | `/users`       | List active users    |
 | PATCH  | `/users/{id}`  | Update role/active   |
 
+## Customers
+
+| Method | Path                       | Role    | Description            |
+|--------|----------------------------|---------|------------------------|
+| POST   | `/customers`               | agent   | Create customer        |
+| GET    | `/customers`               | agent   | Search + paginate      |
+| GET    | `/customers/{id}`          | agent   | Fetch one              |
+| PATCH  | `/customers/{id}`          | agent   | Update fields          |
+| POST   | `/customers/{id}/status`   | manager | Change account status  |
+| DELETE | `/customers/{id}`          | manager | Archive (soft delete)  |
+
