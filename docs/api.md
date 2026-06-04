@@ -59,3 +59,16 @@ role for each endpoint is listed below.
 | POST   | `/reservations/{id}/cancel`       | agent | Release inventory            |
 | POST   | `/reservations/{id}/reschedule`   | agent | Move window (re-checked)     |
 
+## Orders & invoices
+
+| Method | Path                              | Role  | Description                  |
+|--------|-----------------------------------|-------|------------------------------|
+| POST   | `/orders`                         | agent | Draft from reservation (idempotent) |
+| GET    | `/orders`                         | agent | Search + paginate            |
+| POST   | `/orders/{id}/open`               | agent | Open a draft order           |
+| POST   | `/orders/{id}/close`              | agent | Close an open order          |
+| POST   | `/invoices/from-order/{id}`       | agent | Generate an invoice          |
+| POST   | `/invoices/{id}/issue`            | agent | Issue with net terms         |
+| POST   | `/invoices/{id}/void`             | manager | Void an unpaid invoice     |
+| POST   | `/invoices/{id}/payments`         | agent | Record a payment             |
+
