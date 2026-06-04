@@ -91,3 +91,12 @@ role for each endpoint is listed below.
 | GET    | `/audit`          | manager | Recent audit entries       |
 | GET    | `/reports/dashboard` | viewer | Ops dashboard             |
 
+## Error envelope
+
+```json
+{ "error": { "code": "conflict", "message": "...", "details": { } } }
+```
+
+Common codes: `validation_error` (422), `not_found` (404), `conflict` (409),
+`invalid_state` (409), `business_rule_violation` (422), `unauthenticated`
+(401), `permission_denied` (403).
