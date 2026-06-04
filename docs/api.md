@@ -82,3 +82,12 @@ role for each endpoint is listed below.
 | POST   | `/maintenance`                                        | manager |
 | PATCH  | `/maintenance/{id}`                                   | manager |
 
+## Platform
+
+| Method | Path              | Role  | Description                  |
+|--------|-------------------|-------|------------------------------|
+| POST   | `/webhooks`       | admin | Register endpoint            |
+| POST   | `/api-keys`       | admin | Issue key (shown once)       |
+| GET    | `/audit`          | manager | Recent audit entries       |
+| GET    | `/reports/dashboard` | viewer | Ops dashboard             |
+
