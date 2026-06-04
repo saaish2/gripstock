@@ -72,3 +72,13 @@ role for each endpoint is listed below.
 | POST   | `/invoices/{id}/void`             | manager | Void an unpaid invoice     |
 | POST   | `/invoices/{id}/payments`         | agent | Record a payment             |
 
+## Operations
+
+| Method | Path                                                  | Role    |
+|--------|-------------------------------------------------------|---------|
+| POST   | `/operations/reservations/{id}/checkout`              | agent   |
+| POST   | `/operations/reservations/{id}/checkin`               | agent   |
+| GET    | `/operations/reservations/{id}/inspections`           | agent   |
+| POST   | `/maintenance`                                        | manager |
+| PATCH  | `/maintenance/{id}`                                   | manager |
+
